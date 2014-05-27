@@ -1,6 +1,6 @@
 package jeffaschenk.commons.standards;
 
-import jeffaschenk.commons.standards.util.StringUtils;
+import jeffaschenk.commons.util.StringUtils;
 
 import java.util.Map;
 import java.util.TreeMap;

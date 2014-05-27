@@ -1,13 +1,11 @@
-package com.outbid.sor.commons.standards;
+package jeffaschenk.commons.standards;
 
 import jeffaschenk.commons.util.StringUtils;
-import com.outbid.sor.model.orm.system.OlsonTimeZoneElement;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * OUTBID
  * <p/>
  * TimeZone Enumeration
  * <p/>
