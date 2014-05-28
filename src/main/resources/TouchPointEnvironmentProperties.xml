@@ -209,7 +209,7 @@
     </bean>
 
     <bean id="systemEnvironmentPropertyAccessor" name="systemEnvironmentPropertyAccessor"
-          class="com.jeffaschenk.commons.environment.SystemEnvironment">
+          class="jeffaschenk.commons.environment.SystemEnvironment">
         <property name="systemEnvironmentProperties" ref="systemEnvironmentProperties"/>
     </bean>
     <alias name="systemEnvironmentPropertyAccessor" alias="systemEnvironment"/>

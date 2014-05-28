@@ -25,7 +25,7 @@
     </bean>
 
     <!-- Hibernate SessionFactory -->
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource">
             <ref bean="dataSource"/>
         </property>
@@ -46,30 +46,6 @@
         </property>
     </bean>
 
-    <!-- JMX Management Bean Exporter -->
-    <bean id="jmxExporter"
-          class="org.springframework.jmx.export.MBeanExporter">
-        <property name="beans">
-            <map>
-                <entry key="Hibernate:name=statistics">
-                    <ref local="statisticsBean"/>
-                </entry>
-            </map>
-        </property>
-        <property name="registrationBehaviorName" value="REGISTRATION_IGNORE_EXISTING"></property>
-    </bean>
-
-    <!-- Hibernate Session Factory Statistics -->
-    <bean id="statisticsBean" class="org.hibernate.jmx.StatisticsService">
-        <property name="statisticsEnabled">
-            <value>true</value>
-        </property>
-        <property name="sessionFactory">
-            <ref local="sessionFactory"/>
-        </property>
-    </bean>
-
-
     <!-- ***************************** -->
     <!-- Operational Related Aspects   -->
     <!-- ***************************** -->
@@ -81,7 +57,7 @@
     <aop:config proxy-target-class="false">
         <!-- Define Transactional Point Cuts within Application -->
         <aop:pointcut id="tp_tx_dao"
-                      expression="( execution(* com.jeffaschenk.touchpoint.model.dao..*.*(..)) )"/>
+                      expression="( execution(* jeffaschenk.commons.touchpoint.model.dao..*.*(..)) )"/>
         <!-- Weave Transactional Support -->
         <aop:advisor advice-ref="tp_txAdvice" pointcut-ref="tp_tx_dao" order="200"/>
     </aop:config>
@@ -114,7 +90,7 @@
     <tx:annotation-driven order="190" transaction-manager="tp_transactionManager"/>
 
     <!-- Transaction manager for a single Hibernate SessionFactory (alternative to JTA) -->
-    <bean id="tp_transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+    <bean id="tp_transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
         <property name="failEarlyOnGlobalRollbackOnly" value="true"/>
         <property name="defaultTimeout" value="600"/>

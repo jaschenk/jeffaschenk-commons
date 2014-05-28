@@ -100,7 +100,7 @@
     <category name="jeffaschenk">
         <level value="DEBUG"/>
     </category>
-    <category name="jeffaschenk.touchpoint">
+    <category name="jeffaschenk.commons.touchpoint">
         <level value="DEBUG"/>
     </category>
     <!-- Set to TRACE to produce Performance Timings for Data Persistence Layer -->
@@ -129,7 +129,7 @@
         <level value="DEBUG"/>
     </category>
     <!-- Spring Hibernate Transaction Manager -->
-    <category name="org.springframework.orm.hibernate4.HibernateTransactionManager">
+    <category name="org.springframework.orm.hibernate3.HibernateTransactionManager">
         <level value="WARN"/>
     </category>
     <!-- DWR -->
