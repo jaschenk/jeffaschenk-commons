@@ -6,12 +6,13 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.MappingException;
 import org.hibernate.dialect.Dialect;
-import org.hibernate.engine.SessionImplementor;
-import org.hibernate.exception.JDBCExceptionHelper;
+import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.id.Configurable;
 import org.hibernate.id.PersistentIdentifierGenerator;
+import org.hibernate.internal.util.JdbcExceptionHelper;
+import org.hibernate.internal.util.config.ConfigurationHelper;
 import org.hibernate.type.Type;
-import org.hibernate.util.PropertiesHelper;
+
 import jeffaschenk.commons.touchpoint.model.RootElement;
 
 import java.io.Serializable;
@@ -82,7 +83,7 @@ public class PlatformSequenceGenerator implements
         // Now Create SQL
         PreparedStatement sqlStatement = null;
         try {
-            sqlStatement = session.getBatcher().prepareSelectStatement(sequenceSQL);
+            sqlStatement = session.connection().prepareStatement(sequenceSQL);
         } catch (SQLException sqle) {
             throw new RuntimeException(sqle);
         }
@@ -103,13 +104,14 @@ public class PlatformSequenceGenerator implements
                 }
                 return result;
             } finally {
-                session.getBatcher().closeStatement(sqlStatement);
+                if (sqlStatement != null) {
+                    sqlStatement.close();
+                }
             }
         } catch (SQLException sqle) {
-            throw
-                    JDBCExceptionHelper.convert(session.getFactory()
-                            .getSQLExceptionConverter(), sqle,
-                            "could not get next sequence value", sequenceSQL);
+            throw  new RuntimeException("SQL Exception for SQL Statement:["+sqlStatement.toString()+"],"+
+                    " SQL ErrorCode:["+JdbcExceptionHelper.extractErrorCode(sqle)+"],+" +
+                    " "+JdbcExceptionHelper.extractSqlState(sqle)+"]");
         }
     }
 
@@ -123,7 +125,7 @@ public class PlatformSequenceGenerator implements
             throws MappingException {
         this.dialect = dialect;
         // This is only used during Database creation, which is only used in test
-        String table = PropertiesHelper.getString("target_table", params, "TABLE");
+        String table = ConfigurationHelper.getString("target_table", params, "TABLE");
         sequenceName = table + "_seq_id";
     }
 
