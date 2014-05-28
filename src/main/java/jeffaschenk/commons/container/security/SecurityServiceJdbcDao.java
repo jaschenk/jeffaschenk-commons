@@ -19,8 +19,6 @@ public interface SecurityServiceJdbcDao extends UserDetailsService {
 
     List<SecuritySessionUserObject> getRegisteredUserForAuthentication(String principal);
 
-    List<SecuritySessionUserObject> getRegisteredUserForAuthentication(BigDecimal facebookUserId);
-
     List<SecuritySessionProfileObject> getRegisteredUserProfileForAuthentication(BigInteger registeredUserProfileId);
 
     List<SecuritySessionRoleObject> getRegisteredUserRolesForAuthentication(BigInteger registeredUserId);

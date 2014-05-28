@@ -41,6 +41,7 @@ import java.util.List;
  * @author jeffaschenk@gmail.com
  * @version $Id: $
  */
+@SuppressWarnings("unchecked")
 @Component("securityServiceJdbcDao")
 public class SecurityServiceJdbcDaoImpl extends JdbcUserDetailsManager implements SecurityServiceJdbcDao {
 
@@ -171,20 +172,6 @@ public class SecurityServiceJdbcDaoImpl extends JdbcUserDetailsManager implement
 
         return
                 (this.initialized) ? this.getJdbcTemplate().query(REGISTEREDUSER_QUERY, new Object[]{principal, principal},
-                        new SecuritySessionObjectRowMapper()) : null;
-    }
-
-    /**
-     * Obtain the Registered User For Authentication using facebookUserId.
-     *
-     * @param facebookUserId
-     * @return List<SecuritySessionUserObject> - Normally will contain Null or One Entry.
-     */
-    @Override
-    public List<SecuritySessionUserObject> getRegisteredUserForAuthentication(BigDecimal facebookUserId) {
-
-        return
-                (this.initialized) ? this.getJdbcTemplate().query(REGISTEREDUSER_FACEBOOK_UUID_QUERY, new Object[]{facebookUserId},
                         new SecuritySessionObjectRowMapper()) : null;
     }
 

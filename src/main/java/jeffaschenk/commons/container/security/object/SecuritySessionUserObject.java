@@ -110,12 +110,12 @@ public class SecuritySessionUserObject implements UserDetails, java.io.Serializa
      * Saved Search Criteria for this Users Session.
      */
     private Map<String, PagableSearchCriteria> savedSearchCriteria
-            = new HashMap<String, PagableSearchCriteria>();
+            = new HashMap<>();
 
     /**
      * Granted Authorities for this User Session
      */
-    private Collection<? extends GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+    private Collection<GrantedAuthority> authorities = new ArrayList<>();
 
 
     /**
@@ -343,7 +343,7 @@ public class SecuritySessionUserObject implements UserDetails, java.io.Serializa
 
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
-        return (Collection<GrantedAuthority>) this.authorities;
+        return this.authorities;
     }
 
     @Override
