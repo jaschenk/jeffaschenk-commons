@@ -77,7 +77,7 @@ public class SpringAccessor implements ApplicationContextAware {
      * Obtain a Specified BeanName.
      *
      * @param beanName a {@link java.lang.String} object.
-     * @return a {@link java.lang.Object} object.
+     * @return  {@link java.lang.Object} object.
      */
     protected static Object getBean(String beanName) {
         return getApplicationContext().getBean(beanName);

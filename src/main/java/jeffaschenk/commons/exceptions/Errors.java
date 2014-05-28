@@ -17,14 +17,14 @@ public interface Errors extends org.springframework.validation.Errors {
     /**
      * <p>hasWarnings</p>
      *
-     * @return a boolean.
+     * @return  boolean.
      */
     boolean hasWarnings();
 
     /**
      * <p>getWarnings</p>
      *
-     * @return a {@link java.util.List} object.
+     * @return  {@link java.util.List} object.
      */
     @SuppressWarnings("unchecked")
     List getWarnings();
@@ -49,14 +49,14 @@ public interface Errors extends org.springframework.validation.Errors {
     /**
      * <p>getClassUniqueConstraintUpdates</p>
      *
-     * @return a {@link java.util.Map} object.
+     * @return  {@link java.util.Map} object.
      */
     Map<Class<?>, Map<List<String>, List<List<Object>>>> getClassUniqueConstraintUpdates();
 
     /**
      * <p>getUpdatedConstraintFieldsGuids</p>
      *
-     * @return a {@link java.util.Map} object.
+     * @return  {@link java.util.Map} object.
      */
     Map<List<String>, Set<String>> getUpdatedConstraintFieldsGuids();
 
@@ -84,7 +84,7 @@ public interface Errors extends org.springframework.validation.Errors {
      * @param targetEntity           a {@link java.lang.Class} object.
      * @param uniqueConstraintFields a {@link java.util.List} object.
      * @param guid                   a {@link java.lang.String} object.
-     * @return a boolean.
+     * @return  boolean.
      */
     boolean rectifyUniqueConstraintViolation(
             Class<?> targetEntity,
@@ -106,7 +106,7 @@ public interface Errors extends org.springframework.validation.Errors {
     /**
      * <p>getCurrentContextName</p>
      *
-     * @return a {@link java.lang.String} object.
+     * @return  {@link java.lang.String} object.
      */
     String getCurrentContextName();
 }

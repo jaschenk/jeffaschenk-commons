@@ -585,7 +585,7 @@ public enum TimeZone {
     /**
      * Get Only US Applicable TimeZones.
      *
-     * @return
+     * @return List<String> of US Applicable TimeZones only.
      */
     public static List<String> getUSTimeZones() {
         List<String> timeZoneList = new ArrayList<String>(TimeZone.USTimeZones.length);
@@ -603,7 +603,7 @@ public enum TimeZone {
      * Get the Timezone by Name
      *
      * @param timeZoneName
-     * @return
+     * @return TimeZone
      */
     public static TimeZone getTimeZoneByName(String timeZoneName) {
         if (StringUtils.isEmpty(timeZoneName))
@@ -622,7 +622,7 @@ public enum TimeZone {
      * Determine if the specified Timezone Name is Valid or not.
      *
      * @param timeZoneName
-     * @return
+     * @return boolean indicating if TimeZone By Name is Valid or Not.
      */
     public static boolean isTimeZoneByNameValid(String timeZoneName) {
         if (StringUtils.isEmpty(timeZoneName))
@@ -641,7 +641,7 @@ public enum TimeZone {
     /**
      * Get the correct TimeZone Name for a Drop Down Menu
      * @param timeZoneName
-     * @return
+     * @return String
      */
     public static String getTimeZoneNameForDropDown(String timeZoneName) {
         return TimeZone.getTimeZoneByName(timeZoneName).TimeZoneNameForDropDown();
@@ -650,7 +650,7 @@ public enum TimeZone {
     /**
      * Get the correct TimeZone name for Standard Olson DB Lookup and Conversions.
      * @param timeZoneName
-     * @return
+     * @return String
      */
     public static String getTimeZoneStandardName(String timeZoneName) {
         return TimeZone.getTimeZoneByName(timeZoneName).TimeZoneStandardName();
@@ -659,7 +659,7 @@ public enum TimeZone {
     /**
      * Obtain the corresponding java.util.Timezone object for the Specified TimeZone.
      * @param timeZoneName
-     * @return
+     * @return java.util.TimeZone
      */
     public static java.util.TimeZone getJavaTimeZone(String timeZoneName) {
         return java.util.TimeZone.getTimeZone(TimeZone.getTimeZoneByName(timeZoneName).TimeZoneStandardName());

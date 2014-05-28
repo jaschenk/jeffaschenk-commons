@@ -91,7 +91,6 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     }
 
     /**
-     * {@inheritDoc}
      * <p/>
      * Capitalizes a String changing the first letter to title case as per {@link Character#toTitleCase(char)}.
      */
@@ -173,7 +172,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * Get Hexidecimal String from Raw Byte Array.
      *
      * @param raw
-     * @return
+     * @return String of Hexadecimal Digits
      * @throws java.io.UnsupportedEncodingException
      */
     public static String getHexString(byte[] raw)
@@ -200,7 +199,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * Perform Unicode Escape on Specified String.
      *
      * @param s
-     * @return
+     * @return String Escaped
      */
     public static String unicodeEscape(final String s) {
         StringBuilder sb = new StringBuilder();
@@ -223,7 +222,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         * Perform Unicode Escape on Specified String.
         *
         * @param s
-        * @return
+        * @return String Escaped
         */
        public static String unicodeHTMLEscape(final String s) {
            StringBuilder sb = new StringBuilder();
@@ -254,7 +253,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * @param min
      * @param max
      * @param string
-     * @return
+     * @return boolean indicating UTF-8 String Length is valid or not.
      */
     public static boolean isUTF8StringLengthValid(int min, int max, String string) {
         if (string == null) { return false; }
@@ -267,7 +266,12 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         return false;
     }
 
-
+    /**
+     * Get length of UTF8 String Length
+     *
+     * @param string
+     * @return int of UTF-8 String Length.
+     */
     public static int getUTF8StringLength(String string) {
         if (string == null) { return 0; }
         try {
@@ -282,7 +286,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * Determines if the String has any UTF-8 Type Characters in it's Data.
      *
      * @param string
-     * @return
+     * @return boolean
      */
     public static boolean isStringUTF8(String string) {
         if (string == null) { return false; }

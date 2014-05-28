@@ -117,7 +117,7 @@ public class SearchRestriction implements java.io.Serializable {
     /**
      * Helper Method to obtain a single value.
      *
-     * @return
+     * @return Object Value
      */
     public Object getValue() {
         if ((getValues() != null) && (getValues().length >= 1)) {

@@ -890,6 +890,12 @@
             <artifactId>cglib-nodep</artifactId>
             <version>2.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.18.1-GA</version>
+            <scope>compile</scope>
+        </dependency>
         <!-- ASM used to do byte code generation -->
         <dependency>
             <groupId>asm</groupId>

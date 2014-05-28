@@ -22,7 +22,7 @@ public class EntityPathGroup implements java.io.Serializable {
     /**
      * IS the Path Group Empty.
      *
-     * @return
+     * @return boolean indicating if Entity Paths is empty or not.
      */
     public boolean isEmpty() {
         return ((this.entityPaths == null) || (this.entityPaths.isEmpty()));
@@ -50,7 +50,7 @@ public class EntityPathGroup implements java.io.Serializable {
      * Helper method to add an EntityPath to a Group.
      *
      * @param entityPath
-     * @return
+     * @return boolean indicating Path added to Group successfully or not.
      */
     public boolean addEntityPath(EntityPath entityPath) {
         if (entityPath == null) {

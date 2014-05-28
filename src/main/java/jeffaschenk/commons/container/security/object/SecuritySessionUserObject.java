@@ -141,7 +141,7 @@ public class SecuritySessionUserObject implements UserDetails, java.io.Serializa
     /**
      * SessionId
      *
-     * @return a {@link java.lang.String} object.
+     * @return  {@link java.lang.String} object.
      */
     public String getSessionSid() {
         return sessionSid;
@@ -163,7 +163,7 @@ public class SecuritySessionUserObject implements UserDetails, java.io.Serializa
     /**
      * Obtain the Principal
      *
-     * @return a {@link java.lang.String} object.
+     * @return  {@link java.lang.String} object.
      */
     public String getPrincipal() {
         return principal;
@@ -181,7 +181,7 @@ public class SecuritySessionUserObject implements UserDetails, java.io.Serializa
     /**
      * Obtain the loginTime
      *
-     * @return a long.
+     * @return long
      */
     public long getLoginTime() {
         return loginTime;
@@ -199,7 +199,7 @@ public class SecuritySessionUserObject implements UserDetails, java.io.Serializa
     /**
      * Obtain the currentDuration
      *
-     * @return a long.
+     * @return long
      */
     public long getCurrentDuration() {
         return currentDuration;
@@ -297,7 +297,7 @@ public class SecuritySessionUserObject implements UserDetails, java.io.Serializa
     /**
      * Saved Search Criteria
      *
-     * @return a {@link java.util.Map} object.
+     * @return  {@link java.util.Map} object.
      */
     public Map<String, PagableSearchCriteria> getSavedSearchCriteria() {
         return savedSearchCriteria;
@@ -329,7 +329,7 @@ public class SecuritySessionUserObject implements UserDetails, java.io.Serializa
      * <p>Getter for the field <code>savedSearchCriteria</code>.</p>
      *
      * @param name a {@link java.lang.String} object.
-     * @return a {@link jeffaschenk.commons.container.session.PagableSearchCriteria} object.
+     * @return  {@link jeffaschenk.commons.container.session.PagableSearchCriteria} object.
      */
     public PagableSearchCriteria getSavedSearchCriteria(String name) {
         if ((name != null) &&

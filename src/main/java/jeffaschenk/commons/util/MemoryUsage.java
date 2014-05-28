@@ -56,7 +56,7 @@ public class MemoryUsage {
     /**
      * <p>getCurrentMemory</p>
      *
-     * @return a {@link String} object.
+     * @return  {@link String} object.
      */
     public String getCurrentMemory() {
         double current_memory = Runtime.getRuntime().totalMemory();
@@ -98,7 +98,7 @@ public class MemoryUsage {
     /**
      * Get current Duration.
      *
-     * @return a double.
+     * @return  double.
      */
     public double getCurrentMemoryDifference() {
         timeDuration.stop();
@@ -174,7 +174,7 @@ public class MemoryUsage {
     /**
      * Show Memory Movement
      *
-     * @return
+     * @return String
      */
     private String getMemoryMovement(double _memory) {
         if ((_memory) == 0) {

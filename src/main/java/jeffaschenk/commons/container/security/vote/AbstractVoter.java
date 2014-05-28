@@ -50,7 +50,7 @@ public abstract class AbstractVoter implements SecurityConstants {
      * @param authentication
      * @param object
      * @param attributes
-     * @return
+     * @return boolean indicating if Role applicable or not.
      */
     public static boolean hasRole(Log log, Authentication authentication, Object object, Collection<ConfigAttribute> attributes) {
         // ****************************

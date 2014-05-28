@@ -87,7 +87,7 @@ public class AuthenticationException extends org.springframework.security.core.A
     /**
      * <p>Getter for the field <code>errors</code>.</p>
      *
-     * @return a {@link org.springframework.validation.Errors} object.
+     * @return  {@link org.springframework.validation.Errors} object.
      */
     public Errors getErrors() {
         return errors;

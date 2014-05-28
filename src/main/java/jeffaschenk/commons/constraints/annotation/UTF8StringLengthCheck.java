@@ -46,7 +46,7 @@ public class UTF8StringLengthCheck extends AbstractAnnotationCheck<UTF8StringLen
      * @param valueToValidate
      * @param context
      * @param validator
-     * @return
+     * @return boolean indicating if validation isSatisfied or not.
      */
     public boolean isSatisfied(Object validatedObject, Object valueToValidate, OValContext context, Validator validator) {
         this.requireMessageVariablesRecreation();

@@ -47,7 +47,7 @@ public class ORMParser {
      * This is a helper to the helper to use the Default
      * ORM Configuration Mapping Resource.
      *
-     * @return an array of {@link java.lang.Class} objects.
+     * @return n array of {@link java.lang.Class} objects.
      */
     public static final Class<?>[] getORMResourceBundle() {
         return getORMResourceBundle(defaultORMConfiguration);
@@ -134,7 +134,7 @@ public class ORMParser {
      * Produces the Mapping by parsing the Class File Annotations.
      *
      * @param objectModelClasses an array of {@link java.lang.Class} objects.
-     * @return a {@link java.util.Map} object.
+     * @return  {@link java.util.Map} object.
      */
     public static final Map<String, ClassAnnotationData> generateMapping(
             Class<?>[] objectModelClasses) {

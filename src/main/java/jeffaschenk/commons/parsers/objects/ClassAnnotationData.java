@@ -38,7 +38,7 @@ public class ClassAnnotationData implements java.io.Serializable {
     /**
      * ClassName
      *
-     * @return a {@link java.lang.String} object.
+     * @return  {@link java.lang.String} object.
      */
     public String getClassName() {
         return className;
@@ -56,7 +56,7 @@ public class ClassAnnotationData implements java.io.Serializable {
     /**
      * Simple ClassName
      *
-     * @return a {@link java.lang.String} object.
+     * @return  {@link java.lang.String} object.
      */
     public String getSimpleName() {
         return simpleName;
@@ -74,7 +74,7 @@ public class ClassAnnotationData implements java.io.Serializable {
     /**
      * Class Annotations.
      *
-     * @return a {@link java.util.Map} object.
+     * @return  {@link java.util.Map} object.
      */
     public Map<String, String> getClassAnnotations() {
         return classAnnotations;
@@ -92,7 +92,7 @@ public class ClassAnnotationData implements java.io.Serializable {
     /**
      * Class Field Annotations.
      *
-     * @return a {@link java.util.Map} object.
+     * @return  {@link java.util.Map} object.
      */
     public Map<String, String> getFieldAnnotations() {
         return fieldAnnotations;
@@ -110,7 +110,7 @@ public class ClassAnnotationData implements java.io.Serializable {
     /**
      * Class Method Annotations.
      *
-     * @return a {@link java.util.Map} object.
+     * @return  {@link java.util.Map} object.
      */
     public Map<String, String> getMethodAnnotations() {
         return methodAnnotations;

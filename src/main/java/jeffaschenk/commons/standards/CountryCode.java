@@ -300,7 +300,7 @@ public enum CountryCode {
     /**
      * Generates a JSON String Array for consumption in JavaScript.
      * @param filtered
-     * @return
+     * @return String
      */
     public static String getJSONString(boolean filtered) {
         StringBuffer sb = new StringBuffer(" var vCountryCode = { ");

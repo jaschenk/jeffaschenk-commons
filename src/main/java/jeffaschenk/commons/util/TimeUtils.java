@@ -143,7 +143,7 @@ public class TimeUtils {
      * Simple Date Helper to get the time a number of Days from Now.
      * To go back in time, simple supply a negative value.
      *
-     * @return
+     * @return Date
      */
     public static Date getDateDaysFromNow(int days_offset) {
         Calendar now = Calendar.getInstance();
@@ -155,7 +155,7 @@ public class TimeUtils {
      * Simple Date Helper to get the time a number of Days from some point in time.
      * To go back in time, simple supply a negative value.
      *
-     * @return
+     * @return Date
      */
     public static Date getDateDaysFromSomeTime(int days_offset, Date someTime) {
         Calendar origin = Calendar.getInstance();
@@ -198,7 +198,7 @@ public class TimeUtils {
      * 
      * @param timeMillisSinceEpoch time in milliseconds since the Epoch
      * @param roundOffMillis round off period in milliseconds - e.g. 1000 * 60 * 15 would be 15 minutes
-     * @return a Date representing the rounded-off time - e.g. 16:57:43 -> 16:45:00
+     * @return  Date representing the rounded-off time - e.g. 16:57:43 -> 16:45:00
      */
     public static Date getRoundedOffTime(long timeMillisSinceEpoch, long roundOffMillis) {
         timeMillisSinceEpoch -= timeMillisSinceEpoch % roundOffMillis;

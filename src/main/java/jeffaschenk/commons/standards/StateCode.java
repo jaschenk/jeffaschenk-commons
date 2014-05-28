@@ -25,7 +25,7 @@ public class StateCode {
 
     /**
      * @param countryCode
-     * @return
+     * @return Map<String, String>
      */
     public static Map<String, String> getCountrySubDivisions(final String countryCode) {
         // *******************************************
@@ -92,7 +92,7 @@ public class StateCode {
 
      /**
      * @param countryCode
-     * @return
+     * @return Map<String, Object>
      */
     public static Map<String, Object> getCountrySubDivisionObjects(final String countryCode) {
         // *******************************************

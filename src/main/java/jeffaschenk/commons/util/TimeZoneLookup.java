@@ -92,7 +92,7 @@ public class TimeZoneLookup {
      * Get Timezone Based upon UTC Offset.
      *
      * @param utc_offset
-     * @return
+     * @return TimeZone
      */
     public static TimeZone getTimeZoneByUTC(long utc_offset) {
         // Determine which Table to use?

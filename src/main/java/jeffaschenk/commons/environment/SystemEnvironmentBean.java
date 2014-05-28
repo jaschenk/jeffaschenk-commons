@@ -63,14 +63,14 @@ public interface SystemEnvironmentBean {
     /**
      * Obtain the Specified Deauthorize Callback Suffix as specified as the ending portion of the Facebook Deauthorize URL.
      *
-     * @return
+     * @return String
      */
     String getFacebookDeauthorizeCallback();
 
     /**
      * Obtain the Specified Facebook Application Secret for Decoding Signed Requests.
      *
-     * @return
+     * @return String
      */
     String getFacebookApplicationSecret();
 

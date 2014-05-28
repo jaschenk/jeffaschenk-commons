@@ -15,7 +15,7 @@ public class MappingClasses {
     /**
      * <p>Getter for the field <code>mappingClasses</code>.</p>
      *
-     * @return a {@link java.util.Vector} object.
+     * @return  {@link java.util.Vector} object.
      */
     public Vector<MappingClass> getMappingClasses() {
         return mappingClasses;

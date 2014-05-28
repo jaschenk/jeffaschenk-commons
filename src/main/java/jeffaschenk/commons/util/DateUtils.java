@@ -142,7 +142,6 @@ public class DateUtils {
      * using/applying a specific Date Formatter.
      *
      * @param date
-     * @param dateFormatter
      * @param dateFormatter a {@link java.text.DateFormat} object.
      * @return String representation of date
      */

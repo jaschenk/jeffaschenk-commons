@@ -12,7 +12,7 @@ public class TimeStamp {
 	/**
 	 * <p>getTimeStamp</p>
 	 *
-	 * @return a {@link String} object.
+	 * @return  {@link String} object.
 	 */
 	public static final String getTimeStamp() {
 		return getTimeStampForFileName(Calendar.getInstance());
@@ -22,7 +22,7 @@ public class TimeStamp {
 	 * <p>getTimeStampForFileName</p>
 	 *
 	 * @param current_calendar a {@link java.util.Calendar} object.
-	 * @return a {@link String} object.
+	 * @return  {@link String} object.
 	 */
 	public static final String getTimeStampForFileName(Calendar current_calendar) {
 		StringBuffer sb = new StringBuffer();
@@ -42,7 +42,7 @@ public class TimeStamp {
 	/**
 	 * <p>getGenerationTimeStamp</p>
 	 *
-	 * @return a {@link String} object.
+	 * @return  {@link String} object.
 	 */
 	public static final String getGenerationTimeStamp() {
 		return getTimeStampForReadableText(Calendar.getInstance());
@@ -52,7 +52,7 @@ public class TimeStamp {
 	 * <p>getTimeStampForReadableText</p>
 	 *
 	 * @param current_calendar a {@link java.util.Calendar} object.
-	 * @return a {@link String} object.
+	 * @return  {@link String} object.
 	 */
 	public static final String getTimeStampForReadableText(Calendar current_calendar) {
 		StringBuffer sb = new StringBuffer();

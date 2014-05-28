@@ -43,7 +43,7 @@ public class SQLConstraintColumn implements java.io.Serializable {
     /**
      * columnName
      *
-     * @return a {@link java.lang.String} object.
+     * @return  {@link java.lang.String} object.
      */
     public String getColumnName() {
         return columnName;
@@ -61,7 +61,7 @@ public class SQLConstraintColumn implements java.io.Serializable {
     /**
      * position
      *
-     * @return a {@link java.lang.Integer} object.
+     * @return  {@link java.lang.Integer} object.
      */
     public Integer getPosition() {
         return position;

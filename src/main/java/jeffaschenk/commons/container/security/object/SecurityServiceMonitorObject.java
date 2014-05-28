@@ -256,7 +256,7 @@ public class SecurityServiceMonitorObject implements Serializable {
      * take necessary properties into consideration.
      *
      * @param o
-     * @return
+     * @return boolean indicating equality.
      */
     @Override
     public boolean equals(Object o) {
@@ -272,7 +272,7 @@ public class SecurityServiceMonitorObject implements Serializable {
      * hashcode override,
      * take necessary properties into consideration.
      *
-     * @return
+     * @return int hashCode
      */
     @Override
     public int hashCode() {
@@ -283,7 +283,7 @@ public class SecurityServiceMonitorObject implements Serializable {
     /**
      * Override to String.
      *
-     * @return
+     * @return String Value of this Object.
      */
     @Override
     public String toString() {

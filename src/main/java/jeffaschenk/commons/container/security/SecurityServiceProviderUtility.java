@@ -195,7 +195,7 @@ public class SecurityServiceProviderUtility {
      *
      * @param password
      * @param encryptedPassword
-     * @return
+     * @return boolean indicating if credentials are equal or not.
      */
     public static boolean checkPassword(final String password, final String encryptedPassword) {
         if ((password == null) || (password.isEmpty())) {
@@ -268,7 +268,7 @@ public class SecurityServiceProviderUtility {
      * @param expectedSignature
      * @param data
      * @param secret
-     * @return
+     * @return boolean indicating if signature is as expected or not.
      */
     public static boolean checkServiceProviderSignature(byte[] expectedSignature, String data, String secret) {
         try {
@@ -295,7 +295,7 @@ public class SecurityServiceProviderUtility {
      *
      * @param inArray
      * @param trunc   - last number of bytes to be truncated
-     * @return
+     * @return byte[] Byte Array Truncated by specificed number of bytes.
      */
     private static byte[] stripLastBytesFromArray(byte[] inArray, int trunc) {
         byte[] newByteArray = new byte[inArray.length - trunc];
@@ -310,7 +310,7 @@ public class SecurityServiceProviderUtility {
      * Facebook.
      *
      * @param data
-     * @return
+     * @return byte[] Decoded Byte Array.
      */
     public static byte[] decodeBase64Data(String data) {
         if (StringUtils.isEmpty(data)) {
@@ -327,7 +327,7 @@ public class SecurityServiceProviderUtility {
      * Facebook.
      *
      * @param data
-     * @return
+     * @return byte[] encoded Byte Array
      */
     public static byte[] encodeBase64Data(byte[] data) {
         if (data == null) {

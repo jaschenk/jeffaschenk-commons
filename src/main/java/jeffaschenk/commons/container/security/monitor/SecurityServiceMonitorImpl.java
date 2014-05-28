@@ -80,7 +80,6 @@ public class SecurityServiceMonitorImpl implements SecurityServiceMonitor {
 
 
     /**
-     * {@inheritDoc}
      * <p/>
      * Destroy Implemented Spring Interface Method, invoked when bean is removed
      * from container.
@@ -220,7 +219,7 @@ public class SecurityServiceMonitorImpl implements SecurityServiceMonitor {
      *
      * @param principal
      * @param request
-     * @return
+     * @return boolean indicating if login attempt allowed at this time or not.
      */
     @Override
     public boolean isLoginAttemptAllowed(String principal, HttpServletRequest request) {
@@ -265,7 +264,7 @@ public class SecurityServiceMonitorImpl implements SecurityServiceMonitor {
      * Get the number of Login attempts for this instance.
      *
      * @param principal
-     * @return
+     * @return long
      */
     @Override
     public long getPrincipalAttempts(String principal) {
@@ -281,7 +280,7 @@ public class SecurityServiceMonitorImpl implements SecurityServiceMonitor {
      * Get the number of Successful Login attempts for this instance.
      *
      * @param principal
-     * @return
+     * @return long
      */
     @Override
     public long getPrincipalSuccessfulAttempts(String principal) {
@@ -297,7 +296,7 @@ public class SecurityServiceMonitorImpl implements SecurityServiceMonitor {
      * Get the number of UnSuccessful Login attempts for this instance.
      *
      * @param principal
-     * @return
+     * @return long
      */
     @Override
     public long getPrincipalUnsuccessfulAttempts(String principal) {

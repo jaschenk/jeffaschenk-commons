@@ -46,7 +46,7 @@ public class TraceDurationAspect {
      * Advice for Named Pointcut for Around Method Profiling.
      *
      * @param pjp a {@link org.aspectj.lang.ProceedingJoinPoint} object.
-     * @return a {@link java.lang.Object} object.
+     * @return  {@link java.lang.Object} object.
      * @throws java.lang.Throwable if any.
      */
     @Around("inDataPersistenceLayer()")

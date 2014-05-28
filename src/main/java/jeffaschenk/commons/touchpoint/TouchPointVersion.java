@@ -13,7 +13,7 @@ public class TouchPointVersion {
     /**
      * Get our Version
      *
-     * @return a {@link String} object.
+     * @return  {@link String} object.
      */
     public static String getVersion() {
         return ((TouchPointVersion.class.getPackage().getImplementationVersion() == null) ? "UNKNOWN" : TouchPointVersion.class.getPackage().getImplementationVersion());

@@ -40,7 +40,7 @@ public class OptionalParameters {
      * Is there an Entity Path Object Specified within our optionalParameter?
      *
      * @param optionalParameters
-     * @return
+     * @return boolean indicator
      */
     public static boolean isEntityPathSpecifiedAsOptionalParameter(Object... optionalParameters) {
         return isClassSpecifiedAsOptionalParameter(EntityPath.class, optionalParameters);
@@ -50,7 +50,7 @@ public class OptionalParameters {
      * Get any Entity Path Objects Specified within our optionalParameters
      *
      * @param optionalParameters
-     * @return
+     * @return Object[]
      */
     public static Object[] getAllEntityPathsSpecifiedAsOptionalParameter(Object... optionalParameters) {
         return getAllOptionalParamatersByClass(EntityPath.class, optionalParameters);
@@ -60,7 +60,7 @@ public class OptionalParameters {
      * Is there an Entity Path Group Object Specified within our optionalParameter?
      *
      * @param optionalParameters
-     * @return
+     * @return boolean indicating if Path Group Object within our optionalParameter or not.
      */
     public static boolean isEntityPathGroupSpecifiedAsOptionalParameter(Object... optionalParameters) {
         return isClassSpecifiedAsOptionalParameter(EntityPathGroup.class, optionalParameters);
@@ -70,7 +70,7 @@ public class OptionalParameters {
      * Get any Entity Path Group Objects Specified within our optionalParameters
      *
      * @param optionalParameters
-     * @return
+     * @return Object[]
      */
     public static Object[] getAllEntityPathGroupsSpecifiedAsOptionalParameter(Object... optionalParameters) {
         return getAllOptionalParamatersByClass(EntityPathGroup.class, optionalParameters);
@@ -80,7 +80,7 @@ public class OptionalParameters {
      * Is there an Class Object Specified within our optionalParameter?
      *
      * @param optionalParameters
-     * @return
+     * @return boolean indicating Class Object Specified within optionalParmeter or not.
      */
     private static boolean isClassSpecifiedAsOptionalParameter(Class<?> clazz, Object... optionalParameters) {
         if ((optionalParameters == null) || (optionalParameters.length <= 0)) {

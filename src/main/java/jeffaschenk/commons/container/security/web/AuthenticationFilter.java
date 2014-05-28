@@ -163,7 +163,6 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
 
 
     /**
-     * {@inheritDoc}
      * <p/>
      * Destroy Implemented Spring Interface Method, invoked when bean is removed
      * from container.
@@ -217,7 +216,6 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
     }
 
     /**
-     * {@inheritDoc}
      * <p/>
      * successfulAuthentication
      * Provides Override for additional Successful Authentication Processing.

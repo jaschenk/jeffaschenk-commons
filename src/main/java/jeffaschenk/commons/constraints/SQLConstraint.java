@@ -51,7 +51,7 @@ public class SQLConstraint implements java.io.Serializable {
     /**
      * owner
      *
-     * @return a {@link java.lang.String} object.
+     * @return  {@link java.lang.String} object.
      */
     public String getOwner() {
         return owner;
@@ -69,7 +69,7 @@ public class SQLConstraint implements java.io.Serializable {
     /**
      * constraintName
      *
-     * @return a {@link java.lang.String} object.
+     * @return  {@link java.lang.String} object.
      */
     public String getConstraintName() {
         return constraintName;
@@ -87,7 +87,7 @@ public class SQLConstraint implements java.io.Serializable {
     /**
      * constraintType
      *
-     * @return a {@link java.lang.String} object.
+     * @return  {@link java.lang.String} object.
      */
     public String getConstraintType() {
         return constraintType;
@@ -105,7 +105,7 @@ public class SQLConstraint implements java.io.Serializable {
     /**
      * tableName
      *
-     * @return a {@link java.lang.String} object.
+     * @return  {@link java.lang.String} object.
      */
     public String getTableName() {
         return tableName;
@@ -123,7 +123,7 @@ public class SQLConstraint implements java.io.Serializable {
     /**
      * searchCondition
      *
-     * @return a {@link java.lang.String} object.
+     * @return  {@link java.lang.String} object.
      */
     public String getSearchCondition() {
         return searchCondition;
@@ -141,7 +141,7 @@ public class SQLConstraint implements java.io.Serializable {
     /**
      * SQLConstraintColumns
      *
-     * @return a {@link java.util.List} object.
+     * @return  {@link java.util.List} object.
      */
     public List<SQLConstraintColumn> getSQLConstraintColumns() {
         return SQLConstraintColumns;

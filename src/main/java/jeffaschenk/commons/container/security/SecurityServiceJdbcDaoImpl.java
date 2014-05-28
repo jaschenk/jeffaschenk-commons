@@ -149,7 +149,6 @@ public class SecurityServiceJdbcDaoImpl extends JdbcUserDetailsManager implement
     }
 
     /**
-     * {@inheritDoc}
      * <p/>
      * Destroy Implemented Spring Interface Method, invoked when bean is removed
      * from container.
@@ -224,7 +223,7 @@ public class SecurityServiceJdbcDaoImpl extends JdbcUserDetailsManager implement
      *
      * @param principal
      * @param sessionId
-     * @return
+     * @return SecuritySessionUserObject
      */
     @Override
     public SecuritySessionUserObject createSecuritySessionObject(String principal, String sessionId) {
@@ -506,8 +505,10 @@ public class SecurityServiceJdbcDaoImpl extends JdbcUserDetailsManager implement
     }
 
     /**
+     * load User By UserName
+     *
      * @param username
-     * @return
+     * @return UserDetails
      * @throws UsernameNotFoundException
      * @throws DataAccessException
      */

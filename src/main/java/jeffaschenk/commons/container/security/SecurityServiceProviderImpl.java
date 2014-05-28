@@ -78,7 +78,6 @@ public class SecurityServiceProviderImpl extends DaoAuthenticationProvider
     }
 
     /**
-     * {@inheritDoc}
      * <p/>
      * Destroy Implemented Spring Interface Method, invoked when bean is removed
      * from container.
@@ -94,7 +93,7 @@ public class SecurityServiceProviderImpl extends DaoAuthenticationProvider
      * Overriding Authentication Method within Spring Security
      *
      * @param authentication
-     * @return Authentication
+     * @return uthentication
      * @throws AuthenticationException
      *
      */
@@ -231,7 +230,7 @@ public class SecurityServiceProviderImpl extends DaoAuthenticationProvider
      * Indicate this class can return a UserName and Password Token.
      *
      * @param aClass
-     * @return
+     * @return boolean indicating if specified class is supported or not.
      */
     @Override
     public boolean supports(Class aClass) {

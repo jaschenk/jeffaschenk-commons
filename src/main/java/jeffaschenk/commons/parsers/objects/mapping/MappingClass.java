@@ -13,7 +13,7 @@ public class MappingClass {
     /**
      * <p>Getter for the field <code>name</code>.</p>
      *
-     * @return a {@link java.lang.String} object.
+     * @return  {@link java.lang.String} object.
      */
     public String getName() {
         return name;

@@ -31,7 +31,7 @@ public class Sequence {
     /**
      * <p>Getter for the field <code>entityClass</code>.</p>
      *
-     * @return a {@link Class} object.
+     * @return  {@link Class} object.
      */
     public Class<? extends RootElement> getEntityClass() {
         return entityClass;
@@ -49,7 +49,7 @@ public class Sequence {
     /**
      * <p>Getter for the field <code>name</code>.</p>
      *
-     * @return a {@link String} object.
+     * @return  {@link String} object.
      */
     public String getName() {
         return name;
@@ -67,7 +67,7 @@ public class Sequence {
     /**
      * <p>Getter for the field <code>sql</code>.</p>
      *
-     * @return a {@link String} object.
+     * @return  {@link String} object.
      */
     public String getSql() {
         return sql;
@@ -85,7 +85,7 @@ public class Sequence {
     /**
      * <p>Getter for the field <code>parameters</code>.</p>
      *
-     * @return a {@link String} object.
+     * @return  {@link String} object.
      */
     public String getParameters() {
         return parameters;

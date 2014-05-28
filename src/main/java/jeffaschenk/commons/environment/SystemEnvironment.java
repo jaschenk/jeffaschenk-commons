@@ -167,7 +167,7 @@ public class SystemEnvironment implements SystemEnvironmentBean, ApplicationCont
     /**
      * Returns a message source that can be used to translate messages in the system of record.
      *
-     * @return a {@link org.springframework.context.MessageSource}
+     * @return  {@link org.springframework.context.MessageSource}
      */
     public static MessageSource getMessageSource() {
         return applicationContext.getBean("messageSource", MessageSource.class);
@@ -216,7 +216,7 @@ public class SystemEnvironment implements SystemEnvironmentBean, ApplicationCont
     /**
      * Obtain the Specified Deauthorize Callback Suffix as specified as the ending portion of the Facebook Deauthorize URL.
      *
-     * @return
+     * @return String
      */
     @Override
     public String getFacebookDeauthorizeCallback() {
@@ -226,7 +226,7 @@ public class SystemEnvironment implements SystemEnvironmentBean, ApplicationCont
     /**
      * Obtain the Specified Facebook Application Secret for Decoding Signed Requests.
      *
-     * @return
+     * @return String
      */
     @Override
     public String getFacebookApplicationSecret() {
@@ -288,7 +288,7 @@ public class SystemEnvironment implements SystemEnvironmentBean, ApplicationCont
      * runtime context or not.
      *
      * @param className
-     * @return
+     * @return boolean Indicates if Additional classname has been loaded or not.
      */
     private boolean findEnvironmentClass(String className) {
         try {

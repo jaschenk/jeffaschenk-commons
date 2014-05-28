@@ -57,7 +57,7 @@ public class AuthenticationToken extends UsernamePasswordAuthenticationToken {
     /**
      * Obtain the Security Session User Object
      *
-     * @return
+     * @return SecuritySessionUserObject
      */
     public SecuritySessionUserObject getSecuritySessionUserObject() {
         return securitySessionUserObject;

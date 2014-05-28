@@ -132,7 +132,7 @@ public class PagableSearchCriteria implements java.io.Serializable {
     /**
      * name
      *
-     * @return a {@link java.lang.String} object.
+     * @return  {@link java.lang.String} object.
      */
     public String getName() {
         return name;
@@ -150,7 +150,7 @@ public class PagableSearchCriteria implements java.io.Serializable {
     /**
      * Get Search criteria on Display and Entered by User
      *
-     * @return a {@link java.lang.String} object.
+     * @return  {@link java.lang.String} object.
      */
     public String getSearchCriteria() {
         return searchCriteria;
@@ -174,7 +174,7 @@ public class PagableSearchCriteria implements java.io.Serializable {
     /**
      * Actual Search Criteria modified for a Like Condition
      *
-     * @return a {@link java.lang.String} object.
+     * @return  {@link java.lang.String} object.
      */
     public String getActualSearchCriteria() {
         return actualSearchCriteria;
@@ -192,7 +192,7 @@ public class PagableSearchCriteria implements java.io.Serializable {
     /**
      * buttonClicked
      *
-     * @return a {@link java.lang.String} object.
+     * @return  {@link java.lang.String} object.
      */
     public String getButtonClicked() {
         return buttonClicked;
@@ -210,7 +210,7 @@ public class PagableSearchCriteria implements java.io.Serializable {
     /**
      * rowCount
      *
-     * @return a int.
+     * @return  int.
      */
     public int getRowCount() {
         return rowCount;
@@ -228,7 +228,7 @@ public class PagableSearchCriteria implements java.io.Serializable {
     /**
      * rowsPerPage
      *
-     * @return a int.
+     * @return  int.
      */
     public int getRowsPerPage() {
         return rowsPerPage;
@@ -246,7 +246,7 @@ public class PagableSearchCriteria implements java.io.Serializable {
     /**
      * pageSegments
      *
-     * @return a {@link java.util.Map} object.
+     * @return  {@link java.util.Map} object.
      */
     public Map<Integer, PageSegmentBounds> getPageSegments() {
         return pageSegments;
@@ -264,7 +264,7 @@ public class PagableSearchCriteria implements java.io.Serializable {
     /**
      * SelectedPageNumber
      *
-     * @return a int.
+     * @return  int.
      */
     public int getSelectedPageNumber() {
         return selectedPageNumber;
@@ -282,7 +282,7 @@ public class PagableSearchCriteria implements java.io.Serializable {
     /**
      * currentPageNumber
      *
-     * @return a int.
+     * @return  int.
      */
     public int getCurrentPageNumber() {
         return this.currentPageNumber;
@@ -309,7 +309,7 @@ public class PagableSearchCriteria implements java.io.Serializable {
     /**
      * beginningPageRowNumber
      *
-     * @return a int.
+     * @return  int.
      */
     public int getBeginningPageRowNumber() {
         PageSegmentBounds currentPageSegment = this.pageSegments
@@ -324,7 +324,7 @@ public class PagableSearchCriteria implements java.io.Serializable {
     /**
      * endingPageRowNumber
      *
-     * @return a int.
+     * @return  int.
      */
     public int getEndingPageRowNumber() {
         PageSegmentBounds currentPageSegment = this.pageSegments
@@ -339,7 +339,7 @@ public class PagableSearchCriteria implements java.io.Serializable {
     /**
      * rowsPerPage for Current Page Segment.
      *
-     * @return a int.
+     * @return  int.
      */
     public int getRowsPerCurrentPage() {
         PageSegmentBounds currentPageSegment = this.pageSegments.get(new Integer(this.getCurrentPageNumber()));
@@ -352,7 +352,7 @@ public class PagableSearchCriteria implements java.io.Serializable {
     /**
      * Provide Number of Pages per our Segment Map.
      *
-     * @return a int.
+     * @return  int.
      */
     public int getNumberOfPages() {
         return this.pageSegments.size();

@@ -88,7 +88,7 @@ public class ErrorsImpl implements Errors {
      * regarding the nested path of this instance.
      *
      * @param field a {@link java.lang.String} object.
-     * @return a {@link java.lang.String} object.
+     * @return  {@link java.lang.String} object.
      */
     protected String fixedField(String field) {
         if (StringUtils.hasLength(field)) {
@@ -105,7 +105,7 @@ public class ErrorsImpl implements Errors {
      * <p/>
      * return List of all Field and Global Errors
      *
-     * @return a {@link java.util.List} object.
+     * @return  {@link java.util.List} object.
      */
     public List<ObjectError> getAllErrors() {
         List<ObjectError> objectErrorsList = new ArrayList<ObjectError>();
@@ -270,7 +270,7 @@ public class ErrorsImpl implements Errors {
     /**
      * Get a list of all Global Errors
      *
-     * @return A list of all Global Errors
+     * @return  list of all Global Errors
      */
     public List<ObjectError> getGlobalErrors() {
         return this.globalErrors;

@@ -47,7 +47,7 @@ public interface SecurityServiceMonitor {
      *
      * @param principal
      * @param request
-     * @return
+     * @return boolean indicating if a login attempt is allowed at this time or not.
      */
     boolean isLoginAttemptAllowed(String principal, HttpServletRequest request);
 
@@ -55,7 +55,7 @@ public interface SecurityServiceMonitor {
      * Get the number of Login attempts for this instance.
      *
      * @param principal
-     * @return
+     * @return long
      */
     long getPrincipalAttempts(String principal);
 
@@ -63,7 +63,7 @@ public interface SecurityServiceMonitor {
      * Get the number of Successful Login attempts for this instance.
      *
      * @param principal
-     * @return
+     * @return long
      */
     long getPrincipalSuccessfulAttempts(String principal);
 
@@ -71,7 +71,7 @@ public interface SecurityServiceMonitor {
      * Get the number of UnSuccessful Login attempts for this instance.
      *
      * @param principal
-     * @return
+     * @return long
      */
     long getPrincipalUnsuccessfulAttempts(String principal);
 

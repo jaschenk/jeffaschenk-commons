@@ -48,7 +48,7 @@ public class TimeDuration {
     /**
      * Get current Duration.
      *
-     * @return a long.
+     * @return  long.
      */
     public long getCurrentDuration() {
 //        stop();

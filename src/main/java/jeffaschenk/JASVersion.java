@@ -13,7 +13,7 @@ public class JASVersion {
     /**
      * Get our Version
      *
-     * @return a {@link String} object.
+     * @return  {@link String} object.
      */
     public static String getVersion() {
         return ((JASVersion.class.getPackage().getImplementationVersion() == null) ? "UNKNOWN" : JASVersion.class.getPackage().getImplementationVersion());

@@ -44,7 +44,7 @@ public class AnnotationParser {
      * Form, return Class, Field and Method Annotations.
      *
      * @param clazz a {@link java.lang.Class} object.
-     * @return a {@link jeffaschenk.commons.parsers.objects.ClassAnnotationData} object.
+     * @return  {@link jeffaschenk.commons.parsers.objects.ClassAnnotationData} object.
      */
     public ClassAnnotationData parse(Class<?> clazz) {
         // ************************************
@@ -81,7 +81,7 @@ public class AnnotationParser {
      * Form, return Class Annotations.
      *
      * @param clazz a {@link java.lang.Class} object.
-     * @return a {@link java.util.Map} object.
+     * @return  {@link java.util.Map} object.
      */
     public Map<String, String> parseClassAnnotations(Class<?> clazz) {
         CtClass cc = null;
@@ -102,7 +102,7 @@ public class AnnotationParser {
      * Form, return Class, Field and Method Annotations.
      *
      * @param cc a {@link javassist.CtClass} object.
-     * @return a {@link java.util.Map} object.
+     * @return  {@link java.util.Map} object.
      */
     public Map<String, String> parseClassAnnotations(CtClass cc) {
         // *************************************
@@ -162,7 +162,7 @@ public class AnnotationParser {
      * Form, return Field Annotations.
      *
      * @param clazz a {@link java.lang.Class} object.
-     * @return a {@link java.util.Map} object.
+     * @return  {@link java.util.Map} object.
      */
     public Map<String, String> parseClassFieldAnnotations(Class<?> clazz) {
         CtClass cc = null;
@@ -183,7 +183,7 @@ public class AnnotationParser {
      * Form, return Field Annotations.
      *
      * @param cc a {@link javassist.CtClass} object.
-     * @return a {@link java.util.Map} object.
+     * @return  {@link java.util.Map} object.
      */
     public Map<String, String> parseClassFieldAnnotations(CtClass cc) {
         // *************************************
@@ -261,7 +261,7 @@ public class AnnotationParser {
      * Form, return Method Annotations.
      *
      * @param clazz a {@link java.lang.Class} object.
-     * @return a {@link java.util.Map} object.
+     * @return  {@link java.util.Map} object.
      */
     public Map<String, String> parseClassMethodAnnotations(Class<?> clazz) {
         CtClass cc = null;
@@ -283,7 +283,7 @@ public class AnnotationParser {
      * Form, return Method Annotations.
      *
      * @param cc a {@link javassist.CtClass} object.
-     * @return a {@link java.util.Map} object.
+     * @return  {@link java.util.Map} object.
      */
     public Map<String, String> parseClassMethodAnnotations(CtClass cc) {
         // *************************************
@@ -356,7 +356,7 @@ public class AnnotationParser {
      * Form, return Method Annotations.
      *
      * @param method a {@link java.lang.reflect.Method} object.
-     * @return a {@link java.util.Map} object.
+     * @return  {@link java.util.Map} object.
      */
     public Map<String, String> parseSpecificClassMethodAnnotations(Method method) {
         // *************************************

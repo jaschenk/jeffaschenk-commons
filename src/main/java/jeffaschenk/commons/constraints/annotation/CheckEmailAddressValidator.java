@@ -37,7 +37,7 @@ public class CheckEmailAddressValidator extends AbstractAnnotationCheck<CheckEma
      * @param valueToValidate
      * @param context
      * @param validator
-     * @return
+     * @return boolean indicating isSatisfied or not.
      */
     public boolean isSatisfied(Object validatedObject, Object valueToValidate, OValContext context, Validator validator) {
         this.requireMessageVariablesRecreation();

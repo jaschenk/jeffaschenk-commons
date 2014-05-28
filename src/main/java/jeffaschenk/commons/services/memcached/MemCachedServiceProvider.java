@@ -138,7 +138,7 @@ public interface MemCachedServiceProvider {
      * @param region
      * @param key
      * @param value
-     * @return
+     * @return Future<Boolean>
      */
     Future<Boolean> setKeyObjectValue(String region, String key, Object value);
 
@@ -149,7 +149,7 @@ public interface MemCachedServiceProvider {
      * @param key
      * @param expiration
      * @param value
-     * @return
+     * @return Future<Boolean>
      */
     Future<Boolean> setKeyObjectValue(String region, String key, int expiration, Object value);
 
@@ -158,7 +158,7 @@ public interface MemCachedServiceProvider {
      *
      * @param region
      * @param key
-     * @return
+     * @return Boolean
      */
     Boolean removeKeyObjectValue(String region, String key);
 
@@ -167,7 +167,7 @@ public interface MemCachedServiceProvider {
      *
      * @param region
      * @param key
-     * @return
+     * @return Boolean
      */
     Boolean isKeyObjectValueAvailable(String region, String key);
 
@@ -177,7 +177,7 @@ public interface MemCachedServiceProvider {
      *
      * @param region
      * @param keys
-     * @return
+     * @return BulkFuture<Map<String, Object>>
      */
     BulkFuture<Map<String, Object>> getBulkObjectValues(String region, Collection<String> keys);
 
@@ -215,7 +215,7 @@ public interface MemCachedServiceProvider {
      *
      * @param region
      * @param key
-     * @return
+     * @return Boolean
      */
     Boolean removeKeyCounterValue(String region, String key);
 
@@ -224,7 +224,7 @@ public interface MemCachedServiceProvider {
      *
      * @param region
      * @param key
-     * @return
+     * @return Boolean
      */
     Boolean isKeyCounterValueAvailable(String region, String key);
 
@@ -233,7 +233,7 @@ public interface MemCachedServiceProvider {
      *
      * @param region
      * @param keys
-     * @return
+     * @return BulkFuture<Map<String, Object>>
      */
     BulkFuture<Map<String, Object>> getBulkCounterValues(String region, Collection<String> keys);
 }
