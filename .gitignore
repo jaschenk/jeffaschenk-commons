@@ -3,6 +3,7 @@ target/*
 .idea/*
 *.iml
 derby.log
+work/*
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
