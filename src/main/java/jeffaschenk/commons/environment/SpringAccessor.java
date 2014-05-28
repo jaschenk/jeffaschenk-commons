@@ -7,8 +7,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.orm.hibernate3.SessionFactoryUtils;
-import org.springframework.orm.hibernate3.SessionHolder;
+import org.springframework.orm.hibernate4.SessionFactoryUtils;
+import org.springframework.orm.hibernate4.SessionHolder;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 /**
@@ -81,35 +81,6 @@ public class SpringAccessor implements ApplicationContextAware {
      */
     protected static Object getBean(String beanName) {
         return getApplicationContext().getBean(beanName);
-    }
-
-    /**
-     * Extend Session Reach Setup Call this prior to accessing DAOs to extend
-     * the Session Reach and eliminate Lazy Implications.
-     */
-    public static void startExtendedSessionReach() {
-        if (log.isDebugEnabled()) {
-            log.debug("Starting Extended Session Reach");
-        }
-
-        try {
-            SessionFactory sessionFactory = (SessionFactory) getBean(sessionFactoryBeanName);
-            Session session = SessionFactoryUtils.getSession(sessionFactory,
-                    true);
-            if (TransactionSynchronizationManager.getResource(sessionFactory) == null) {
-                TransactionSynchronizationManager.bindResource(sessionFactory,
-                        new SessionHolder(session));
-            }
-        } catch (Exception e) {
-            log.error(
-                    "Exception encountered while starting Extended Session Reach:"
-                            + e.getMessage(), e);
-            throw new java.lang.RuntimeException(
-                    "Extended Session Reach Start Up Exception Encountered", e);
-        }
-        if (log.isDebugEnabled()) {
-            log.debug("Successfully Started Extended Session Reach");
-        }
     }
 
     /**

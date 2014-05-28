@@ -129,7 +129,7 @@
         <level value="DEBUG"/>
     </category>
     <!-- Spring Hibernate Transaction Manager -->
-    <category name="org.springframework.orm.hibernate3.HibernateTransactionManager">
+    <category name="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <level value="WARN"/>
     </category>
     <!-- DWR -->

@@ -19,7 +19,7 @@
     <!-- Our Data Source -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="org.apache.derby.jdbc.EmbeddedDriver"/>
-        <property name="url" value="jdbc:derby:memory:touchpoint_dev"/>
+        <property name="url" value="jdbc:derby:memory:touchpoint_dev;create=true"/>
         <property name="username" value=""/>
         <property name="password" value=""/>
     </bean>

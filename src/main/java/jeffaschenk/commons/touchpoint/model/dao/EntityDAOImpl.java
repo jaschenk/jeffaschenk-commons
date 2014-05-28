@@ -6,9 +6,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate3.SessionFactoryUtils;
-import org.springframework.orm.hibernate3.SessionHolder;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.orm.hibernate4.SessionFactoryUtils;
+import org.springframework.orm.hibernate4.SessionHolder;
+import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 import jeffaschenk.commons.touchpoint.model.RootElement;
@@ -34,7 +34,7 @@ public abstract class EntityDAOImpl extends HibernateDaoSupport implements Entit
      * @param sessionFactory
      */
     @Autowired
-    public void setTouchPointdSessionFactory(SessionFactory sessionFactory) {
+    public void setTouchPointSessionFactory(SessionFactory sessionFactory) {
         super.setSessionFactory(sessionFactory);
     }
 
@@ -45,8 +45,8 @@ public abstract class EntityDAOImpl extends HibernateDaoSupport implements Entit
      */
     public Session getDAOSession() {
         try {
-            Session session = SessionFactoryUtils.getSession(this.getSessionFactory(),
-                    true);
+            Session session = this.getSessionFactory().openSession();
+
             if (TransactionSynchronizationManager.getResource(this.getSessionFactory()) == null) {
                 TransactionSynchronizationManager.bindResource(this.getSessionFactory(),
                         new SessionHolder(session));
