@@ -16,12 +16,12 @@
 
     <aop:aspectj-autoproxy/>
 
-    <!-- Our PostgreSql Data Source -->
+    <!-- Our Data Source -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="org.postgresql.Driver"/>
-        <property name="url" value="jdbc:postgresql://localhost:5432/touchpoint_dev"/>
-        <property name="username" value="touchpoint_dev"/>
-        <property name="password" value="1ts!Manu"/>
+        <property name="driverClassName" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+        <property name="url" value="jdbc:derby:memory:touchpoint_dev"/>
+        <property name="username" value=""/>
+        <property name="password" value=""/>
     </bean>
 
     <!-- Hibernate SessionFactory -->
@@ -33,7 +33,7 @@
         <property name="mappingResources" value="hibernate-named-queries.xml"/>
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.DerbyTenSevenDialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.format_sql">true</prop>
                 <prop key="hibernate.use_sql_comments">false</prop>
