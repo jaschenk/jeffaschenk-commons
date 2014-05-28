@@ -42,6 +42,9 @@
                 <!-- Encoding -->
                 <prop key="hibernate.connection.useUnicode">true</prop>
                 <prop key="hibernate.connection.characterEncoding">UTF-8</prop>
+                <!-- Initialization -->
+                <prop key="hibernate.hbm2ddl.auto">create</prop>
+                <prop key="hibernate.generateDdl">true</prop>
             </props>
         </property>
     </bean>
