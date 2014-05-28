@@ -164,7 +164,7 @@ public class SecurityServiceJdbcDaoImpl extends JdbcUserDetailsManager implement
      * Obtain the Registered User For Authentication using Principal.
      *
      * @param principal
-     * @return List<OutbidSecuritySessionUserObject> - Normally will contain Null or One Entry.
+     * @return List<SecuritySessionUserObject> - Normally will contain Null or One Entry.
      */
     @Override
     public List<SecuritySessionUserObject> getRegisteredUserForAuthentication(String principal) {
@@ -178,7 +178,7 @@ public class SecurityServiceJdbcDaoImpl extends JdbcUserDetailsManager implement
      * Obtain the Registered User For Authentication using facebookUserId.
      *
      * @param facebookUserId
-     * @return List<OutbidSecuritySessionUserObject> - Normally will contain Null or One Entry.
+     * @return List<SecuritySessionUserObject> - Normally will contain Null or One Entry.
      */
     @Override
     public List<SecuritySessionUserObject> getRegisteredUserForAuthentication(BigDecimal facebookUserId) {
@@ -192,7 +192,7 @@ public class SecurityServiceJdbcDaoImpl extends JdbcUserDetailsManager implement
      * Obtain the Optional Regiustered User Profile For Authentication using the Registered User's Row Identifier.
      *
      * @param registeredUserProfileId
-     * @return List<OutbidSecuritySessionProfileObject> - Normally will contain Null or One Entry.
+     * @return List<SecuritySessionProfileObject> - Normally will contain Null or One Entry.
      */
     @Override
     public List<SecuritySessionProfileObject> getRegisteredUserProfileForAuthentication(BigInteger registeredUserProfileId) {
@@ -207,7 +207,7 @@ public class SecurityServiceJdbcDaoImpl extends JdbcUserDetailsManager implement
      * Obtain the Regiustered User Roles For Authentication using the Registered User's Row Identifier.
      *
      * @param registeredUserId
-     * @return List<OutbidSecuritySessionRoleObject> - Roles Assigned to this User.
+     * @return List<SecuritySessionRoleObject> - Roles Assigned to this User.
      */
     @Override
     public List<SecuritySessionRoleObject> getRegisteredUserRolesForAuthentication(BigInteger registeredUserId) {
@@ -221,7 +221,7 @@ public class SecurityServiceJdbcDaoImpl extends JdbcUserDetailsManager implement
      * Obtain the Registered User Permissions For Authentication using the Registered User's Row Identifier.
      *
      * @param registeredUserId
-     * @return List<OutbidSecuritySessionPermissionObject> - Permissions Assigned to this User.
+     * @return List<SecuritySessionPermissionObject> - Permissions Assigned to this User.
      */
     @Override
     public List<SecuritySessionPermissionObject> getRegisteredUserPermissionsForAuthentication(BigInteger registeredUserId) {
@@ -566,7 +566,7 @@ public class SecurityServiceJdbcDaoImpl extends JdbcUserDetailsManager implement
             log.warn(emsg);
             throw new AuthenticationException(emsg);
         } else if (securitySessionUserObject.getUserStatus().equalsIgnoreCase(UserStatus.NEW.code())) {
-            String emsg = "Authenticating Principal:[" + username + "], Account has not been verified yet, Please Check your Email Inbox for a Registration Email from Outbid.";
+            String emsg = "Authenticating Principal:[" + username + "], Account has not been verified yet, Please Check your Email Inbox for a Registration Email.";
             log.warn(emsg);
             throw new AuthenticationException(emsg);
         } else if (securitySessionUserObject.getUserStatus().equalsIgnoreCase(UserStatus.DEACTIVATED.code())) {

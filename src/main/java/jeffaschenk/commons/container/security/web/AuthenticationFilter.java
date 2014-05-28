@@ -1,6 +1,3 @@
-/**
- * OUTBID
- */
 package jeffaschenk.commons.container.security.web;
 
 import jeffaschenk.commons.container.security.AuthenticationException;
@@ -62,52 +59,52 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
     /**
      * Injected Service Provider AppId
      */
-    @Value("#{systemEnvironmentProperties['facebook.serviceProvider.appId']}")
+    @Value("#{systemEnvironmentProperties['serviceProvider.appId']}")
     private String serviceProviderAppId;
 
     /**
      * Injected Service Provider Secret
      */
-    @Value("#{systemEnvironmentProperties['facebook.serviceProvider.secret']}")
+    @Value("#{systemEnvironmentProperties['serviceProvider.secret']}")
     private String serviceProviderSecret;
 
     /**
      * Injected Service Provider Graph Api Url
      */
-    @Value("#{systemEnvironmentProperties['facebook.serviceProvider.graph.apiUrl']}")
+    @Value("#{systemEnvironmentProperties['serviceProvider.graph.apiUrl']}")
     private String serviceProviderGraphApiUrl;
 
     /**
      * Injected Service Provider Authorize Url
      */
-    @Value("#{systemEnvironmentProperties['facebook.serviceProvider.authorizeUrl']}")
+    @Value("#{systemEnvironmentProperties['serviceProvider.authorizeUrl']}")
     private String serviceProviderAuthorizeUrl;
 
     /**
      * Injected Service Provider Authorize Url
      */
-    @Value("#{systemEnvironmentProperties['facebook.serviceProvider.accessTokenUrl']}")
+    @Value("#{systemEnvironmentProperties['serviceProvider.accessTokenUrl']}")
     private String serviceProviderAccessTokenUrl;
 
     /**
      * Injected Service Provider Redirect Url
      */
-    @Value("#{systemEnvironmentProperties['facebook.serviceProvider.redirectUrl']}")
+    @Value("#{systemEnvironmentProperties['serviceProvider.redirectUrl']}")
     private String serviceProviderRedirectUrl;
 
     /**
      * Injected Service Provider Required Extended Permissions
      */
-    @Value("#{systemEnvironmentProperties['facebook.serviceProvider.extended.permissions']}")
+    @Value("#{systemEnvironmentProperties['serviceProvider.extended.permissions']}")
     private String serviceProviderExtendedPermissions;
 
-    @Value("#{systemEnvironmentProperties['facebook.serviceProvider.permission.dialog.form.default']}")
+    @Value("#{systemEnvironmentProperties['serviceProvider.permission.dialog.form.default']}")
     private String serviceProviderPermissionDialogFormDefault;
 
-    @Value("#{systemEnvironmentProperties['outbid.host']}")
-    private String outbidHost;
+    @Value("#{systemEnvironmentProperties['host']}")
+    private String host;
 
-    @Value("#{systemEnvironmentProperties['facebook.serviceProvider.deauthorization.callback']}")
+    @Value("#{systemEnvironmentProperties['serviceProvider.deauthorization.callback']}")
     private String serviceProviderDeAuthorizationCallback;
 
     /**
@@ -239,7 +236,7 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
             // Proceed with Request.
             log.info("Successful Authentication for Principal:[" + authResult.getPrincipal() + "], of Requested Resource:[" + request.getRequestURI() + "]");
             HttpSession session = request.getSession();
-            session.setAttribute(SecuritySessionUserObject.OUTBID_SECURITY_SESSION_USER_OBJECT_NAME,
+            session.setAttribute(SecuritySessionUserObject.SECURITY_SESSION_USER_OBJECT_NAME,
                     authResult.getDetails());
             if (((SecuritySessionUserObject) authResult.getDetails()).getSecuritySessionProfileObject() != null) {
                 Locale locale =
@@ -367,7 +364,7 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
         //response.sendRedirect(url);
         response.setContentType("text/html");
         response.getWriter().write("<html><body><script language=\"javascript\">window.open('" + url + "', '_parent', '')</script>" +
-                "<a href=\"" + url + "\">Launch</a> Outbid Facebook Application.</body></html>");
+                "<a href=\"" + url + "\">Launch</a> Application.</body></html>");
     }
 
     /**
@@ -383,7 +380,7 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
         response.sendRedirect(this.serviceProviderAuthorizeUrl
                 + "?" + "type=" + "web_server"
                 + "&" + "client_id=" + this.serviceProviderAppId
-                + "&" + "redirect_uri=" + this.outbidHost + "/" + OAUTH_REDIRECT
+                + "&" + "redirect_uri=" + this.host + "/" + OAUTH_REDIRECT
                 + "&" + "scope=" + this.serviceProviderExtendedPermissions
                 + "&" + "display=" + this.serviceProviderPermissionDialogFormDefault);
     }
@@ -403,7 +400,7 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
         //
         return this.serviceProviderAccessTokenUrl
                 + "?" + "client_id=" + this.serviceProviderAppId
-                + "&" + "redirect_uri=" + this.outbidHost + "/" + OAUTH_REDIRECT
+                + "&" + "redirect_uri=" + this.host + "/" + OAUTH_REDIRECT
                 + "&" + "client_secret=" + this.serviceProviderSecret
                 + "&" + "scope=" + this.serviceProviderExtendedPermissions
                 + "&" + "code=" + code;

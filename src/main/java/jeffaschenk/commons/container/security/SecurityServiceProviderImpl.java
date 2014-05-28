@@ -1,6 +1,3 @@
-/**
- * OUTBID
- */
 package jeffaschenk.commons.container.security;
 
 import jeffaschenk.commons.container.security.constants.SecurityConstants;
@@ -26,7 +23,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -178,7 +174,7 @@ public class SecurityServiceProviderImpl extends DaoAuthenticationProvider
             if (securitySessionUserObject.getSecuritySessionRoles().size() <= 0) {
                 securitySessionUserObject.getSecuritySessionRoles().add(
                         new SecuritySessionRoleObject(
-                                new BigInteger("0"), ROLE_OUTBID_USER));
+                                new BigInteger("0"), ROLE_USER));
             }
             // *****************************************
             // Build Up Granted Authorities List

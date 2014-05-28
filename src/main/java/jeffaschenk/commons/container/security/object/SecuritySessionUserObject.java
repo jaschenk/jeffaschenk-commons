@@ -1,6 +1,3 @@
-/**
- * QNow
- */
 package jeffaschenk.commons.container.security.object;
 
 import jeffaschenk.commons.container.session.PagableSearchCriteria;
@@ -12,16 +9,16 @@ import java.util.*;
 
 
 /**
- * OUTBID Security Session Object
+ * Security Session Object
  * Provides Authenticated User or Process Session Information.
  *
- * @author jeff.schenk
+ * @author jeffaschenk@gmail.com
  * @version $Id: $
  */
 public class SecuritySessionUserObject implements UserDetails, java.io.Serializable {
     private static final long serialVersionUID = 1109L;
 
-    public static final String OUTBID_SECURITY_SESSION_USER_OBJECT_NAME = "outbidSecuritySessionUserObject";
+    public static final String SECURITY_SESSION_USER_OBJECT_NAME = "securitySessionUserObject";
 
     /**
      * Session SId
@@ -36,7 +33,7 @@ public class SecuritySessionUserObject implements UserDetails, java.io.Serializa
     /**
      * Security Session authenticated Principal
      * <p/>
-     * This contains the emailAddress or ScreeName for an OUTBID User.
+     * This contains the emailAddress or ScreeName for a User.
      */
     private String principal;
     private String password;
@@ -120,7 +117,6 @@ public class SecuritySessionUserObject implements UserDetails, java.io.Serializa
      */
     private Collection<? extends GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
-    private boolean facebookVipUidVerified;
 
     /**
      * Default Constructor
@@ -427,14 +423,8 @@ public class SecuritySessionUserObject implements UserDetails, java.io.Serializa
      */
     @Override
     public String toString() {
-        return "OUTBID Principal:[" + this.getPrincipal() + "], Session Sid:[" + this.getSessionSid() + "], Login Time:[" + this.getLoginTime() + "]";
+        return "Principal:[" + this.getPrincipal() + "], Session Sid:[" + this.getSessionSid() + "], Login Time:[" + this.getLoginTime() + "]";
     }
 
-    public boolean isFacebookVipUidVerified() {
-        return facebookVipUidVerified;
-    }
 
-    public void setFacebookVipUidVerified(boolean facebookVipUidVerified) {
-        this.facebookVipUidVerified = facebookVipUidVerified;
-    }
 }

@@ -12,7 +12,7 @@ import org.springframework.core.io.ClassPathResource;
  * configuration and setup as underlying Persistence Manager via Injection for a
  * non-container Environment only.
  *
- * @author jeff.schenk
+ * @author jeffaschenk@gmail.com
  * @version $Id: SetUpSpringContainerBootStrap.java 8201 2011-05-17 19:58:21Z jschenk $
  */
 public class SetUpSpringContainerBootStrap {

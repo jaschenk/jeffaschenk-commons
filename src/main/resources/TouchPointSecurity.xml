@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security-3.0.3.xsd
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+       http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+       default-lazy-init="false">
+
+    <!-- ************************************************************  -->
+    <!--  Common Security, Spring Security 3.0.3 Configuration         -->
+    <!-- ************************************************************  -->
+    <!-- Authentication Manager -->
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider ref="securityServiceProvider" user-service-ref="securityServiceJdbcDao"/>
+        <security:authentication-provider ref="anonymousAuthenticationProvider"/>
+    </security:authentication-manager>
+
+    <!-- Authentication Provider -->
+    <bean class="jeffaschenk.commons.container.security.SecurityServiceProviderImpl"
+          id="securityServiceProvider">
+        <property name="userDetailsService" ref="securityServiceJdbcDao"/>
+    </bean>
+
+    <!-- Anonymous Provider -->
+    <bean class="org.springframework.security.authentication.AnonymousAuthenticationProvider"
+          id="anonymousAuthenticationProvider">
+        <property name="key" value="BF93JFJ091N00Q7HF"/>
+        <!-- TODO MAKE ME A SYS ENV PROPERTY ! -->
+    </bean>
+
+    <!-- Wrapper for User Details Service -->
+    <bean id="authenticationUserDetailsService"
+          class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
+        <property name="userDetailsService" ref="securityServiceJdbcDao"/>
+    </bean>
+
+    <!-- Default Event Publisher -->
+    <bean id="defaultAuthEventPublisher"
+          class="org.springframework.security.authentication.DefaultAuthenticationEventPublisher"/>
+
+    <!-- Spring Security Listeners-->
+    <bean id="authenticationListener" class="org.springframework.security.authentication.event.LoggerListener"/>
+    <bean id="authorizationListener" class="org.springframework.security.access.event.LoggerListener"/>
+    <!-- TouchPoint Session Listener -->
+    <bean id="touchPointSessionListener" class="jeffaschenk.commons.container.security.web.SessionListener"/>
+
+    <!-- Spring Security Authority Voters  -->
+    <bean class="org.springframework.security.access.vote.UnanimousBased" id="unanimousBased">
+        <property name="decisionVoters">
+            <list>
+                <ref bean="roleVoter"/>
+                <ref bean="expressionVoter"/>
+                <ref bean="authenticatedVoter"/>
+            </list>
+        </property>
+    </bean>
+    <bean class="jeffaschenk.commons.container.security.vote.RoleVoter" id="roleVoter"/>
+    <bean class="jeffaschenk.commons.container.security.vote.AuthenticatedVoter" id="authenticatedVoter"/>
+    <bean class="jeffaschenk.commons.container.security.vote.ExpressionVoter" id="expressionVoter">
+        <property name="expressionHandler" ref="expressionHandler"/>
+    </bean>
+
+    <!-- FORM/AJAX/REST/WS/Service Provider Authentication Filter -->
+    <bean id="touchPointAuthenticationFilter"
+          class="jeffaschenk.commons.container.security.web.AuthenticationFilter">
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="authenticationFailureHandler" ref="authenticationFailureHandler"/>
+        <property name="allowSessionCreation" value="true"/>
+        <property name="continueChainBeforeSuccessfulAuthentication" value="false"/>
+        <property name="securityServiceMonitor" ref="securityServiceMonitor"/>
+    </bean>
+
+    <!-- Security Context Persistence Filter -->
+    <bean id="securityContextPersistenceFilter"
+          class="org.springframework.security.web.context.SecurityContextPersistenceFilter"/>
+
+    <!-- Security Exception Translation Filter -->
+    <bean id="exceptionTranslationFilter" class="org.springframework.security.web.access.ExceptionTranslationFilter">
+        <property name="authenticationEntryPoint" ref="authenticationEntryPoint"/>
+        <property name="accessDeniedHandler" ref="accessDeniedHandler"/>
+    </bean>
+
+    <!-- Anonymous Processing Filter -->
+    <bean id="anonymousProcessingFilter"
+          class="org.springframework.security.web.authentication.AnonymousAuthenticationFilter">
+        <!-- Both of these are required -->
+        <!-- username, default role -->
+        <property name="userAttribute" value="anonymousUser,ROLE_ANONYMOUS"/>
+        <!-- randomly generated key -->
+        <property name="key" value="BF93JFJ091N00Q7HF"/>
+        <!-- TODO MAKE ME A SYS ENV PROPERTY ! -->
+    </bean>
+
+    <!-- Logout Filter -->
+    <bean id="logoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
+        <!-- the post-logout destination -->
+        <constructor-arg value="/"/>
+        <constructor-arg>
+            <array>
+                <ref local="logoutHandler"/>
+                <!-- <ref local="rememberMeServices"/> -->
+            </array>
+        </constructor-arg>
+        <property name="filterProcessesUrl" value="/logout"/>
+    </bean>
+
+    <!-- Authentication Entry Point per HTTP Configuration -->
+    <bean id="authenticationEntryPoint"
+          class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+        <property name="loginFormUrl" value="/login"/>
+        <property name="forceHttps" value="${security.forceHttps.where.applicable}"/>
+    </bean>
+
+    <!-- Authentication Entry Point per Service Provider Configuration -->
+    <bean id="serviceProviderAuthenticationEntryPoint"
+          class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+        <property name="loginFormUrl" value="/"/>
+        <!-- There is really no Form, we just need a place to land. -->
+        <property name="forceHttps" value="${security.forceHttps.where.applicable}"/>
+    </bean>
+
+    <!-- Handler's -->
+    <bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"
+          id="expressionHandler"/>
+
+    <bean id="accessDeniedHandler" class="org.springframework.security.web.access.AccessDeniedHandlerImpl">
+        <property name="errorPage" value="/accessDenied"/>
+    </bean>
+
+    <bean id="authenticationFailureHandler"
+          class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+        <property name="defaultFailureUrl" value="/login/failure"/>
+    </bean>
+
+    <bean id="logoutHandler"
+          class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>
+
+    <!-- Filter Security Interceptor -->
+    <bean id="filterSecurityInterceptor"
+          class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="accessDecisionManager" ref="unanimousBased"/>
+        <property name="securityMetadataSource">
+            <!--  SEC-1256 -->
+            <security:filter-security-metadata-source use-expressions="true">
+                <security:intercept-url pattern="/login" access="permitAll"/>
+                <security:intercept-url pattern="/modals/login" access="permitAll"/>
+                <security:intercept-url pattern="/oauth_redirect" access="permitAll"/>
+                <security:intercept-url pattern="/*" access="hasRole('ROLE_USER')"/>
+            </security:filter-security-metadata-source>
+        </property>
+    </bean>
+
+    <!-- Explicit Filter Chain -->
+    <bean id="springSecurityFilterChain" class="org.springframework.security.web.FilterChainProxy">
+        <security:filter-chain-map path-type="ant">
+            <security:filter-chain pattern="/**" filters="
+	           securityContextPersistenceFilter,
+	           logoutFilter,
+	           touchPointAuthenticationFilter,
+	           anonymousProcessingFilter,
+	           exceptionTranslationFilter,
+	           filterSecurityInterceptor"/>
+        </security:filter-chain-map>
+    </bean>
+
+    <!-- Security Component Scan Paths -->
+    <context:component-scan base-package="jeffaschenk.commons.container"/>
+
+</beans>

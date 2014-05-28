@@ -1,6 +1,3 @@
-/**
- * QNow
- */
 package jeffaschenk.commons.touchpoint.model.dao;
 
 import org.hibernate.Session;
@@ -14,7 +11,7 @@ import java.util.List;
  * EntityDAO
  * Entity Service Interface.
  *
- * @author (jschenk) Jeff.Schenk@thought-matrix.com
+ * @author jeffascehnk@gmail.com
  * @version $Id: $
  */
 public abstract interface EntityDAO {

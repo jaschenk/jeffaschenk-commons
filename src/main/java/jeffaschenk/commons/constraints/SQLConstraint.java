@@ -8,7 +8,7 @@ import java.util.List;
  * Helper Support Object to pass obtained Constraint Information back to
  * Exception and other processes for examination.
  *
- * @author jeff.schenk
+ * @author jeffaschenk@gmail.com
  * @version $Id: $
  */
 public class SQLConstraint implements java.io.Serializable {

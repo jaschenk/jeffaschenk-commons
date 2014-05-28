@@ -5,7 +5,7 @@ import java.util.Calendar;
 /**
  * Simple TimeStamp Object to provide various timestamp formats
  *
- * @author Jeff.Schenk
+ * @author jeffaschenk@gmail.com
  * @version $Id: $
  */
 public class TimeStamp {

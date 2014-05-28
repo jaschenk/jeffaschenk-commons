@@ -1,6 +1,3 @@
-/**
- * Qnow
- */
 package jeffaschenk.commons.container.security.web;
 
 import jeffaschenk.commons.util.TimeUtils;
@@ -14,7 +11,7 @@ import javax.servlet.http.HttpSessionListener;
 /**
  * Session Listener
  *
- * @author Jeff.Schenk
+ * @author jeffaschenk@gmail.com
  * @version $Id: $
  */
 public class SessionListener implements HttpSessionListener {

@@ -15,7 +15,7 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
  * SpringAccessor Utility Class. Provides Spring+AOP+Hibernate configuration and
  * setup as underlying Persistence Manager via Injection.
  *
- * @author jeff.schenk
+ * @author jeffaschenk@gmail.com
  * @version $Id: $
  */
 public class SpringAccessor implements ApplicationContextAware {

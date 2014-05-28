@@ -3,7 +3,7 @@ package jeffaschenk.commons.parsers.objects.mapping;
 /**
  * Mapping Class Object used by ORMParser and Digester.
  *
- * @author jeff.schenk
+ * @author jeffaschenk@gmail.com
  * @version $Id: $
  */
 public class MappingClass {

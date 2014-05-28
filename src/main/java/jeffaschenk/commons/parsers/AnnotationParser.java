@@ -15,7 +15,7 @@ import java.util.Map;
  * Collection Map of those attributes and properties of the Object class. This
  * parser uses Javassist to perform introspection of the Java ByteCode.
  *
- * @author jeff.schenk
+ * @author jeffaschenk@gmail.com
  * @version $Id: $
  */
 public class AnnotationParser {

@@ -19,7 +19,7 @@ public class ConstraintException extends ConflictException {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Constraint Obtain from the OUTBID SQL Constraint Lookup Service
+     * Constraint Obtain from the SQL Constraint Lookup Service
      */
     private SQLConstraint SQLContraint;
 
@@ -83,7 +83,7 @@ public class ConstraintException extends ConflictException {
     }
 
     /**
-     * Additional Constructors, with OUTBID SQL Constraint Object Set.
+     * Additional Constructors, with SQL Constraint Object Set.
      *
      * @param errorCode    a {@link java.lang.String} object.
      * @param SQLContraint a {@link jeffaschenk.commons.constraints.SQLConstraint} object.
@@ -154,16 +154,16 @@ public class ConstraintException extends ConflictException {
     }
 
     /**
-     * Get the OUTBID SQL Constraint Object representing this Constraint Violation
+     * Get the SQL Constraint Object representing this Constraint Violation
      *
-     * @return QNOWSQLContraint
+     * @return SQLContraint
      */
-    public SQLConstraint getQNOWSQLContraint() {
+    public SQLConstraint getSQLContraint() {
         return SQLContraint;
     }
 
     /**
-     * Set the OUTBID SQL Constraint Object representing this Constraint Violation
+     * Set the SQL Constraint Object representing this Constraint Violation
      *
      * @param SQLContraint the SQLContraint to set
      */

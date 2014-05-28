@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 /**
  * AOP Aspect to provide Advice to methods for Performance Tuning.
  *
- * @author jeff.schenk
+ * @author jeffaschenk@gmail.com
  * @version $Id: $
  */
 @Component

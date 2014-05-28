@@ -2,7 +2,7 @@ package jeffaschenk.commons.exceptions;
 
 
 /**
- * Qnow Errors Context Holder Class
+ * Errors Context Holder Class
  *
  * @author Jeff
  * @version $Id: $

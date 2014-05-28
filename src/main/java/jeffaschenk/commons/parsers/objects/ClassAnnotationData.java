@@ -7,7 +7,7 @@ import java.util.Map;
  * POJO to define the Object Relational Mapping information obtained from the
  * Object Class' annotations.
  *
- * @author jeff.schenk
+ * @author jeffaschenk@gmail.com
  * @version $Id: $
  */
 public class ClassAnnotationData implements java.io.Serializable {

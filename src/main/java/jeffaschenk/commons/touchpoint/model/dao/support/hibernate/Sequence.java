@@ -5,7 +5,7 @@ import jeffaschenk.commons.touchpoint.model.RootElement;
 /**
  * Simple Sequence Object
  *
- * @author Jeff.Schenk@thought-matrix.com
+ * @author jeffaschenk@gmail.com
  * @version $Id: $
  */
 public class Sequence {

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+
+    <!-- ============================== -->
+    <!-- Append messages to the console -->
+    <!-- ============================== -->
+
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <param name="Target" value="System.out"/>
+        <param name="Threshold" value="INFO"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <!-- The default pattern: Date Priority [Category] Message\n -->
+            <param name="ConversionPattern" value="%d{ABSOLUTE} [%t] %-5p %c{1}.%M.%L %x - %m%n"/>
+        </layout>
+    </appender>
+
+    <!-- ================ -->
+    <!-- Limit categories -->
+    <!-- ================ -->
+
+    <!-- Limit the org.apache category to INFO as its DEBUG is verbose -->
+    <category name="org.apache">
+        <priority value="INFO"/>
+    </category>
+    <!-- Limit the jacorb category to WARN as its INFO is verbose -->
+    <category name="jacorb">
+        <priority value="WARN"/>
+    </category>
+
+    <!-- Limit the org.jgroups category to WARN as its INFO is verbose -->
+    <category name="org.jgroups">
+        <priority value="WARN"/>
+    </category>
+
+    <!-- Limit the org.quartz category to INFO as its DEBUG is verbose -->
+    <category name="org.quartz">
+        <priority value="INFO"/>
+    </category>
+
+    <!-- Limit the com.sun category to INFO as its FINE is verbose -->
+    <category name="com.sun">
+        <priority value="INFO"/>
+    </category>
+
+    <!-- Limit the sun category to INFO as its FINE is verbose -->
+    <category name="sun">
+        <priority value="INFO"/>
+    </category>
+
+    <!-- Limit the javax.xml.bind category to INFO as its FINE is verbose -->
+    <category name="javax.xml.bind">
+        <priority value="INFO"/>
+    </category>
+
+    <!-- Limit the JSR77 categories -->
+    <category name="org.jboss.management">
+        <priority value="INFO"/>
+    </category>
+
+    <!-- Limit the verbose facelets compiler -->
+    <category name="facelets.compiler">
+        <priority value="WARN"/>
+    </category>
+
+    <!-- Limit the verbose ajax4jsf cache initialization -->
+    <category name="org.ajax4jsf.cache">
+        <priority value="WARN"/>
+    </category>
+
+    <!-- Limit the verbose embedded jopr categories -->
+    <category name="org.rhq">
+        <priority value="WARN"/>
+    </category>
+
+    <!-- Limit the verbose seam categories -->
+    <category name="org.jboss.seam">
+        <priority value="WARN"/>
+    </category>
+
+    <!-- Show the evolution of the DataSource pool in the logs [inUse/Available/Max] -->
+    <category name="org.jboss.resource.connectionmanager.JBossManagedConnectionPool">
+        <priority value="TRACE"/>
+    </category>
+
+    <!-- Category specifically for Security Audit Provider -->
+    <category name="org.jboss.security.audit.providers.LogAuditProvider" additivity="false">
+        <priority value="TRACE"/>
+    </category>
+
+    <!-- Limit the org.jboss.serial (jboss-serialization) to INFO as its DEBUG is verbose -->
+    <category name="org.jboss.serial">
+        <priority value="INFO"/>
+    </category>
+
+
+    <!-- ======================================== -->
+    <!-- Setup the TouchPoint Specific Categories -->
+    <!-- ======================================== -->
+    <category name="jeffaschenk">
+        <level value="DEBUG"/>
+    </category>
+    <category name="jeffaschenk.touchpoint">
+        <level value="DEBUG"/>
+    </category>
+    <!-- Set to TRACE to produce Performance Timings for Data Persistence Layer -->
+    <category name="jeffaschenk.commons.aop.TraceDurationAspect">
+        <level value="WARN"/>
+    </category>
+    <!-- Hibernate -->
+    <category name="org.hibernate">
+        <level value="DEBUG"/>
+    </category>
+    <category name="org.hibernate.LazyInitializationException">
+        <level value="FATAL"/>
+    </category>
+    <!-- Spring -->
+    <category name="org.springframework">
+        <level value="DEBUG"/>
+    </category>
+    <!-- Spring AOP -->
+    <category name="org.springframework.aop">
+        <level value="DEBUG"/>
+    </category>
+    <category name=" org.aspectj">
+        <level value="DEBUG"/>
+    </category>
+    <category name="org.springframework.web.servlet.DispatcherServlet">
+        <level value="DEBUG"/>
+    </category>
+    <!-- Spring Hibernate Transaction Manager -->
+    <category name="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <level value="WARN"/>
+    </category>
+    <!-- DWR -->
+    <category name="org.directwebremoting">
+        <level value="WARN"/>
+    </category>
+    <!-- jXPath -->
+    <category name="org.apache.commons.jxpath">
+        <level value="DEBUG"/>
+    </category>
+    <category name="org.springframework.beans.factory.xml.PluggableSchemaResolver">
+        <level value="DEBUG"/>
+    </category>
+    <category name="org.apache.commons.digester.Digester">
+        <level value="WARN"/>
+    </category>
+
+    <!-- ======================= -->
+    <!-- Setup the Root category -->
+    <!-- ======================= -->
+
+    <root>
+        <priority value="DEBUG"/>
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</log4j:configuration>

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.jboss.org/dtd/hibernate/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+
+        <!-- Dialect property for hbm2ddl schema generation. -->
+
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+
+        <!--Touch Point -->
+        <mapping class="jeffaschenk.commons.touchpoint.model.RootElement"/>
+        <mapping class="jeffaschenk.commons.touchpoint.model.Owner"/>
+        <mapping class="jeffaschenk.commons.touchpoint.model.Element"/>
+        <mapping class="jeffaschenk.commons.touchpoint.model.Group"/>
+        <mapping class="jeffaschenk.commons.touchpoint.model.Action"/>
+        <mapping class="jeffaschenk.commons.touchpoint.model.Ancestry"/>
+        <mapping class="jeffaschenk.commons.touchpoint.model.AncestryElement"/>
+        <mapping class="jeffaschenk.commons.touchpoint.model.Property"/>
+        <mapping class="jeffaschenk.commons.touchpoint.model.PropertyValue"/>
+
+    </session-factory>
+
+</hibernate-configuration>
+
+
+
+

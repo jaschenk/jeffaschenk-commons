@@ -63,6 +63,7 @@
 					<source>${jdk.version}</source>
 					<target>${jdk.version}</target>
 					<encoding>UTF-8</encoding>
+                    <compilerArgument>-Xlint:unchecked</compilerArgument>
 				</configuration>
 			</plugin>
 
@@ -198,17 +199,17 @@
                 <configuration>
                     <!-- All Reports -->
                     <show>private</show>
-                    <quiet>false</quiet>
+                    <quiet>true</quiet>
                     <outputDirectory>${project.build.directory}/site/apidocs
                     </outputDirectory>
                     <excludePackageNames>org.springframework:org.springframework.*:org.*:javax.*
                     </excludePackageNames>
-                    <name>TouchPoint-JAVADOC</name>
-                    <description>TouchPoint Framework API Documentation,
+                    <name>JeffASchenk Commons JAVADOC</name>
+                    <description>JeffASchenk Commons Framework API Documentation,
                         developed and produced by Jeff A. Schenk.
                     </description>
                     <bottom>
-                        <![CDATA[Copyright &#169 2011, <a href="http://www.jeffaschenk.com">Jeff A. Schenk<a> All Rights Reserved.]]>
+                        <![CDATA[Copyright &#169 1978-2014, <a href="http://www.jeffaschenk.com">Jeff A. Schenk<a> All Rights Reserved.]]>
                     </bottom>
                 </configuration>
                 <executions>
@@ -729,13 +730,6 @@
           <groupId>org.jasypt</groupId>
           <artifactId>jasypt</artifactId>
           <version>1.6</version>
-      </dependency>
-
-      <!-- JUnit -->
-      <dependency>
-          <groupId>junit</groupId>
-          <artifactId>junit</artifactId>
-          <version>4.8.1</version>
       </dependency>
 
       <!-- AOP & ByteCode manipulation -->

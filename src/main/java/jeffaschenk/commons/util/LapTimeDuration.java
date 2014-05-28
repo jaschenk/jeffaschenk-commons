@@ -1,13 +1,10 @@
-/**
- * QNow
- */
 package jeffaschenk.commons.util;
 
 
 /**
  * Java Class for accumulating LapTimes for a Iterative Task.
  *
- * @author jeff.schenk
+ * @author jeffaschenk@gmail.com
  * @version $Id: $
  */
 public class LapTimeDuration extends TimeDuration {

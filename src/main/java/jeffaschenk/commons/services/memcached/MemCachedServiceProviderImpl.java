@@ -127,7 +127,7 @@ public class MemCachedServiceProviderImpl implements MemCachedServiceProvider,
             }
 
         } else {
-            logger.warn("Disabling MemcachedServiceProvider for Internal OUTBID Cache component!");
+            logger.warn("Disabling MemcachedServiceProvider for Internal Cache component!");
             this.initialized = false;
             return;
         }
@@ -625,7 +625,7 @@ public class MemCachedServiceProviderImpl implements MemCachedServiceProvider,
             } else if (this.isMemcachedClusterAlivePrivateMethod()) {
                 this.initialized = true;
                 this.mc.addObserver(new MemcachedServiceProviderConnectionObserver());
-                logger.info("OUTBID MemCached Application Client Services has been initialized successfully.");
+                logger.info("MemCached Application Client Services has been initialized successfully.");
             } else {
                 logger.warn("Unable to Post and Obtain Initial Private Region value from MemCached Cluster, stopping Initialization.");
             }

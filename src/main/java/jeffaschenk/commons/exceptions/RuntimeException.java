@@ -3,7 +3,7 @@ package jeffaschenk.commons.exceptions;
 import org.springframework.validation.Errors;
 
 /**
- * This Exception is the base class of all runtime exceptions in the OUTBID-SOR Layer.
+ * This Exception is the base class of all runtime exceptions.
  * The exception will contain an <code>Errors</code> object that will describe the exception in more detail.
  * <p/>
  * Please note that the errorCode can be used to try and resolve it to a message in a ResourceBundle

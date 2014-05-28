@@ -3,7 +3,7 @@ package jeffaschenk.commons.environment;
 import jeffaschenk.commons.types.EnvironmentType;
 
 /**
- * OUTBID
+ *
  * Dynamic System Environment Properties
  * <p/>
  * Our Bean and Alias are defined in the SORProperties.xml Spring Configuration file.

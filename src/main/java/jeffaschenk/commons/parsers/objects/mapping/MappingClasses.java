@@ -5,7 +5,7 @@ import java.util.Vector;
 /**
  * Mapping Classes Object used by ORMParser and Digester.
  *
- * @author jeff.schenk
+ * @author jeffaschenk@gmail.com
  * @version $Id: $
  */
 public class MappingClasses {

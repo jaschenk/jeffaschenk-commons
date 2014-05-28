@@ -1,13 +1,10 @@
-/**
- * QNow
- */
 package jeffaschenk.commons.container.security.object;
 
 /**
- * OUTBID Security Session Profile Object
+ * Security Session Profile Object
  * Provides Authenticated User or Process Session Information.
  *
- * @author jeff.schenk
+ * @author jeffaschenk@gmail.com
  * @version $Id: $
  */
 public class SecuritySessionProfileObject implements java.io.Serializable {

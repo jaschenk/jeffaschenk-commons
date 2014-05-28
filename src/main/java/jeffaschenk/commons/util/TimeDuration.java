@@ -4,7 +4,7 @@ package jeffaschenk.commons.util;
  * Provides Simple Time Duration Object for calculating during of task or other
  * invocations.
  *
- * @author jeff.schenk
+ * @author jeffaschenk@gmail.com
  * @version $Id: $
  */
 public class TimeDuration {

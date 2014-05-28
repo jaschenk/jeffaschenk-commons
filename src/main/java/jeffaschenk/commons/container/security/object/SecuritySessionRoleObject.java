@@ -1,16 +1,13 @@
-/**
- * QNow
- */
 package jeffaschenk.commons.container.security.object;
 
 import java.math.BigInteger;
 
 /**
- * OUTBID
+ *
  * Security Session Object
  * Provides Authenticated User or Process Session Information.
  *
- * @author jeff.schenk
+ * @author jeffaschenk@gmail.com
  * @version $Id: $
  */
 public class SecuritySessionRoleObject implements java.io.Serializable {

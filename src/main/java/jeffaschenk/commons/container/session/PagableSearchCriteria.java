@@ -1,6 +1,3 @@
-/**
- * QNow
- */
 package jeffaschenk.commons.container.session;
 
 import org.apache.commons.logging.Log;
@@ -12,7 +9,7 @@ import java.util.TreeMap;
 /**
  * Simple POJO to contain the Search Criteria for a given Web Page.
  *
- * @author jeff.schenk
+ * @author jeffaschenk@gmail.com
  * @version $Id: $
  */
 public class PagableSearchCriteria implements java.io.Serializable {
@@ -562,7 +559,7 @@ public class PagableSearchCriteria implements java.io.Serializable {
     /**
      * Inner Class to provide Page Segment Bounds
      *
-     * @author jeff.schenk
+     * @author jeffaschenk@gmail.com
      */
     public class PageSegmentBounds {
 

@@ -1,7 +1,7 @@
 package jeffaschenk.commons.container.security.object;
 
 /**
- * OUTBID
+ *
  * Granted Authority
  *
  * @author jeffaschenk@gmail.com

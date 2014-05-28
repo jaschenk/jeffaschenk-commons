@@ -7,7 +7,7 @@ package jeffaschenk.commons.constraints;
  * Helper Support Object to pass obtained Constraint Information back to
  * Exception and other processes for examination.
  *
- * @author jeff.schenk
+ * @author jeffaschenk@gmail.com
  * @version $Id: $
  */
 public class SQLConstraintColumn implements java.io.Serializable {

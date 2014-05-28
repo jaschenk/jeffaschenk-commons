@@ -9,7 +9,7 @@ import java.text.NumberFormat;
  * Provides Simple memory Usage Object for calculating during of task or other
  * invocations.
  *
- * @author jeff.schenk
+ * @author jeffaschenk@gmail.com
  * @version $Id: $
  */
 public class MemoryUsage {

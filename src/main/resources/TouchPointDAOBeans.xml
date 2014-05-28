@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	     http://www.springframework.org/schema/context
+	     http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	     http://www.springframework.org/schema/aop
+	     http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	     http://www.springframework.org/schema/tx
+	     http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <aop:aspectj-autoproxy/>
+
+    <!-- Our PostgreSql Data Source -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="jdbc:postgresql://localhost:5432/touchpoint_dev"/>
+        <property name="username" value="touchpoint_dev"/>
+        <property name="password" value="1ts!Manu"/>
+    </bean>
+
+    <!-- Hibernate SessionFactory -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource">
+            <ref bean="dataSource"/>
+        </property>
+        <property name="configLocation" value="classpath:hibernate-mapping.cfg.xml"/>
+        <property name="mappingResources" value="hibernate-named-queries.xml"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.use_sql_comments">false</prop>
+                <prop key="hibernate.default_batch_fetch_size">32</prop>
+                <prop key="hibernate.generate_statistics">true</prop>
+                <!-- Encoding -->
+                <prop key="hibernate.connection.useUnicode">true</prop>
+                <prop key="hibernate.connection.characterEncoding">UTF-8</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- JMX Management Bean Exporter -->
+    <bean id="jmxExporter"
+          class="org.springframework.jmx.export.MBeanExporter">
+        <property name="beans">
+            <map>
+                <entry key="Hibernate:name=statistics">
+                    <ref local="statisticsBean"/>
+                </entry>
+            </map>
+        </property>
+        <property name="registrationBehaviorName" value="REGISTRATION_IGNORE_EXISTING"></property>
+    </bean>
+
+    <!-- Hibernate Session Factory Statistics -->
+    <bean id="statisticsBean" class="org.hibernate.jmx.StatisticsService">
+        <property name="statisticsEnabled">
+            <value>true</value>
+        </property>
+        <property name="sessionFactory">
+            <ref local="sessionFactory"/>
+        </property>
+    </bean>
+
+
+    <!-- ***************************** -->
+    <!-- Operational Related Aspects   -->
+    <!-- ***************************** -->
+
+    <!-- Aspectj Use autoproxy Creator -->
+    <aop:aspectj-autoproxy/>
+
+    <!-- Aspect Configuration -->
+    <aop:config proxy-target-class="false">
+        <!-- Define Transactional Point Cuts within Application -->
+        <aop:pointcut id="tp_tx_dao"
+                      expression="( execution(* com.jeffaschenk.touchpoint.model.dao..*.*(..)) )"/>
+        <!-- Weave Transactional Support -->
+        <aop:advisor advice-ref="tp_txAdvice" pointcut-ref="tp_tx_dao" order="200"/>
+    </aop:config>
+
+    <!-- Transactional Advice -->
+    <tx:advice id="tp_txAdvice" transaction-manager="tp_transactionManager">
+        <!-- Transactional semantics -->
+        <tx:attributes>
+            <!-- all methods starting with 'get','contains','list','lookup','read','search' are read-only -->
+            <tx:method name="get*" read-only="true" timeout="40" propagation="REQUIRED"/>
+            <tx:method name="contains*" read-only="true" timeout="40" propagation="REQUIRED"/>
+            <tx:method name="find*" read-only="true" timeout="40" propagation="REQUIRED"/>
+            <tx:method name="list*" read-only="true" timeout="40" propagation="REQUIRED"/>
+            <tx:method name="lookup*" read-only="true" timeout="40" propagation="REQUIRED"/>
+            <tx:method name="read*" read-only="true" timeout="40" propagation="REQUIRED"/>
+            <tx:method name="search*" read-only="true" timeout="40" propagation="REQUIRED"/>
+            <tx:method name="validate*" read-only="true" timeout="40" propagation="REQUIRED"/>
+            <!-- all other methods use the default transaction settings, basically read-write semantics, 600 second timeout -->
+            <tx:method name="*" read-only="false" rollback-for="Throwable" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- Allowing Persistent Translation using @Repository Annotation within DAO Layer, Jeff Schenk. -->
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+    <!-- AOP to ensure Transactional Annotation is Applied -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+
+    <!-- Use Additional Transaction Manager Annotations -->
+    <tx:annotation-driven order="190" transaction-manager="tp_transactionManager"/>
+
+    <!-- Transaction manager for a single Hibernate SessionFactory (alternative to JTA) -->
+    <bean id="tp_transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="failEarlyOnGlobalRollbackOnly" value="true"/>
+        <property name="defaultTimeout" value="600"/>
+        <!--
+                This is excellent to use during development, to make sure all transactions are aligned.
+                <property name="validateExistingTransaction" value="true"/>
+
+                 <property name="defaultTimeout" value="${transaction.timeout.default}"/>
+        -->
+
+    </bean>
+
+
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>errors</value>
+                <value>messages</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Active Thread Pool for Asynchronous Background Task Executions -->
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="4"/>
+        <property name="maxPoolSize" value="16"/>
+        <property name="queueCapacity" value="32"/>
+        <property name="allowCoreThreadTimeOut" value="false"/>
+        <property name="threadGroupName" value="TOUCHPOINT_THREAD_GROUP"/>
+        <property name="threadNamePrefix" value="TP_T_"/>
+        <property name="waitForTasksToCompleteOnShutdown" value="true"/>
+    </bean>
+
+    <!-- Component Scan Paths -->
+    <context:component-scan base-package="jeffaschenk.commons.touchpoint"/>
+    <context:component-scan base-package="jeffaschenk.commons"/>
+
+</beans>

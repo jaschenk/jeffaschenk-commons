@@ -5,7 +5,7 @@ import java.io.*;
 /**
  * Utility Class for String Handling extensions specific to environment and data artifacts.
  *
- * @author Jeff.Schenk
+ * @author jeffaschenk@gmail.com
  * @version $Id: $
  */
 public class StringUtils extends org.apache.commons.lang3.StringUtils {

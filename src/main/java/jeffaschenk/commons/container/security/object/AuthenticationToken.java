@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
 
 /**
- * OUTBID
+ *
  * Authentication Token Object
  *
  * @author jeffaschenk@gmail.com
@@ -55,7 +55,7 @@ public class AuthenticationToken extends UsernamePasswordAuthenticationToken {
     }
 
     /**
-     * Obtain the OUTBID Security Session User Object
+     * Obtain the Security Session User Object
      *
      * @return
      */

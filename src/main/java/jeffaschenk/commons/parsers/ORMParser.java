@@ -20,7 +20,7 @@ import java.util.Map;
  * <p/>
  * Used in Various Tools
  *
- * @author jeff.schenk
+ * @author jeffaschenk@gmail.com
  * @version $Id: $
  */
 public class ORMParser {

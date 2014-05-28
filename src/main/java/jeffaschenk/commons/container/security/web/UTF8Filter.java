@@ -1,6 +1,3 @@
-/**
- * OUTBID
- */
 package jeffaschenk.commons.container.security.web;
 
 import jeffaschenk.commons.container.security.constants.SecurityConstants;

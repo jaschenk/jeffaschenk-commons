@@ -5,10 +5,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 
 /**
- * OUTBID
+ * Common
  * Security Constants
  *
- * @author (jschenk) jeff.schenk@thought-matirx.com
+ * @author jeff.schenk@gmail.com
  */
 public interface SecurityConstants {
 
@@ -38,20 +38,20 @@ public interface SecurityConstants {
     /**
      * Standard Default Role
      */
-    static final String ROLE_PREFIX = "ROLE_OUTBID_";
+    static final String ROLE_PREFIX = "ROLE_";
 
-    static final String ROLE_OUTBID_ADMIN = ROLE_PREFIX + UserRoles.ADMIN.text().toUpperCase();
-    static final String ROLE_OUTBID_SYSTEM = ROLE_PREFIX + UserRoles.SYSTEM.text().toUpperCase();
-    static final String ROLE_OUTBID_USER = ROLE_PREFIX + UserRoles.USER.text().toUpperCase();
+    static final String ROLE_ADMIN = ROLE_PREFIX + UserRoles.ADMIN.text().toUpperCase();
+    static final String ROLE_SYSTEM = ROLE_PREFIX + UserRoles.SYSTEM.text().toUpperCase();
+    static final String ROLE_USER = ROLE_PREFIX + UserRoles.USER.text().toUpperCase();
 
     static final String DEFAULT_ANY_ROLES =
-            new String(ROLE_OUTBID_USER + "," + ROLE_OUTBID_ADMIN + "," + ROLE_OUTBID_SYSTEM);
+            new String(ROLE_USER + "," + ROLE_ADMIN + "," + ROLE_SYSTEM);
 
 
     static final String HAS_ROLE_BEGIN = "hasRole('";
     static final String HAS_ROLE_END = "')";
 
-    static final String PERMISSION_PREFIX = "PERMISSION_OUTBID_";
+    static final String PERMISSION_PREFIX = "PERMISSION_";
 
     static final String ROLE_ANONYMOUS = "ROLE_ANONYMOUS";
 

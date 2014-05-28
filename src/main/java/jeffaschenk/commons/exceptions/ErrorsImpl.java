@@ -8,7 +8,7 @@ import org.springframework.validation.ObjectError;
 import java.util.*;
 
 /**
- * The QNowErrors object will hold the errors that occur any where in OUTBID SOR Layer.
+ * The Errors object will hold the errors that occur any where in upstream or downstream layers.
  *
  * @author jeffaschenk@gmail.com
  * @version $Id: $

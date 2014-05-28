@@ -26,7 +26,7 @@ import java.util.TreeMap;
 /**
  * Override Hibernate Sequence Generation Capabilities.
  *
- * @author Jeff.Schenk@thought-matrix.com
+ * @author jeffaschenk@gmail.com
  *         <p/>
  *         * Adapted from Community version.
  * @version $Id: $
@@ -60,7 +60,7 @@ public class PlatformSequenceGenerator implements
         // Initialize
         if (!(obj instanceof RootElement)) {
             log.error("Illegal Object Class:[" + obj.getClass().getName()
-                    + "] using Qnow Element Sequence Generator!");
+                    + "] using Element Sequence Generator!");
             throw new IllegalArgumentException(
                     "The Specified Object is not derived from RootElement!");
         }

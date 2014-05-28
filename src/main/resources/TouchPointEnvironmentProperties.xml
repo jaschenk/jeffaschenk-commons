@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	     http://www.springframework.org/schema/aop
+	     http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	     http://www.springframework.org/schema/tx
+	     http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	     http://www.springframework.org/schema/context
+	     http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	     http://www.springframework.org/schema/util
+	     http://www.springframework.org/schema/util/spring-util-3.0.xsd
+	     http://www.springframework.org/schema/lang
+	     http://www.springframework.org/schema/lang/spring-lang-3.0.xsd">
+
+    <!-- TouchPoint Externally Resolved System Environment Property Definitions -->
+    <bean id="systemEnvironmentProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="singleton" value="true"/>
+        <property name="ignoreResourceNotFound" value="true"/>
+        <!-- Locations to Resolve System Properties -->
+        <property name="locations">
+            <list>
+                <value>${environment}</value>
+            </list>
+        </property>
+        <!-- Defaults if not found in location file -->
+        <property name="properties">
+            <props>
+                <!--
+                Global Application Properties -->
+                <prop key="application.instance.definition.name.prefix">touchPointAppGlobalSysEnv</prop>
+                <!-- Default Transaction Timeout -->
+                <prop key="transaction.timeout.default">600</prop>
+                <!-- Checkout URL that is being used by the live event panel to redirect to the checkout URL when the auction is over. -->
+                <!--
+                Validation -->
+                <!-- Should the SOR perform business validation when creating entities? Can be disabled during load testing. -->
+                <prop key="perform.validation">true</prop>
+                <prop key="validation.annotations">true</prop>
+                <prop key="validation.annotations.bean">true</prop>
+                <prop key="validation.annotations.jpa">false</prop>
+                <!--
+                Security Settings and Behaviour -->
+                <prop key="security.checkFailedLoginAttempts">true</prop>
+                <prop key="security.maxFailedLoginAttempts">3</prop>
+                <!-- Number of Seconds In Seconds we suspend after number of failed login attempts for credentials.  -->
+                <prop key="security.failedLoginSuspendedTimeout">30</prop>
+
+                <!-- Security Channels Used can be "any" or "https", normal is "any" -->
+                <prop key="security.channels.used">any</prop>
+                <!-- Secure Socket Layer Enablement -->
+                <prop key="security.forceHttps.where.applicable">true</prop>
+
+                <!--
+                SOR Data Source properties used for both Core and ESB Configuration to Oracle Database Instance
+                Please See Doc:
+                http://download.oracle.com/docs/cd/E11882_01/java.112/e12265/optimize.htm
+                http://download.oracle.com/docs/cd/E11882_01/java.112/e12826/oracle/ucp/jdbc/PoolDataSourceImpl.html
+                -->
+                <prop key="SORDataSource.class">oracle.ucp.jdbc.PoolDataSourceImpl</prop>
+                <prop key="SORDataSource.driverClassName">oracle.jdbc.driver.OracleDriver</prop>
+                <prop key="SORDataSource.url">jdbc:oracle:thin:@localhost:1521:xe</prop>
+                <prop key="SORDataSource.username"></prop>
+                <prop key="SORDataSource.password"></prop>
+                <prop key="SORDataSource.testOnBorrow">true</prop>
+                <!-- Advanced Oracle Pool Settings -->
+                <prop key="SORDataSource.InitialLimit">10</prop>
+                <prop key="SORDataSource.MinLimit">4</prop>
+                <prop key="SORDataSource.MaxLimit">512</prop>
+                <prop key="SORDataSource.InactivityTimeout">0</prop>
+                <prop key="SORDataSource.TimeToLiveTimeout">0</prop>
+                <prop key="SORDataSource.ConnectionWaitTimeout">10</prop>
+                <prop key="SORDataSource.AbandonedConnectionTimeout">0</prop>
+                <!-- Throw Exception if a Valid Connection cannot be retrieved. -->
+                <prop key="SORDataSource.ValidateConnection">true</prop>
+                <!-- Connection Re-usability Feature Disabled -->
+                <prop key="SORDataSource.MaxConnectionReuseTime">0</prop>
+                <prop key="SORDataSource.MaxConnectionReuseCount">5</prop>
+
+                <!-- Define Additional Service Providers (Comma Deliminted String of Service Providers. -->
+                <prop key="serviceProviders">facebook</prop>
+                <!-- Service Provider Information -->
+                <prop key="serviceProvider.name">Facebook</prop>
+                <prop key="serviceProvider.displayName">Facebook</prop>
+                <prop key="serviceProvider.implementation"></prop>
+                <prop key="serviceProvider.apiKey"></prop>
+                <prop key="serviceProvider.secret"></prop>
+                <prop key="serviceProvider.appId"></prop>
+                <prop key="serviceProvider.graph.apiUrl">https://graph.com/</prop>
+                <prop key="serviceProvider.requestTokenUrl"></prop>
+                <prop key="serviceProvider.authorizeUrl">https://graph.com/oauth/authorize</prop>
+                <prop key="serviceProvider.accessTokenUrl">https://graph.com/oauth/access_token</prop>
+                <prop key="serviceProvider.redirectUrl">http://apps.com/something/</prop>
+                <prop key="serviceProvider.extended.permissions">
+                    email,user_photos,create_event
+                </prop>
+                <!-- Specify the Following as the Default, can be page, popup, wap, touch -->
+                <prop key="serviceProvider.permission.dialog.form.default">page</prop>
+                <!--
+                * page - Display a full-page authorization screen (the default)
+                * popup - Display a compact dialog optimized for web popup windows
+                * wap - Display a WAP / mobile-optimized version of the dialog
+                * touch - Display an iPhone/Android/smartphone-optimized version of the dialog
+                -->
+                <!-- Defines the public domain that the Facebook application is deployed to -->
+                <prop key="app.domain">http://localhost:8080/</prop>
+
+                <!-- Generate with: curl -F grant_type=client_credentials -F client_id=your_app_id -F client_secret=your_app_secret https://graph.com/oauth/access_token -->
+                <prop key="application.access.token"></prop>
+
+                <!-- Performance Throttling -->
+                <prop key="service.provider.allowed.method.request.per.second">-1</prop>
+                <prop key="service.provider.throttle.seconds.wait.per.method.request">1</prop>
+                <prop key="service.provider.dump.history.after.number.requests.reached">100</prop>
+                <prop key="service.provider.number.of.servers.in.pool">1</prop>
+                <!-- DeAuthorization Callback:
+                    Must Match the Ending of the specified Deauthorize/Deactivation URL specified on the FB App Page.-->
+                <prop key="serviceProvider.deauthorization.callback">deauthorize</prop>
+                <!-- Facebook Deauthorization Mode, specify either:
+                     soft: Account Status Set to Deactivated, Avatar and other object information about the User
+                             from the Service provider is Removed.
+                     hard: Account and all Dependent Data is physically removed from the System.
+                             -->
+                <prop key="serviceProvider.deauthorization.mode">soft</prop>
+
+                <!-- The access token to the fan page -->
+                <prop key="fan.page.access.token"></prop>
+
+
+                <!-- Internal Scheduling Services Enabled -->
+                <prop key="internal.scheduling.tasks.enabled">true</prop>
+                <prop key="internal.scheduling.tasks.cron.prefix">CRON.</prop>
+
+                <!-- MEMCACHE Settings -->
+                <prop key="MemCached.Enabled">false</prop>
+                <!-- This defined Server List must be the SAME on all Instances -->
+                <prop key="MemCached.Server.List"></prop>
+                <prop key="MemCached.Hibernate.Cache.Provider">com.googlecode.hibernate.memcached.MemcachedCacheProvider
+                </prop>
+                <prop key="MemCached.Hibernate.CacheTimeSeconds">300</prop>
+                <prop key="MemCached.Hibernate.ReadBufferSize">16384</prop>
+                <prop key="MemCached.Hibernate.OperationQueueLength">16384</prop>
+                <prop key="MemCached.Hibernate.OperationTimeout">2500</prop>
+                <!-- Available Hash Algorithms
+
+                    CRC32_HASH    - As used by the perl API.
+                    FNV1_32_HASH  - 32-bit FNV1.
+                    FNV1_64_HASH  - FNV hashes are designed to be fast while maintaining a low collision rate.
+                    FNV1A_32_HASH - 32-bit FNV1a.
+                    FNV1A_64_HASH - Variation of FNV.
+                    KETAMA_HASH   - MD5-based hash algorithm used by ketama.
+                    NATIVE_HASH   - Native hash (String.hashCode()) (DEFAULT)
+                -->
+                <prop key="MemCached.Hibernate.KeyStrategy">com.googlecode.hibernate.memcached.HashCodeKeyStrategy
+                </prop>
+                <prop key="MemCached.Hibernate.HashAlgorithm">NATIVE_HASH</prop>
+                <prop key="MemCached.Hibernate.ConnectionFactory">DefaultConnectionFactory</prop>
+                <prop key="MemCached.Hibernate.ClearSupported">false</prop>
+                <!--
+
+                   Cache Wide Settings
+
+                    The cache wide settings all have defaults can mostly be overwritten at a cache-region level.
+                    Property 	                                 Default 	                Description
+                    hibernate.memcached.servers 	                localhost:11211 	    Space delimited list of memcached instances in host:port format
+                    hibernate.memcached.cacheTimeSeconds 	    300 	                The default number of seconds items should be cached. Can be overriden at the region level.
+                    hibernate.memcached.keyStrategy 	            HashCodeKeyStrategy 	Sets the strategy class to to use for generating cache keys. Must provide a class name that implements KeyStrategy
+                    hibernate.memcached.readBufferSize 	        DefaultConnectionFactory.DEFAULT_READ_BUFFER_SIZE 	The read buffer size for each server connection from this factory
+                    hibernate.memcached.operationQueueLength 	DefaultConnectionFactory.DEFAULT_OP_QUEUE_LEN 	Maximum length of the operation queue returned by this connection factory
+                    hibernate.memcached.operationTimeout 	    DefaultConnectionFactory.DEFAULT_OPERATION_TIMEOUT 	Default operation timeout in milliseconds
+                    hibernate.memcached.hashAlgorithm 	        HashAlgorithm.NATIVE_HASH 	Which hash algorithm to use when adding items to the cache. Prior to hibernate-memcached 1.2 this defaulted to HashAlgorithm.KETAMA_HASH
+                    hibernate.memcached.connectionFactory (since 1.2) 	DefaultConnectionFactory 	The "simple" name of the ConnectionFactory class to use from spymemcached. Must be one of DefaultConnectionFactory, KetamaConnectionFactory, or BinaryConnectionFactory
+                    hibernate.memcached.clearSupported 	        false 	                Enables support for the MemcachedCache.clear() method for all cache regions. The way clear is implemented for memcached is expensive and adds overhead to all get/set operations. It is not recommended for production use.
+
+                    Cache Region Settings
+
+                    Cache region properties are set by giving your cached data a "region name" in hibernate. You can tune the MemcachedCache instance for your region using the following properties. These properties essentially override the cache-wide properties above. Note: that the square brackets are there to denote the text you need to replace, they are not part of the property name.
+
+                    Property 	Default 	Description
+                    hibernate.memcached.YOUR_REGION_NAME.cacheTimeSeconds 	none, see hibernate.memcached.cacheTimeSeconds 	Set the cache time for this cache region, overriding the cache-wide setting.
+                    hibernate.memcached.YOUR_REGION_NAME.keyStrategy 	none, see hibernate.memcached.keyStrategy 	Overrides the strategy class to to use for generating cache keys in this cache region. Must provide a class name that implements KeyStrategy
+                    hibernate.memcached.YOUR_REGION_NAME.clearSupported 	none, see hibernate.memcached.clearSupported 	Enables clear() operations for this cache region only. Again, the clear operation incurs cost on every get/set operation.
+                -->
+            </props>
+        </property>
+    </bean>
+
+    <bean id="systemEnvironmentPropertiesConfigurerZero"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="0"/>
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+    </bean>
+
+    <bean id="systemEnvironmentPropertiesConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="1"/>
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="searchSystemEnvironment" value="true"/>
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+        <property name="localOverride" value="true"/>
+        <property name="properties" ref="systemEnvironmentProperties"/>
+    </bean>
+
+    <bean id="systemEnvironmentPropertyAccessor" name="systemEnvironmentPropertyAccessor"
+          class="com.jeffaschenk.commons.environment.SystemEnvironment">
+        <property name="systemEnvironmentProperties" ref="systemEnvironmentProperties"/>
+    </bean>
+    <alias name="systemEnvironmentPropertyAccessor" alias="systemEnvironment"/>
+</beans>

@@ -3,7 +3,7 @@ package jeffaschenk.commons.types;
 /**
  * User Roles
  *
- * @author Jeff.Schenk
+ * @author jeffaschenk@gmail.com
  * @version $Id: $
  */
 public enum UserRoles {

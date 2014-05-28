@@ -1,6 +1,3 @@
-/**
- * QNow
- */
 package jeffaschenk.commons.util;
 
 import java.text.DateFormat;
@@ -11,7 +8,7 @@ import java.util.Date;
 /**
  * Utility Class for handling Dates.
  *
- * @author Jeff.Schenk
+ * @author jeffaschenk@gmail.com
  * @version $Id: $
  */
 public class DateUtils {
