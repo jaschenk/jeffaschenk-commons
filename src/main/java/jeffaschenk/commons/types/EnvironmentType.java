@@ -5,10 +5,11 @@ package jeffaschenk.commons.types;
  * <p/>
  * Provide Formal Indicator for Runtime Environment Type
  *
- * @author (jschenk) Jeff Schenk jeffaschenk@gmail.com
+ * @author  jeffaschenk@gmail.com
  */
 public enum EnvironmentType {
     JVM,
+    ESB,
     JAS,
     JUNIT
 

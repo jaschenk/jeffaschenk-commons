@@ -798,6 +798,13 @@
             <version>2.0.8</version>
         </dependency>
 
+        <!-- Amazon Web Services -->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk</artifactId>
+            <version>1.7.11</version>
+        </dependency>
+
         <!-- JMS -->
         <!--
         <dependency>
@@ -999,6 +1006,11 @@
             <artifactId>commons-pool</artifactId>
             <version>1.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.3.3</version>
+        </dependency>
         <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -1017,12 +1029,13 @@
         </dependency>
 
         <!-- Facebook and other Social Media APIs -->
-        <!--
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-social-core</artifactId>
-            <version>1.0.0.M1</version>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-facebook</artifactId>
+            <version>1.1.1.RELEASE</version>
         </dependency>
+
+        <!--
         <dependency>
             <groupId>net.sf</groupId>
             <artifactId>fb4j</artifactId>
