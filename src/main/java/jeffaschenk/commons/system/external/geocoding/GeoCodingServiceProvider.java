@@ -1,8 +1,8 @@
 package jeffaschenk.commons.system.external.geocoding;
 
 
-import jeffaschenk.commons.model.serviceprovider.GeoLocation;
-import jeffaschenk.commons.model.serviceprovider.GeoLocationCoordinates;
+import jeffaschenk.commons.touchpoint.model.serviceprovider.GeoLocation;
+import jeffaschenk.commons.touchpoint.model.serviceprovider.GeoLocationCoordinates;
 
 import java.math.BigDecimal;
 

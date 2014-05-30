@@ -39,7 +39,7 @@
         <jackson.version>1.4.1</jackson.version>
 
         <!-- Restlet API Version -->
-        <restlet.version>2.0-RC4</restlet.version>
+        <restlet.version>2.2.1</restlet.version>
 
         <!-- Main Boostrap Class -->
         <main.bootstrap.classname>jeffaschenk.commons.container.boot.BootServiceInstance</main.bootstrap.classname>
@@ -805,6 +805,13 @@
             <version>1.7.11</version>
         </dependency>
 
+        <!-- JDRing -->
+        <dependency>
+            <groupId>jdring</groupId>
+            <artifactId>jdring</artifactId>
+            <version>1.0</version>
+        </dependency>
+
         <!-- JMS -->
         <!--
         <dependency>
@@ -1167,8 +1174,7 @@
         </dependency>
         -->
 
-        <!-- Restlets -->
-        <!--
+        <!-- Restlet -->
         <dependency>
             <groupId>org.restlet.jee</groupId>
             <artifactId>org.restlet</artifactId>
@@ -1227,8 +1233,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
-      -->
 
     </dependencies>
 
@@ -1335,6 +1339,12 @@
                 <enabled>false</enabled>
                 <updatePolicy>never</updatePolicy>
             </snapshots>
+        </repository>
+
+        <repository>
+            <id>maven-restlet</id>
+            <name>Public online Restlet repository</name>
+            <url>http://maven.restlet.com</url>
         </repository>
 
     </repositories>

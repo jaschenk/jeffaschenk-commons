@@ -1,8 +1,8 @@
 package jeffaschenk.commons.system.external.geocoding;
 
 import jeffaschenk.commons.container.security.constants.SecurityConstants;
-import jeffaschenk.commons.model.serviceprovider.GeoLocation;
-import jeffaschenk.commons.model.serviceprovider.GeoLocationCoordinates;
+import jeffaschenk.commons.touchpoint.model.serviceprovider.GeoLocation;
+import jeffaschenk.commons.touchpoint.model.serviceprovider.GeoLocationCoordinates;
 import jeffaschenk.commons.types.GeoCodingServiceProviderResponseStatus;
 import jeffaschenk.commons.util.StringUtils;
 import net.iharder.Base64;
@@ -138,8 +138,7 @@ public class GeoCodingServiceProviderImpl implements GeoCodingServiceProvider, A
      */
     @PostConstruct
     public void initialize() {
-        this.geoCodingEnabled =
-                (StringUtils.isEmpty(this.geoCodingEnabledStringValue))?false:Boolean.parseBoolean(this.geoCodingEnabledStringValue);
+        this.geoCodingEnabled = StringUtils.toBoolean(this.geoCodingEnabledStringValue, false);
         if (this.geoCodingEnabled) {
             log.info("Activating GeoCoding Service Provider Interface - Google Maps Rest Services Implementation.");
 
