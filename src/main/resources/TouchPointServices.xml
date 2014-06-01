@@ -5,12 +5,66 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
+    <!-- Additional Beans to Dynamically define the Extract Drop Zone Row Definitions to Actual Java POJOs -->
+    <bean id="extractMappings" class="jeffaschenk.commons.touchpoint.model.wrappers.ExtractMappings">
+
+        <!-- Mapping Extract FileName Regular Expression Filters to Extract Java Objects -->
+        <!-- Please Note: FileNames should be represented in UpperCase for proper filter processing. -->
+        <property name="filterMappings">
+            <props>
+                <prop key="^ROOTELEMENT.*\.TXT">jeffaschenk.commons.touchpoint.model.RootElement</prop>
+            </props>
+        </property>
+
+    </bean>
+
+    <!-- Additional Beans to Dynamically define additional Processing if Row can be Updated by an incoming Extract Source -->
+    <bean id="preProcessingMappings" class="jeffaschenk.commons.touchpoint.model.wrappers.PreProcessingMappings">
+        <property name="preProcessingMappings">
+            <props>
+                <!-- Entity Class Name as Key and Value is the Component Spring bean Name -->
+                <prop key="jeffaschenk.commons.touchpoint.model.RootElement">
+                    nothingToDo
+                </prop>
+            </props>
+        </property>
+
+    </bean>
+
+    <!-- Additional Beans to Dynamically define additional Processing if Row can be Updated by an incoming Extract Source -->
+    <bean id="updateProcessingMappings" class="jeffaschenk.commons.touchpoint.model.wrappers.UpdateProcessingMappings">
+        <property name="updateProcessingMappings">
+            <props>
+                <!-- Entity Class Name as Key and Value is the Component Spring bean Name -->
+                <prop key="jeffaschenk.commons.touchpoint.model.RootElement">
+                    nothingToDo
+                </prop>
+            </props>
+        </property>
+
+    </bean>
+
+    <!-- Additional Beans to Dynamically define additional Processing if Row can be Updated by an incoming Extract Source -->
+    <bean id="postProcessingMappings" class="jeffaschenk.commons.touchpoint.model.wrappers.PostProcessingMappings">
+        <property name="postProcessingMappings">
+            <props>
+                <!-- Entity Class Name as Key and Value is the Component Spring bean Name -->
+                <prop key="jeffaschenk.commons.touchpoint.model.RootElement">
+                    nothingToDo
+                </prop>
+            </props>
+        </property>
+
+    </bean>
+
     <!-- CRON Key Name to Action Class Name, REQUIREMENT: make keys all UpperCase, on DB can be camel case or any. -->
     <bean id="cronKeyToBeanMap" class="jeffaschenk.commons.touchpoint.model.wrappers.CollectionMapBean">
         <property name="map">
             <map>
+                <entry key="HEARTBEAT"
+                       value="heartBeat"/>
                 <entry key="CLEANUP"
-                       value="cleanUp"/>
+                       value="zoneCleanUp"/>
             </map>
         </property>
     </bean>
@@ -22,6 +76,7 @@
             </bean>
         </constructor-arg>
     </bean>
+
 
     <!--
     <bean id="s3Service" class="jeffaschenk.commons.system.external.images.aws.S3ServiceImpl">

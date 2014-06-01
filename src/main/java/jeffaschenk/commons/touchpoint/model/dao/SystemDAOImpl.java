@@ -110,6 +110,7 @@ public class SystemDAOImpl extends EntityDAOImpl implements SystemDAO {
      * @param value - can have a like '%' to indicate a like query instead of exact, can be null to exclude from search.
      * @return Map<String,String> - TreeMap of System Environment Properties for ordered Map.
      */
+    @SuppressWarnings("unchecked")
     public Map<String, String> findSysEnvironmentProperty(String key, String value) {
         // **********************************
         // Initialize
@@ -145,7 +146,7 @@ public class SystemDAOImpl extends EntityDAOImpl implements SystemDAO {
         // Set Result Ordering and
         // Obtain the ResultList.
         criteria.addOrder(Order.asc("propertyKey"));
-        List<SysEnvironment> resultList = this
+        List<SysEnvironment> resultList = (List<SysEnvironment>) this
                 .findByCriteria(criteria);
         // ****************************
         // Iterate over Result List
@@ -184,6 +185,7 @@ public class SystemDAOImpl extends EntityDAOImpl implements SystemDAO {
      * @param propertyKey
      * @return SysEnvironment - associated with specified key.
      */
+    @SuppressWarnings("unchecked")
     private SysEnvironment getSysEnvironmentByKey(String propertyKey) {
         // **********************************************
         // Validate
@@ -200,7 +202,7 @@ public class SystemDAOImpl extends EntityDAOImpl implements SystemDAO {
         Object[] values = new Object[]{propertyKey};
         // *******************************************
         // Perform Search based upon Native HQL.
-        List<SysEnvironment> resultList = this
+        List<SysEnvironment> resultList = (List<SysEnvironment>) this
                 .findByNamedQueryAndNamedParam(queryName, paramNames, values);
         if ((resultList == null) || (resultList.isEmpty())) {
             log

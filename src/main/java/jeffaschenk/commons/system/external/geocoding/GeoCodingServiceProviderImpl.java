@@ -368,7 +368,7 @@ public class GeoCodingServiceProviderImpl implements GeoCodingServiceProvider, A
         // must be CommonsClientHttpRequestFactory or else the location header
         // in an HTTP 302 won't be followed
         // restTemplate.setRequestFactory(new CommonsClientHttpRequestFactory());
-        // TODO .. repair the refacoting...
+        // TODO .. repair the refactoring...
         //
         MappingJacksonHttpMessageConverter json = new MappingJacksonHttpMessageConverter();
         json.setSupportedMediaTypes(Arrays.asList(new MediaType("text", "javascript")));

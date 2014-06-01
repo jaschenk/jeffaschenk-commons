@@ -1,19 +1,24 @@
 package jeffaschenk.commons.touchpoint.model.dao;
 
+import jeffaschenk.commons.touchpoint.model.*;
+import jeffaschenk.commons.types.StatusOutputType;
+import jeffaschenk.commons.util.NumberUtility;
+import jeffaschenk.commons.util.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.SessionFactoryUtils;
 import org.springframework.orm.hibernate4.SessionHolder;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
-import jeffaschenk.commons.touchpoint.model.RootElement;
 
-import java.util.List;
+import javax.persistence.Table;
+import java.util.*;
 
 /**
  * Generic Entity Service DAO Implementation.
@@ -37,6 +42,26 @@ public abstract class EntityDAOImpl extends HibernateDaoSupport implements Entit
     public void setTouchPointSessionFactory(SessionFactory sessionFactory) {
         super.setSessionFactory(sessionFactory);
     }
+
+    /**
+     * Helper List of Associated Entity Classes.
+     */
+    private static List<Class<? extends RootElement>> associatedClasses =
+            new ArrayList<>(15);
+
+    static {
+        associatedClasses.add(Action.class);
+        associatedClasses.add(Ancestry.class);
+        associatedClasses.add(AncestryElement.class);
+        associatedClasses.add(Element.class);
+        associatedClasses.add(Group.class);
+        associatedClasses.add(Owner.class);
+        associatedClasses.add(Property.class);
+        associatedClasses.add(PropertyValue.class);
+        associatedClasses.add(SysEnvironment.class);
+    }
+
+    ;
 
     /**
      * Get a Low-Level Session for performing Query Specific Functions.
@@ -264,6 +289,56 @@ public abstract class EntityDAOImpl extends HibernateDaoSupport implements Entit
     }
 
     /**
+     * {@inheritDoc}
+     * <p/>
+     * Get a Count of Rows for an Entity.  Allows us to determine
+     * if this is an initial load or not.
+     */
+    @Override
+    public Long getRowCount(Class<? extends RootElement> clazz) {
+        // ***************************************
+        // Initialize
+        Long resultCount = new Long(0);
+        Session session = null;
+        try {
+            // ***********************************************
+            // Create the Criteria from our obtained session,
+            // simply only limiting by Class.
+            session = this.getDAOSession();
+            Criteria criteria = session.createCriteria(clazz);
+            ProjectionList projectionList = Projections.projectionList();
+            projectionList.add(Projections.rowCount());
+            criteria.setProjection(projectionList);
+
+            // ********************************************
+            // Now perform the query and return the count.
+            List<?> results = criteria.list();
+            // ********************************************
+            // Check for returned Projection.
+            if (results == null) {
+                return resultCount;
+            }
+            // ********************************************
+            // Obtain an Iterator to traverse result.
+            Iterator<?> resultIterator = results.iterator();
+            if (!resultIterator.hasNext()) {
+                return resultCount;
+            }
+            // ********************************************
+            // Get the Object Count.
+            while (resultIterator.hasNext()) {
+                resultCount = (Long) resultIterator.next();
+            }
+            return resultCount;
+        } finally {
+            if (session != null) {
+                this.finalizeDAOSession();
+            }
+        }
+    }
+
+
+    /**
      * Find a List of Results using a Named query and Named Parameters
      *
      * @param queryName
@@ -311,5 +386,147 @@ public abstract class EntityDAOImpl extends HibernateDaoSupport implements Entit
         return getHibernateTemplate()
                 .findByCriteria(detachedCriteria);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<? extends RootElement> getAllElementsForClass(Class<? extends RootElement> clazz) {
+        Query q = this.getCurrentDAOSession().getNamedQuery(clazz.getSimpleName() + ".findAllAsc");
+        List<? extends RootElement> elements = (List<? extends RootElement>) q.list();
+        return elements;
+    }
+
+    /**
+     * Obtain the Status for the Database Component.
+     *
+     * @param statusOutputType
+     * @return String
+     */
+    @Override
+    public String status(StatusOutputType statusOutputType) {
+        StringBuilder sb = new StringBuilder();
+
+        // Provide Row counts of all applicable Tables
+        if (statusOutputType.equals(StatusOutputType.TEXT)) {
+            sb.append('\t' + "Row Counts: " + '\n');
+        }
+        List<String> counts = getAllElementCounts(statusOutputType);
+
+        ListIterator<String> countsIterator = counts.listIterator();
+        while (countsIterator.hasNext()) {
+            if (statusOutputType.equals(StatusOutputType.TEXT)) {
+                sb.append('\t' + countsIterator.next() + '\n');
+            } else {
+                sb.append(countsIterator.next());
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Helper Method to Obtain Counts of All Elements
+     *
+     * @param statusOutputType
+     * @return List<String>
+     */
+    private List<String> getAllElementCounts(StatusOutputType statusOutputType) {
+        List<String> elementCounts = new ArrayList<String>();
+        if (statusOutputType.equals(StatusOutputType.HTML)) {
+            elementCounts.add("<table><tr><td align=\042right\042><b>Entity Name</b></td><td align=\042right\042><b>Table Name</b></td><td align=\042right\042><b>Current Row Count</b></td></tr>");
+        }
+        Iterator<Class<? extends RootElement>> iterator = associatedClasses.iterator();
+        while (iterator.hasNext()) {
+            Class<? extends RootElement> elementClass = iterator.next();
+            String tableName = getTableName(elementClass);
+            // Check Output
+            if (statusOutputType.equals(StatusOutputType.HTML)) {
+                elementCounts.add(
+                        "<tr><td align=\042right\042>" +
+                                elementClass.getSimpleName() + "</td><td align=\042right\042>" +
+                                tableName +
+                                "</td><td align=\042right\042><b>" +
+                                NumberUtility.formatRowCount(this.getRowCount(elementClass)) +
+                                "</td></tr>");
+            } else {
+                elementCounts.add(
+                        elementClass.getSimpleName() + "-> " +
+                                tableName + ": " +
+                                NumberUtility.formatRowCount(this.getRowCount(elementClass)));
+            }
+        }
+        if (statusOutputType.equals(StatusOutputType.HTML)) {
+            elementCounts.add("</table>");
+        }
+        return elementCounts;
+    }
+
+    /**
+     * Helper Method to Obtain Counts of All Elements currently in database.
+     *
+     * @return Map<Class<? extends RootElement>, Long>
+     */
+    @Override
+    public Map<Class<? extends RootElement>, Long> getAllElementClassCounts() {
+        Map<Class<? extends RootElement>, Long> elementCounts = new
+                HashMap<>();
+        Iterator<Class<? extends RootElement>> iterator = associatedClasses.iterator();
+        while (iterator.hasNext()) {
+            Class<? extends RootElement> elementClass = iterator.next();
+
+            elementCounts.put(
+                    elementClass,
+                    this.getRowCount(elementClass));
+        }
+        return elementCounts;
+    }
+
+    /**
+     * Obtain all Entities for the Specified Element Class.
+     *
+     * @param clazz
+     * @return Number of Elements Removed from Table.
+     */
+    @Override
+    public Number removeAllElementsForClass(Class<? extends RootElement> clazz) {
+        if (clazz == null) {
+            return 0L;
+        } else if ((clazz.getName().toLowerCase().contains("demographics")) ||
+                (clazz.getName().toLowerCase().contains("web_payment_transaction")) ||
+                (clazz.getName().toLowerCase().contains("system"))) {
+            logger.warn("Ignoring Clear of Class:[" + clazz.getName() + "], as Table needs to Maintain Integrity of Life-Cycles!");
+            return 0L;
+        }
+        // Perform deletion of all Rows and All Data for this Class/Table.
+        String tableName = this.getTableName(clazz);
+        if (StringUtils.isNotEmpty(tableName)) {
+            SQLQuery q = this.getCurrentDAOSession().createSQLQuery("delete from " + tableName + " where 1=1");
+            Number resultRowsRemoved = q.executeUpdate();
+            logger.info("Clear of Class:[" + clazz.getName() + "], Table:[" + tableName
+                    + "], Successfully Cleared:[" + resultRowsRemoved + "] Rows/Objects from Table.");
+            return resultRowsRemoved;
+        } else {
+            logger.warn("Ignoring Clear of Class:[" + clazz.getName() + "], as Table Name is unknown!");
+            return 0L;
+        }
+    }
+
+
+    /**
+     * Obtain the String name of the JDBC table for the Object.
+     *
+     * @return String Name of the Table annotated on the Entity Object.
+     */
+    private String getTableName(Class<? extends RootElement> clazz) {
+        try {
+            RootElement element = clazz.newInstance();
+            Table tableAnnotation = element.getClass().getAnnotation(Table.class);
+            return tableAnnotation == null ? null : tableAnnotation.name();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 
 }

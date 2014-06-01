@@ -1,10 +1,6 @@
 package jeffaschenk.commons.system.internal.scheduling;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.StringTokenizer;
+import java.util.*;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -14,11 +10,17 @@ import fr.dyade.jdring.AlarmEntry;
 import fr.dyade.jdring.AlarmListener;
 import fr.dyade.jdring.AlarmManager;
 import fr.dyade.jdring.PastDateException;
+import jeffaschenk.commons.system.internal.file.services.ServiceTask;
+import jeffaschenk.commons.system.internal.scheduling.events.LifeCycleServiceStateType;
+import jeffaschenk.commons.system.internal.scheduling.events.LifeCycleServiceType;
+import jeffaschenk.commons.system.internal.scheduling.events.LifeCycleServicesEvent;
 import jeffaschenk.commons.touchpoint.model.dao.SystemDAO;
 import jeffaschenk.commons.environment.SystemEnvironmentBean;
+import jeffaschenk.commons.touchpoint.model.transitory.ParsedAlarmEntry;
 import jeffaschenk.commons.touchpoint.model.wrappers.CollectionMapBean;
 import jeffaschenk.commons.types.EnvironmentType;
 import jeffaschenk.commons.util.StringUtils;
+import jeffaschenk.commons.util.TimeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
 
@@ -83,12 +87,29 @@ public class LocalSchedulingServiceImpl implements LocalSchedulingService,
 	@Qualifier("systemEnvironmentPropertyAccessor")
 	private SystemEnvironmentBean systemEnvironmentBean;
 
-	/**
-	 * JDRING Global Scheduler
-	 */
-	private AlarmManager alarmManager;
+    /**
+     * Task Scheduler
+     */
+    @Autowired
+    private TaskScheduler taskScheduler;
 
-	/**
+    /**
+     * Task Executor
+     */
+    @Autowired
+    private ThreadPoolTaskExecutor taskExecutor;
+
+    /**
+     * JDRING Global Scheduler
+     */
+    private AlarmManager alarmManager;
+
+    /**
+     * Major Running Service Task States.
+     */
+    private Map<LifeCycleServiceType, LifeCycleServiceTaskState> taskStates = new HashMap<>();
+
+    /**
 	 * Spring Application Context, used to obtain access to Resources on
 	 * Classpath.
 	 */
@@ -264,7 +285,44 @@ public class LocalSchedulingServiceImpl implements LocalSchedulingService,
 		return false;
 	}
 
-	/**
+    /**
+     * Provides ability to remove an Action based upon a
+     * the name of the Action.
+     *
+     * @param actionBeanName
+     * @return boolean indicating if Action has een removed.
+     */
+    @SuppressWarnings("unchecked")
+    public boolean removeAction(String actionBeanName) {
+        // *******************************************
+        // Validate Parameters.
+        if (StringUtils.isEmpty(actionBeanName)) {
+            return false;
+        }
+        // ************************************************
+        // Find our Existing a Alarm Entry for this Action
+        List<AlarmEntry> entries = this.alarmManager.getAllAlarms();
+        if ((entries == null) || (entries.isEmpty())) {
+            return false;
+        }
+        // Spin through and Find our Entry.
+        AlarmEntry entryToBeRemoved = null;
+        for (AlarmEntry entry : entries) {
+            // TODO FIX --
+            //if (entry.getName().equalsIgnoreCase(actionBeanName)) {
+            //    entryToBeRemoved = entry;
+            //}
+        }
+        if (entryToBeRemoved == null) {
+            return false;
+        }
+        // ***********************************************
+        // Remove Existing a Alarm Entry for this Action
+        logger.info("Attempting removal of Alarm Entry:[" + entryToBeRemoved.toString() + "]");
+        return this.alarmManager.removeAlarm(entryToBeRemoved);
+    }
+
+    /**
 	 * Private helper method to Obtain Component Reference of bean Class
 	 * 
 	 * @param actionBeanName
@@ -327,7 +385,8 @@ public class LocalSchedulingServiceImpl implements LocalSchedulingService,
 	 * @param cronClassKey
 	 * @return String
 	 */
-	private String resolveCronClassKey(String cronClassKey) {
+    @Override
+	public String resolveCronClassKey(String cronClassKey) {
 		if (cronKeyToBeanMap.getMap().get(cronClassKey.trim().toUpperCase()) == null) {
 			logger.warn("No Associated Class found with CRON Key:["
 					+ cronClassKey + "], check your configuration!");
@@ -542,5 +601,368 @@ public class LocalSchedulingServiceImpl implements LocalSchedulingService,
 		}
 
 	}
+
+
+    /**
+     * Private Helper Method to parse the String version of
+     * the AlarmEntry to display nicely in HTML.
+     * <p/>
+     * What we will parse and prettify.
+     * <p/>
+     * Alarm (heartBeat) params minute={0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55}
+     * hour={-1} dayOfMonth={-1} month={-1} dayOfWeek={-1}
+     * (next alarm date=Sat Jan 28 17:55:00 PST 2012)
+     *
+     * @param entry
+     * @return ParsedAlarmEntry
+     */
+    private ParsedAlarmEntry parseAlarmEntryString(AlarmEntry entry) {
+        if (entry == null) {
+            return null;
+        }
+        String str = entry.toString();
+        ParsedAlarmEntry parsedAlarmEntry = new ParsedAlarmEntry();
+        // TODO FIX -- parsedAlarmEntry.setName(entry.getName());
+        parsedAlarmEntry.setMinute(parseNamedElement(str, "minute={", "}"));
+        parsedAlarmEntry.setHour(parseNamedElement(str, "hour={", "}"));
+        parsedAlarmEntry.setDayOfMonth(parseNamedElement(str, "dayOfMonth={", "}"));
+        parsedAlarmEntry.setMonth(parseNamedElement(str, "month={", "}"));
+        parsedAlarmEntry.setDayOfWeek(parseNamedElement(str, "dayOfWeek={", "}"));
+        parsedAlarmEntry.setNextAlarm(parseNamedElement(str, "(next alarm date=", ")"));
+        // return Parsed Entry for Display
+        return parsedAlarmEntry;
+    }
+
+    /**
+     * Private Helper to Parse String of the AlarmEntry
+     *
+     * @param str
+     * @param beginChars
+     * @param endChar
+     * @return String
+     */
+    private String parseNamedElement(String str, String beginChars, String endChar) {
+        String content = null;
+        int x = str.indexOf(beginChars);
+        if (x > 0) {
+            content = str.substring(x + beginChars.length());
+            int y = content.indexOf(endChar);
+            if (y > 0) {
+                content = content.substring(0, y);
+            }
+            if (content.equalsIgnoreCase("-1")) {
+                content = "Any";
+            }
+            // Transform to
+            // make the Entry Readable for Months, and Day of Week.
+            if (beginChars.startsWith("month")) {
+                content = this.transformMonth(content);
+            } else if (beginChars.startsWith("dayOfWeek")) {
+                content = this.transformDayOfWeek(content);
+            }
+        }
+        return content;
+    }
+
+    /**
+     * Private helper to transform Cron Month to Human Readable.
+     *
+     * @param rawData
+     * @return String
+     */
+    private String transformMonth(final String rawData) {
+        StringBuffer sb = new StringBuffer();
+        for (String element : rawData.split(",")) {
+            if (sb.length() > 0) {
+                sb.append(",");
+            }
+            // Transform
+            switch (element.trim().toLowerCase()) {
+                case "0":
+                    sb.append("Jan");
+                    break;
+                case "1":
+                    sb.append("Feb");
+                    break;
+                case "2":
+                    sb.append("Mar");
+                    break;
+                case "3":
+                    sb.append("Apr");
+                    break;
+                case "4":
+                    sb.append("May");
+                    break;
+                case "5":
+                    sb.append("Jun");
+                    break;
+                case "6":
+                    sb.append("Jul");
+                    break;
+                case "7":
+                    sb.append("Aug");
+                    break;
+                case "8":
+                    sb.append("Sep");
+                    break;
+                case "9":
+                    sb.append("Oct");
+                    break;
+                case "10":
+                    sb.append("Nov");
+                    break;
+                case "11":
+                    sb.append("Dec");
+                    break;
+                default:
+                    sb.append(element);
+                    break;
+            }
+
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Private helper to transform Cron Month to Human Readable.
+     *
+     * @param rawData
+     * @return String
+     */
+    private String transformDayOfWeek(final String rawData) {
+        StringBuffer sb = new StringBuffer();
+        for (String element : rawData.split(",")) {
+            if (sb.length() > 0) {
+                sb.append(",");
+            }
+            // Transform
+            switch (element.trim().toLowerCase()) {
+                case "1":
+                    sb.append("Sun");
+                    break;
+                case "2":
+                    sb.append("Mon");
+                    break;
+                case "3":
+                    sb.append("Tue");
+                    break;
+                case "4":
+                    sb.append("Wed");
+                    break;
+                case "5":
+                    sb.append("Thu");
+                    break;
+                case "6":
+                    sb.append("Fri");
+                    break;
+                case "7":
+                    sb.append("Sat");
+                    break;
+                default:
+                    sb.append(element);
+                    break;
+            }
+
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Method Entered When a LifeCycle Services Event gets published.
+     * This Method allows our scheduler to consume the Event and provide
+     * state information for all Tasks.
+     *
+     * @param event
+     */
+    public void onApplicationEvent(LifeCycleServicesEvent event) {
+        logger.info("LifeCycle Services Event Consumed: " + event.toString());
+        // Check for Update Cleanup immediately...
+        if (event.getLifeCycleServiceStateType().equals(LifeCycleServiceStateType.UPDATE_CLEANUP)) {
+            logger.warn("Detected Update Clean-Up Event for:" + event.getMessage());
+            // **************************************************
+            // Process Completed Demographics LifeCycle,
+            // Remove the Update Payload elements,
+            // as those have now been processed.
+            //
+            if (event.getLifeCycleServiceType().index()
+                    == LifeCycleServiceType.DEMOGRAPHIC_UPDATES_COMPLETED_LIFECYCLE.index()) {
+                // ***************************************************
+                //
+                // Data from Above Event:
+                //
+                // LifeCycle Services Event Consumed: LifeCycleServicesEvent{lifeCycleServiceType=DEMOGRAPHIC_UPDATES_COMPLETED_LIFECYCLE,
+                // lifeCycleServiceStateType=UPDATE_CLEANUP,
+                // timestamp_when_event_published=1326175084976,
+                // message='Demographics Alt_ID:[10152100] has a completed all existing Lifecycle Updates',
+                // payload=[alt_demographics_profile_update_id{alt_id=10152100, modification_timestamp=12272011 15:25:55},
+                //          alt_demographics_profile_update_id{alt_id=10152100, modification_timestamp=12272011 15:26:49},
+                //          alt_demographics_profile_update_id{alt_id=10152100, modification_timestamp=12272011 21:10:42}]}
+                // com.tmatrix.wga.services.scheduler.events.LifeCycleServicesEvent[
+                //  source=com.tmatrix.wga.services.extract.ExtractLifecycleUpdateDeterminationForDemographics@34a012a6]
+                //
+                // Iterate Over Each Object Key and Remove From the database.
+                //for (Object update_id : event.getPayload()) {
+                //    this.entityDAO.removeDemographicUpdate((alt_demographics_profile_update_id) update_id);
+                //}
+
+            } // End of Demographic Update LifeCycle
+
+            //
+            // Add Additional Update Closure Events here if needed...
+            //
+        }
+
+        // Do we have an Existing Task State?
+        if (this.taskStates.containsKey(event.getLifeCycleServiceType())) {
+            LifeCycleServiceTaskState lifeCycleServiceTaskState =
+                    this.taskStates.get(event.getLifeCycleServiceType());
+            // Is the Task Done?
+            if (event.getLifeCycleServiceStateType().equals(LifeCycleServiceStateType.DONE)) {
+                lifeCycleServiceTaskState.setCurrentLifeCycleServiceState(LifeCycleServiceStateType.DONE);
+                lifeCycleServiceTaskState.setDone(TimeUtils.now());
+            } else if (event.getLifeCycleServiceStateType().equals(LifeCycleServiceStateType.FAILURE)) {
+                logger.warn("Detected Failure Event!");
+                lifeCycleServiceTaskState.setCurrentLifeCycleServiceState(LifeCycleServiceStateType.DONE);
+                lifeCycleServiceTaskState.setDone(TimeUtils.now());
+            }
+        }
+        return;
+    }
+
+    /**
+     * Schedule Runnable Wrapper Interface
+     *
+     * @param runnableTask
+     * @param scheduledTask
+     */
+    public synchronized boolean scheduleTask(ServiceTask runnableTask, Date scheduledTask) {
+        // Determine if this task Type can Run at this time.
+        if (isTaskRunnable(runnableTask.getLifeCycleServiceType())) {
+            // Add Task to Task States.
+            LifeCycleServiceTaskState lifeCycleServiceTaskState =
+                    new LifeCycleServiceTaskState(runnableTask.getLifeCycleServiceType());
+            lifeCycleServiceTaskState.setCurrentLifeCycleServiceState(LifeCycleServiceStateType.BEGIN);
+            lifeCycleServiceTaskState.setStarted(TimeUtils.now());
+            lifeCycleServiceTaskState.setDone(0);
+            taskStates.put(lifeCycleServiceTaskState.getLifeCycleServiceType(), lifeCycleServiceTaskState);
+            // Schedule Task
+            taskScheduler.schedule(runnableTask, scheduledTask);
+            logger.warn("Scheduled Task:[" + runnableTask.getLifeCycleServiceType().text() +
+                    "] to be Executed at:[" + scheduledTask.toString() + "].");
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Private Helper Method to determine if the Task is Runnable or not.
+     *
+     * @param lifeCycleServiceType
+     * @return boolean Indicator if Task can run or not.
+     */
+    private boolean isTaskRunnable(LifeCycleServiceType lifeCycleServiceType) {
+        // Determine if we can run the requested Task at this time or not?
+        if (this.taskStates.containsKey(lifeCycleServiceType)) {
+            LifeCycleServiceTaskState lifeCycleServiceTaskState = this.taskStates.get(lifeCycleServiceType);
+            if ((!lifeCycleServiceTaskState.getCurrentLifeCycleServiceState().equals(LifeCycleServiceStateType.DONE)) ||
+                    (lifeCycleServiceTaskState.getDone() <= 0)) {
+                logger.warn("Unable to Schedule Task:[" + lifeCycleServiceType.text() +
+                        "], since task is currently running or has been scheduled.");
+                return false;
+            }
+        }
+        // Allow running Task Type.
+        return true;
+    }
+
+
+    /**
+     * Schedule Runnable Wrapper Interface
+     *
+     * @return String providing textual data representing active Thread count.
+     */
+    @Override
+    public int getActiveThreadPoolTasks() {
+        return taskExecutor.getActiveCount();
+    }
+
+    /**
+     * Obtain our current schedule
+     *
+     * @return String - HTML Current Schedule Status.
+     */
+    @SuppressWarnings("unchecked")
+    public String getCurrentSchedule() {
+        List<AlarmEntry> alarms = this.alarmManager.getAllAlarms();
+        StringBuffer sb = new StringBuffer();
+        if ((alarms == null) || (alarms.isEmpty())) {
+            sb.append("<br/><b><i>Currently there are no Processes scheduled.</i></b><br/>");
+        } else {
+            sb.append("<br/><b><i>Current Process Scheduled:</i></b><br/>");
+            sb.append("<table border='2'>");
+            sb.append("<tr>");
+            sb.append("<td>");
+            sb.append("<b>Alarm Name</b>");
+            sb.append("</td>");
+            sb.append("<td>");
+            sb.append("<b>Next Alarm</b>");
+            sb.append("</td>");
+            sb.append("</tr>");
+            for (AlarmEntry entry : alarms) {
+                ParsedAlarmEntry parsedAlarmEntry = this.parseAlarmEntryString(entry);
+                sb.append(parsedAlarmEntry.toHTML());
+            }
+            sb.append("</table>");
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Obtain our current schedule
+     *
+     * @return String - HTML Current Schedule Status.
+     */
+    @SuppressWarnings("unchecked")
+    public String getFullCurrentSchedule() {
+        List<AlarmEntry> alarms = this.alarmManager.getAllAlarms();
+        StringBuffer sb = new StringBuffer();
+        if ((alarms == null) || (alarms.isEmpty())) {
+            sb.append("<br/><b><i>Currently there are no Processes scheduled.</i></b><br/>");
+        } else {
+            sb.append("<br/><b><i>Current Process Scheduled:</i></b><br/>");
+            sb.append("<table border='2'>");
+            sb.append("<tr>");
+            sb.append("<td>");
+            sb.append("<b>Alarm Name</b>");
+            sb.append("</td>");
+            sb.append("<td>");
+            sb.append("<b>Next Alarm</b>");
+            sb.append("</td>");
+            sb.append("<td>");
+            sb.append("<b>Minute</b>");
+            sb.append("</td>");
+            sb.append("<td>");
+            sb.append("<b>Hour</b>");
+            sb.append("</td>");
+            sb.append("<td>");
+            sb.append("<b>Day of Month</b>");
+            sb.append("</td>");
+            sb.append("<td>");
+            sb.append("<b>Month</b>");
+            sb.append("</td>");
+            sb.append("<td>");
+            sb.append("<b>Day of Week</b>");
+            sb.append("</td>");
+            sb.append("</tr>");
+            for (AlarmEntry entry : alarms) {
+                ParsedAlarmEntry parsedAlarmEntry = this.parseAlarmEntryString(entry);
+                sb.append(parsedAlarmEntry.toFullHTML());
+            }
+            sb.append("</table>");
+        }
+        return sb.toString();
+    }
+
+
 
 }
