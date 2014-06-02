@@ -11,6 +11,7 @@ public class AlternateId implements java.io.Serializable {
 
     public AlternateId() {
         super();
+        this.alternateId = new RandomGUID().toString();
     }
 
     public AlternateId(String alt_id) {

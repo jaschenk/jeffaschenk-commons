@@ -1,5 +1,7 @@
 package jeffaschenk.commons.touchpoint.model;
 
+import jeffaschenk.commons.identifiers.AlternateId;
+
 import java.util.Date;
 import java.util.List;
 
@@ -50,9 +52,9 @@ public interface RootElementInterface {
      * Wrapper for accessing Embeddable Alt Id within
      * Primary composite Keys.
      *
-     * @return String of alternateId
+     * @return AlternateId
      */
-    public String getAlternateId();
+    public AlternateId getAlternateId();
 
     /**
      * Provide common setter for specific Alt ID on this Object.
@@ -61,7 +63,7 @@ public interface RootElementInterface {
      *
      * @param alternateId
      */
-    public void setAlternateId(String alternateId);
+    public void setAlternateId(AlternateId alternateId);
 
     /**
      * Obtain the String name of the JDBC table for the Object.

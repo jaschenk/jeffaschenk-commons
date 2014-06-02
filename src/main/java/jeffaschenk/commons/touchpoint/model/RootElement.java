@@ -2,6 +2,7 @@ package jeffaschenk.commons.touchpoint.model;
 
 
 import jeffaschenk.commons.identifiers.AlternateId;
+import jeffaschenk.commons.identifiers.RandomGUID;
 import jeffaschenk.commons.system.internal.file.services.GlobalConstants;
 
 import javax.persistence.*;
@@ -35,6 +36,7 @@ public abstract class RootElement implements GlobalConstants, RootElementInterfa
     protected RootElement() {
         this.id = new Integer(0);
         this.timestamp = new Date();
+        this.alternateId = new AlternateId(new RandomGUID().toString());
     }
 
     @Column(name = "id", unique = true, nullable = false, insertable = false, updatable = false)
@@ -46,28 +48,14 @@ public abstract class RootElement implements GlobalConstants, RootElementInterfa
         this.id = id;
     }
 
-    //@EmbeddedId
-    @Transient
-    public AlternateId get_alt_id() {
-        return alternateId;
+    @Embedded
+    public AlternateId getAlternateId() {
+        return this.alternateId;
     }
 
-    public void set_alt_id(AlternateId alternateId) {
+    @Override
+    public void setAlternateId(AlternateId alternateId) {
         this.alternateId = alternateId;
-    }
-
-    @Transient
-    @Override
-    public String getAlternateId() {
-        return (this.alternateId == null) ? null : this.alternateId.getAlternateId();
-    }
-
-    @Override
-    public void setAlternateId(String id) {
-        if (this.alternateId == null) {
-            this.alternateId = new AlternateId();
-        }
-        this.alternateId.setAlternateId(id);
     }
 
     @Override
