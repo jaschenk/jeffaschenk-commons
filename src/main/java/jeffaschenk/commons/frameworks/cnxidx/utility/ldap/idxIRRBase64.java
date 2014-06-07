@@ -18,7 +18,7 @@ public class idxIRRBase64 {
      * returns an array of base64-encoded characters to represent the
      * passed data array.
      *
-     * @param byte[] the array of bytes to encode
+     * @param data the array of bytes to encode
      * @return char[] base64-coded character array.
      */
     static public char[] encode(byte[] data) {
@@ -65,7 +65,7 @@ public class idxIRRBase64 {
      * input and generating from that a count of VALID input
      * characters.
      *
-     * @param char[] the array of bytes to decode.
+     * @param data the array of bytes to decode.
      * @return byte[] Decoded byte array.
      * @throws Error due to miscalculation.
      */

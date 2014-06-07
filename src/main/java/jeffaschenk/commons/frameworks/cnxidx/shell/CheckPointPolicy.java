@@ -637,7 +637,7 @@ public class CheckPointPolicy implements Serializable {
      * from a Data Connection Directory Utility.
      *
      * @param policyname
-     * @return
+     * @return int
      */
     private int parsePolicy(final String policyname) {
 
@@ -680,7 +680,7 @@ public class CheckPointPolicy implements Serializable {
      * Private Method to Format Name.
      *
      * @param name
-     * @return
+     * @return String
      */
     private static String formatName(final String name) {
         if (name == null) {

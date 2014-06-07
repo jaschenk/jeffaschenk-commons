@@ -307,7 +307,7 @@ public class DirContextPool {
      * Creates a resource pool of DirContexts if the pool does not
      * already exist; and always returns a reference to the pool.
      *
-     * @return A reference to a resource pool of DirContext objects.
+     * @param typedProps -- Pool Properties.
      */
     public static synchronized void initializePool(Properties typedProps)
             throws PoolNotAvailableException {

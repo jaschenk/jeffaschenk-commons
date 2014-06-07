@@ -171,7 +171,7 @@ public class ChangeLogStatusElement implements Serializable {
      *
      * @param originator
      * @param logfilename
-     * @return
+     * @return String -- formulated Change Log Key
      */
     public static String formulateChangeLogKey(Object originator,
                                                String logfilename) {

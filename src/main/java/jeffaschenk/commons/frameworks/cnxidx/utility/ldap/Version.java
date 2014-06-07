@@ -61,7 +61,7 @@ public class Version {
     /**
      * Standard toString Method for this Class.
      *
-     * @param String Formulated Version Information.
+     * @return String Formulated Version Information.
      */
     public String toString() {
         return ("Build Name:[" +

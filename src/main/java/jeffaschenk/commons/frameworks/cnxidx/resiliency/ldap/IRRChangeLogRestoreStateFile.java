@@ -30,7 +30,7 @@ public class IRRChangeLogRestoreStateFile implements IRRChangeLogRestoreServiceV
      * Main or other Class Caller.
      *
      * @param _statefilename
-     * @prarm changelogstatus Object which provides final status of log.
+     * @param changelogstatus Object which provides final status of log.
      */
     public IRRChangeLogRestoreStateFile(String _statefilename,
                                         ChangeLogStatus changelogstatus) {
@@ -43,7 +43,7 @@ public class IRRChangeLogRestoreStateFile implements IRRChangeLogRestoreServiceV
      * Main or other Class Caller.
      *
      * @param STATEFILE File Object of Processed File Name.
-     * @prarm changelogstatus Object which provides final status of log.
+     * @param changelogstatus Object which provides final status of log.
      */
     public IRRChangeLogRestoreStateFile(File STATEFILE,
                                         ChangeLogStatus changelogstatus) {

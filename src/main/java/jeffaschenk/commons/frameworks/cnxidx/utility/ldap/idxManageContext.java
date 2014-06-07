@@ -44,8 +44,8 @@ public class idxManageContext implements DataMappingConstants, idxCMDReturnCodes
      * Basic Contructor with Principal and Credentials.
      * The Standard Default Host of localhost will be used.
      *
-     * @param String Principal (DN) to be used for Context.
-     * @param String Credentials (password) to be used for Context.
+     * @param _principal Principal (DN) to be used for Context.
+     * @param _credentials Credentials (password) to be used for Context.
      */
     public idxManageContext(String _principal,
                             String _credentials) {
@@ -67,9 +67,9 @@ public class idxManageContext implements DataMappingConstants, idxCMDReturnCodes
     /**
      * Basic Contructor with LDAP Host, Principal and Credentials.
      *
-     * @param String LDAP Host URL to be used for Context.
-     * @param String Principal (DN) to be used for Context.
-     * @param String Credentials (password) to be used for Context.
+     * @param _hosturl LDAP Host URL to be used for Context.
+     * @param _principal Principal (DN) to be used for Context.
+     * @param _credentials Credentials (password) to be used for Context.
      */
     public idxManageContext(String _hosturl,
                             String _principal,
@@ -92,10 +92,10 @@ public class idxManageContext implements DataMappingConstants, idxCMDReturnCodes
     /**
      * Basic Contructor with LDAP Host, Principal and Credentials.
      *
-     * @param String LDAP Host URL to be used for Context.
-     * @param String Principal (DN) to be used for Context.
-     * @param String Credentials (password) to be used for Context.
-     * @param String Internal Context Name to be used for Context.
+     * @param _hosturl LDAP Host URL to be used for Context.
+     * @param _principal Principal (DN) to be used for Context.
+     * @param _credentials Credentials (password) to be used for Context.
+     * @param _contextname Internal Context Name to be used for Context.
      */
     public idxManageContext(String _hosturl,
                             String _principal,
@@ -119,11 +119,11 @@ public class idxManageContext implements DataMappingConstants, idxCMDReturnCodes
     /**
      * Full Primary Contructor with all Options Specified.
      *
-     * @param String LDAP Host URL to be used for Context.
-     * @param String Principal (DN) to be used for Context.
-     * @param String Credentials (password) to be used for Context.
-     * @param String Security Method to be used for Context.
-     * @param String Internal Context Name for Message Display.
+     * @param _hosturl LDAP Host URL to be used for Context.
+     * @param _principal Principal (DN) to be used for Context.
+     * @param _credentials Credentials (password) to be used for Context.
+     * @param _securitymethod Security Method to be used for Context.
+     * @param _contextname Internal Context Name for Message Display.
      */
     public idxManageContext(String _hosturl,
                             String _principal,
@@ -148,7 +148,7 @@ public class idxManageContext implements DataMappingConstants, idxCMDReturnCodes
     /**
      * Basic Contructor with properties Specified to obtain LDAP Host, Principal and Credentials.
      *
-     * @param Properties To Obtain and load Variables.
+     * @param _props Properties To Obtain and load Variables.
      */
     public idxManageContext(Properties _props) {
 
@@ -183,8 +183,8 @@ public class idxManageContext implements DataMappingConstants, idxCMDReturnCodes
     /**
      * Basic Contructor with properties Specified to obtain LDAP Host, Principal and Credentials.
      *
-     * @param Properties To Obtain and load Variables.
-     * @param String     Context Name.
+     * @param _props To Obtain and load Variables.
+     * @param _ContextName     Context Name.
      */
     public idxManageContext(Properties _props,
                             String _ContextName) {
@@ -227,7 +227,7 @@ public class idxManageContext implements DataMappingConstants, idxCMDReturnCodes
     /**
      * setExitOnException method to set ExitOnException boolean indicator.
      *
-     * @param boolean Indicator value to set ExitOnException.
+     * @param _flag Indicator value to set ExitOnException.
      */
     public void setExitOnException(boolean _flag) {
         ExitOnException = _flag;
@@ -254,7 +254,7 @@ public class idxManageContext implements DataMappingConstants, idxCMDReturnCodes
     /**
      * setVerbose method to set VERBOSE boolean indicator.
      *
-     * @param boolean Indicator value to set VERBOSE.
+     * @param _flag Indicator value to set VERBOSE.
      */
     public void setVerbose(boolean _flag) {
         VERBOSE = _flag;
@@ -263,7 +263,7 @@ public class idxManageContext implements DataMappingConstants, idxCMDReturnCodes
     /**
      * setRetryCount method to set RetryCount.
      *
-     * @param int RetryCount.
+     * @param _retryCount RetryCount.
      */
     public void setRetryCount(int _retryCount) {
         retryCount = _retryCount;
@@ -272,7 +272,7 @@ public class idxManageContext implements DataMappingConstants, idxCMDReturnCodes
     /**
      * setRetryWaitTime method to set WaitTime.
      *
-     * @param long WaitTime Milliseconds.
+     * @param _WaitTime WaitTime Milliseconds.
      */
     public void setRetryWaitTime(long _WaitTime) {
         retrySleepMillis = _WaitTime;
@@ -584,7 +584,7 @@ public class idxManageContext implements DataMappingConstants, idxCMDReturnCodes
     /**
      * close method to close existing IRR Directory Context.
      *
-     * @throws IRRException if unable to obtain Context.
+     * @throws idxIRRException if unable to obtain Context.
      */
     public void close() throws idxIRRException {
 
@@ -626,7 +626,7 @@ public class idxManageContext implements DataMappingConstants, idxCMDReturnCodes
      * disableAliasDereferencing method to override default or obtained
      * property to NEVER Dereference Alias Entries.
      *
-     * @throws IRRException if unable to perform.
+     * @throws idxIRRException if unable to perform.
      */
     public void disableAliasDereferencing() throws idxIRRException {
 
@@ -657,7 +657,7 @@ public class idxManageContext implements DataMappingConstants, idxCMDReturnCodes
      * enableAliasDereferencing method to override default or obtained
      * property to ALWAYS Dereference Alias Entries.
      *
-     * @throws IRRException if unable to perform.
+     * @throws idxIRRException if unable to perform.
      */
     public void enableAliasDereferencing() throws idxIRRException {
 
@@ -688,7 +688,7 @@ public class idxManageContext implements DataMappingConstants, idxCMDReturnCodes
      * showAliasDereferencing method to simple show current
      * property of Dereference Alias Entries.
      *
-     * @throws IRRException if unable to perform.
+     * @throws idxIRRException if unable to perform.
      */
     public void showAliasDereferencing() throws idxIRRException {
 
@@ -732,7 +732,7 @@ public class idxManageContext implements DataMappingConstants, idxCMDReturnCodes
      * disableDSAEFactories method to disable the DSAE Object and State
      * factories.
      *
-     * @throws IRRException if unable to perform.
+     * @throws idxIRRException if unable to perform.
      */
     public void disableDSAEFactories() throws idxIRRException {
 
@@ -766,7 +766,7 @@ public class idxManageContext implements DataMappingConstants, idxCMDReturnCodes
      * enableDSAEFactories method to Enable the use of the DSAE Object and
      * State Factories.
      *
-     * @throws IRRException if unable to perform.
+     * @throws idxIRRException if unable to perform.
      */
     public void enableDSAEFactories() throws idxIRRException {
 
@@ -798,7 +798,7 @@ public class idxManageContext implements DataMappingConstants, idxCMDReturnCodes
      * showDSAEFactories method to simple show current
      * property of DSAE Object and State Factories.
      *
-     * @throws IRRException if unable to perform.
+     * @throws idxIRRException if unable to perform.
      */
     public void showDSAEFactories() throws idxIRRException {
 
@@ -848,8 +848,8 @@ public class idxManageContext implements DataMappingConstants, idxCMDReturnCodes
     /**
      * getRootCause method to obtain root cause within an Exception.
      *
-     * @param Exception Object
-     * @param boolean   Flag to indicate if Root Cause should be displayed.
+     * @param e Object
+     * @param _showflag   Flag to indicate if Root Cause should be displayed.
      * @return String of Lower Case Normalized Root Cause.
      */
     private String getRootCause(Object e,

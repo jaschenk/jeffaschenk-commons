@@ -12,18 +12,7 @@ import java.util.*;
 
 public class idxTimeStamp {
 
-    private int year;
-    private int month;
-    private int day;
-    private int hour;
-    private int minute;
-    private int second;
-
-    private String myTimeStamp = "";
-
     private TimeZone tz;
-
-    private Calendar rightNow;
 
     // ***********************************************
     // All Timestamps provide in LocalTime by Default.
@@ -52,16 +41,24 @@ public class idxTimeStamp {
     } // End of disableLocalTime Method.
 
     /**
-     * gets the value from from the attribute
+     * gets the value of the current TimeStamp Value.
      *
-     * @param Attributes attributes to get attribute value from
-     * @param String     name of attribute to get value for
      * @return String the value containing the timestamp in the for of
      *         <B>YYYYMMDYHHMMSS.0Z</B>
      *         All timestamps generated will be relative to GMT+0 if LOCALTIME
      *         is set to false.
      */
     public String get() {
+        int year;
+        int month;
+        int day;
+        int hour;
+        int minute;
+        int second;
+
+        String myTimeStamp = "";
+
+        Calendar rightNow;
 
         // ***************************
         // Acquire a proper Time Stamp

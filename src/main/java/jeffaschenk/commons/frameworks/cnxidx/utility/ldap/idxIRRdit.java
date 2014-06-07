@@ -55,7 +55,7 @@ public class idxIRRdit implements DataMappingConstants {
     /**
      * Initial Constructor used when arguments supplied.
      *
-     * @param idxIRRschema Object class containing Existing IRR Schema.
+     * @param _SCHEMA Object class containing Existing IRR Schema.
      */
     public idxIRRdit(idxIRRschema _SCHEMA) {
         SCHEMA = _SCHEMA;
@@ -67,7 +67,7 @@ public class idxIRRdit implements DataMappingConstants {
     /**
      * Initial Constructor used when arguments supplied.
      *
-     * @param idxStatus Object class containing Existing Status.
+     * @param _STATUS Object class containing Existing Status.
      */
     public idxIRRdit(idxStatus _STATUS) {
         STATUS = _STATUS;
@@ -76,7 +76,7 @@ public class idxIRRdit implements DataMappingConstants {
     /**
      * Method to Set VERBOSE Indicator.
      *
-     * @param boolean Indicator to set VERBOSE.
+     * @param _verbose Indicator to set VERBOSE.
      */
     public void setVerbose(boolean _verbose) {
         VERBOSE = _verbose;
@@ -113,9 +113,9 @@ public class idxIRRdit implements DataMappingConstants {
      * write/bind entries to formulate the Directory Information Tree or
      * DIT.
      *
-     * @param DirContext current established Directory Context.
-     * @param String     current fully qualified DN to be written.
-     * @param Attributes Attribute Enumeration Set for Entry.
+     * @param ctx current established Directory Context.
+     * @param EntryDN     current fully qualified DN to be written.
+     * @param attrs Attribute Enumeration Set for Entry.
      * @return boolean indication of operation successful or not.
      */
     private boolean writeEntry(DirContext ctx,
@@ -171,8 +171,9 @@ public class idxIRRdit implements DataMappingConstants {
     /**
      * Creates an Operational Admin Account.
      *
-     * @param DirContext current established Directory Context.
-     * @param String     current Fully Qualified Customer Domain DN to be written.
+     * @param ctx current established Directory Context.
+     * @param FrameworkDN     current Fully Qualified Customer Domain DN to be written.
+     * @param  FrameworkPassword
      * @return boolean indication of operation successful or not.
      */
     private boolean CreateOperationalAdminAccount(DirContext ctx,
@@ -205,9 +206,9 @@ public class idxIRRdit implements DataMappingConstants {
     /**
      * Creates an new Operational State Domain Object.
      *
-     * @param DirContext current established Directory Context.
-     * @param String     current Fully Qualified Customer Domain DN to be written.
-     * @param String     Principal Installation By.
+     * @param ctx current established Directory Context.
+     * @param CustomerDN     current Fully Qualified Customer Domain DN to be written.
+     * @param _IRRprincipal     Principal Installation By.
      * @return boolean indication of operation successful or not.
      */
     public boolean CreateOpStateDomainObject(DirContext ctx,
@@ -251,10 +252,10 @@ public class idxIRRdit implements DataMappingConstants {
     /**
      * Creates the Operational Admin Account.
      *
-     * @param DirContext current established Directory Context.
-     * @param String     current Fully Qualified Customer Domain DN.
-     * @param String     current Admin Password.
-     * @param String     current Read Password.
+     * @param ctx current established Directory Context.
+     * @param CustomerDN     current Fully Qualified Customer Domain DN.
+     * @param AdminPassword     current Admin Password.
+     * @param ReadPassword     current Read Password.
      * @return boolean indication of operation successful or not.
      */
     public boolean CreateOperationalAdminAccounts(DirContext ctx,
@@ -289,9 +290,9 @@ public class idxIRRdit implements DataMappingConstants {
      * DIT containment.  This establishes a non-FRAMEWORK Realm
      * container.
      *
-     * @param DirContext current established Directory Context.
-     * @param String     current fully qualified DN of DC to be written.
-     * @param boolean    Indicator for Tag of Framework Realm.
+     * @param ctx current established Directory Context.
+     * @param EntryDN     current fully qualified DN of DC to be written.
+     * @param FRAMEWORK_REALM    Indicator for Tag of Framework Realm.
      * @return boolean indication of operation successful or not.
      */
     public boolean CreateDCContainer(DirContext ctx,
@@ -345,9 +346,8 @@ public class idxIRRdit implements DataMappingConstants {
      * DIT containment.  This establishes a non-FRAMEWORK Realm
      * container.
      *
-     * @param DirContext current established Directory Context.
-     * @param String     current fully qualified DN of DC to be written.
-     * @param boolean    Indicator for Tag of Framework Realm.
+     * @param ctx current established Directory Context.
+     * @param EntryDN     current fully qualified DN of DC to be written.
      * @return boolean indication of operation successful or not.
      */
     public boolean CreateDCContainer(DirContext ctx,
@@ -360,10 +360,10 @@ public class idxIRRdit implements DataMappingConstants {
      * Creates an new OrganizationalUnit (OU) container for realizing
      * DIT containment.
      *
-     * @param DirContext current established Directory Context.
-     * @param String     current fully qualified DN of OU to be written.
-     * @param boolean    Is this an FRAMEWORK Realm?
-     * @param boolean    Is this an FRAMEWORK System Container?
+     * @param ctx current established Directory Context.
+     * @param EntryDN     current fully qualified DN of OU to be written.
+     * @param FRAMEWORK_REALM    Is this an FRAMEWORK Realm?
+     * @param FRAMEWORK_SYSTEM_CONTAINER    Is this an FRAMEWORK System Container?
      * @return boolean indication of operation successful or not.
      */
     public boolean CreateOUContainer(DirContext ctx,
@@ -454,8 +454,8 @@ public class idxIRRdit implements DataMappingConstants {
      * Creates an new OrganizationalUnit (OU) container for realizing
      * DIT containment.
      *
-     * @param DirContext current established Directory Context.
-     * @param String     current fully qualified DN of OU to be written.
+     * @param ctx current established Directory Context.
+     * @param EntryDN     current fully qualified DN of OU to be written.
      * @return boolean indication of operation successful or not.
      */
     public boolean CreateOUContainer(DirContext ctx,
@@ -470,8 +470,8 @@ public class idxIRRdit implements DataMappingConstants {
      * for realizing the FRAMEWORK Instance Specific.
      * These Entries on on every primary and realm instance.
      *
-     * @param DirContext current established Directory Context.
-     * @param String     current parent DN.
+     * @param ctx current established Directory Context.
+     * @param EntryDN     current parent DN.
      * @return boolean indication of operation successful or not.
      */
     public boolean CreateOUContainersForInstanceObjectTree(DirContext ctx,
@@ -493,8 +493,8 @@ public class idxIRRdit implements DataMappingConstants {
      * Creates an new set of OrganizationalUnits (OU)
      * for realizing the Framework Distributed Object Tree.
      *
-     * @param DirContext current established Directory Context.
-     * @param String     current parent DN.
+     * @param ctx current established Directory Context.
+     * @param EntryDN     current parent DN.
      * @return boolean indication of operation successful or not.
      */
     public boolean CreateOUContainersForFrameworkObjectTree(DirContext ctx,
@@ -561,8 +561,8 @@ public class idxIRRdit implements DataMappingConstants {
      * Creates an new set of OrganizationalUnits (OU)
      * for realizing the Site Specific and sundry Distributed Object Tree.
      *
-     * @param DirContext current established Directory Context.
-     * @param String     current parent DN.
+     * @param ctx current established Directory Context.
+     * @param EntryDN     current parent DN.
      * @return boolean indication of operation successful or not.
      */
     public boolean CreateOUContainersForSiteObjectTree(DirContext ctx,
@@ -581,8 +581,8 @@ public class idxIRRdit implements DataMappingConstants {
     /**
      * Initiates the Build of the VendorObjects Area.
      *
-     * @param DirContext current established Directory Context.
-     * @param String     current parent DN.
+     * @param ctx current established Directory Context.
+     * @param EntryDN     current parent DN.
      * @return boolean indication of operation successful or not.
      */
     public boolean CreateVendorObjectContainers(DirContext ctx,
@@ -602,8 +602,8 @@ public class idxIRRdit implements DataMappingConstants {
      * Creates an new set of OrganizationalUnits (OU)
      * for realizing the Vendor or Customer Object containers.
      *
-     * @param DirContext current established Directory Context.
-     * @param String     current parent DN.
+     * @param ctx current established Directory Context.
+     * @param EntryDN     current parent DN.
      * @return boolean indication of operation successful or not.
      */
     public boolean CreateOUContainersForVCObjectTree(DirContext ctx,
@@ -641,8 +641,8 @@ public class idxIRRdit implements DataMappingConstants {
      * Creates an new ResourceContainerUnit (RCU) container for realizing
      * DIT containment.
      *
-     * @param DirContext current established Directory Context.
-     * @param String     current fully qualified DN of RCU to be written.
+     * @param ctx current established Directory Context.
+     * @param EntryDN     current fully qualified DN of RCU to be written.
      * @return boolean indication of operation successful or not.
      */
     public boolean CreateResourceContainerUnit(DirContext ctx,
@@ -697,8 +697,8 @@ public class idxIRRdit implements DataMappingConstants {
     /**
      * Creates the Default Resource Container.
      *
-     * @param DirContext current established Directory Context.
-     * @param String     current parent DN.
+     * @param ctx current established Directory Context.
+     * @param EntryDN     current parent DN.
      * @return boolean indication of operation successful or not.
      */
     public boolean CreateDefaultResourceContainerUnit(DirContext ctx,
@@ -712,7 +712,7 @@ public class idxIRRdit implements DataMappingConstants {
     /**
      * Obtains current Principal from existing Directory Context.
      *
-     * @param DirContext current established Directory Context.
+     * @param ctx current established Directory Context.
      * @return String of IRR Principal.
      */
     private String obtainIRRPrincipal(DirContext ctx) {

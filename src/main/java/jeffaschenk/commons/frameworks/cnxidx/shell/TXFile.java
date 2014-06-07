@@ -36,7 +36,7 @@ public class TXFile implements Serializable {
     /**
      * TXIfile Contructor class driven.
      *
-     * @param String TX filename.
+     * @param _infile TX filename.
      */
     public TXFile(String _infile) {
         this.TXFILENAME = _infile;
@@ -45,8 +45,8 @@ public class TXFile implements Serializable {
     /**
      * TXIfile Contructor class driven.
      *
-     * @param String  TX filename.
-     * @param boolean Indicator to Append.
+     * @param _infile  TX filename.
+     * @param _append Indicator to Append.
      */
     public TXFile(String _infile, boolean _append) {
         this.TXFILENAME = _infile;
@@ -56,7 +56,7 @@ public class TXFile implements Serializable {
     /**
      * set Append Indicator.
      *
-     * @param boolean Indicator to Append.
+     * @param _append Indicator to Append.
      */
     public void setAppend(boolean _append) {
         this.APPEND = _append;
@@ -66,7 +66,7 @@ public class TXFile implements Serializable {
      * Will provide indicator if TX File exists
      * or not.
      *
-     * @return
+     * @return boolean -- indicating TX File exists or not.
      */
     public boolean exists() {
         if ((this.TXFILENAME == null) ||
@@ -83,7 +83,7 @@ public class TXFile implements Serializable {
     /**
      * append Data from String buffer to TX File.
      *
-     * @param StringBuffer Contents to be Appended to TX file.
+     * @param data Contents to be Appended to TX file.
      */
     public void append(String data) throws IOException {
         setAppend(true);
@@ -93,7 +93,7 @@ public class TXFile implements Serializable {
     /**
      * put Data from String buffer to TX File.
      *
-     * @param StringBuffer Contents to be Written to TX file.
+     * @param data Contents to be Written to TX file.
      */
     public void put(String data)
             throws IOException {

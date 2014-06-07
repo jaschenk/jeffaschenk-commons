@@ -1,7 +1,7 @@
 package jeffaschenk.commons.frameworks.cnxidx.utility.commandlinearguments;
 
 /**
- * @authors Jeff.Schenk
+ * @author Jeff.Schenk@gmail.com
  */
 public interface MessageConstants {
     // Messages should be grouped by their functional area within the application

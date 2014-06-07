@@ -38,8 +38,8 @@ public class idxIRROutput {
      * as hidden in a "********" form.  Long attribute values, such
      * as the cnxidoxobjectblob will display a shortened display.
      *
-     * @param NamingEnumeration JNDI search results.
-     * @param String            Current DN base to properly reflect full DN.
+     * @param sl JNDI search results.
+     * @param dnbase            Current DN base to properly reflect full DN.
      * @return int count of entries processed.
      */
     public static int PrintSearchList(NamingEnumeration sl, String dnbase) {
@@ -183,9 +183,9 @@ public class idxIRROutput {
      * If the NICE is TRUE then the Long attribute values, such
      * as the cnxidoxobjectblob will display in full.
      *
-     * @param NamingEnumeration JNDI search results.
-     * @param String            Current DN base to properly reflect full DN.
-     * @param boolean           NICE Output Indicator.
+     * @param sl JNDI search results.
+     * @param dnbase            Current DN base to properly reflect full DN.
+     * @param _NICE           NICE Output Indicator.
      * @return int count of entries processed.
      */
     public static int PrintSearchList(NamingEnumeration sl, String dnbase, boolean _NICE) {
@@ -325,10 +325,10 @@ public class idxIRROutput {
      * We will report on all objectclasses and naming attributes
      * first. Normal Base64 attribute encoding will apply as well.
      *
-     * @param NamingEnumeration JNDI search results.
-     * @param String            Current DN base to properly reflect full DN.
-     * @param BufferedWriter    output stream where LDIF written.
-     * @param boolean           NICE DN Output indicator.
+     * @param sl JNDI search results.
+     * @param dnbase            Current DN base to properly reflect full DN.
+     * @param LDIFOUT    output stream where LDIF written.
+     * @param _NICE           NICE DN Output indicator.
      * @return int count of entries processed.
      * @throws Exception when unrecoverable error occurs.
      */
@@ -452,10 +452,10 @@ public class idxIRROutput {
      * We will report on all objectclasses and naming attributes
      * first. Normal Base64 attribute encoding will apply as well.
      *
-     * @param String         Full DN.
-     * @param Attributes     JNDI Attributes Object.
-     * @param BufferedWriter output stream where LDIF written.
-     * @param boolean        NICE DN output indicator.
+     * @param SourceDN         Full DN.
+     * @param entryattrs     JNDI Attributes Object.
+     * @param LDIFOUT output stream where LDIF written.
+     * @param _NICE        NICE DN output indicator.
      * @throws Exception when unrecoverable error occurs.
      */
     public static void EntryToLDIF(String SourceDN,
@@ -541,10 +541,10 @@ public class idxIRROutput {
      * We will report on all objectclasses and naming attributes
      * first. Normal Base64 attribute encoding will apply as well.
      *
-     * @param String         Full DN.
-     * @param Attributes     JNDI Attributes Object.
-     * @param BufferedWriter output stream where LDIF written.
-     * @param boolean        NICE DN output indicator.
+     * @param SourceDN         Full DN.
+     * @param entryattrs     JNDI Attributes Object.
+     * @param LDIFOUT output stream where LDIF written.
+     * @param _NICE        NICE DN output indicator.
      * @throws Exception when unrecoverable error occurs.
      */
     public static void EntryToLDIFPreservingAttributeNameCase(String SourceDN,
@@ -642,9 +642,9 @@ public class idxIRROutput {
      * Outputs RFC complient LDIF data.
      * Normal Base64 attribute encoding will apply as well.
      *
-     * @param String         Atrribute Name.
-     * @param Object         Attribute Object Value.
-     * @param BufferedWriter output stream where LDIF written.
+     * @param AttributeName         Atrribute Name.
+     * @param obvalue         Attribute Object Value.
+     * @param LDIFOUT output stream where LDIF written.
      */
     public static void WriteLDIF(String AttributeName,
                                  Object obvalue,
@@ -722,7 +722,7 @@ public class idxIRROutput {
      * This follows the standard LDIF rules for encoding as presented in the
      * RFC.
      *
-     * @param String Attribute Value String.
+     * @param str Attribute Value String.
      * @return boolean indicator whether value should be Base64 encoded
      *         or not.
      */
@@ -757,7 +757,7 @@ public class idxIRROutput {
     /**
      * Class to output the current Directory Schema to STDOUT.
      *
-     * @param DirContext current established Directory Context.
+     * @param ctx current established Directory Context.
      */
     public static void PrintSchema(DirContext ctx) {
 
@@ -801,7 +801,7 @@ public class idxIRROutput {
     /**
      * Class to extract the DN from a URL CompoundName.
      *
-     * @param String Incoming URL with DN, from an Alias.
+     * @param _DN Incoming URL with DN, from an Alias.
      * @return String Extracted DN.
      */
     public static String extractDNfromURL(String _DN) {

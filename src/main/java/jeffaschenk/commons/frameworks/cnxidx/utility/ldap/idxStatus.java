@@ -48,7 +48,7 @@ public class idxStatus {
     /**
      * Provides Common Status for MAIN Operation Functions.
      *
-     * @param String A Friendly Operation Name.
+     * @param _Operation A Friendly Operation Name.
      */
     public idxStatus(String _Operation) {
         CurrentOperationName = _Operation;

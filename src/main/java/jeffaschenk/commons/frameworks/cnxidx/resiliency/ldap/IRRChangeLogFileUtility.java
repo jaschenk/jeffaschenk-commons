@@ -254,8 +254,8 @@ public class IRRChangeLogFileUtility {
     /**
      * obtainUnprocessedFileMap, check for any unprocessed files within the Change Log File System Directory.
      *
-     * @param String Input File System Path of Directory where Log Restore Files Reside.
-     * @param String Tagname for our State file.
+     * @param INPUT_PATH Input File System Path of Directory where Log Restore Files Reside.
+     * @return TreeMap
      */
     protected static TreeMap obtainUnprocessedFileMap(String INPUT_PATH) {
         String METHODNAME = "obtainUnprocessedFileMap";
@@ -325,8 +325,8 @@ public class IRRChangeLogFileUtility {
     /**
      * obtainReferenceFileMap, check for any reference files within the Change Log File System Directory.
      *
-     * @param String Input File System Path of Directory where Log Restore Files Reside.
-     * @param String Change File Log we are Looking for with Reference Files Associated.
+     * @param changelog_filename Input File System Path of Directory where Log Restore Files Reside.
+     * @return TreeMap --
      */
     protected static TreeMap obtainReferenceFileMap(final String changelog_filename) {
         String METHODNAME = "obtainReferenceFileMap";
@@ -370,8 +370,8 @@ public class IRRChangeLogFileUtility {
      * deleteReferenceFiles, check for any reference files within the Change Log File System Directory for
      * a specific base change log file and delete those files.
      *
-     * @param String Input File System Path of Directory where Log Restore Files Reside.
-     * @param String Change File Log we are Looking for with Reference Files Associated.
+     * @param changelog_filename Input File System Path of Directory where Log Restore Files Reside.
+     * @return long -- returns number of deleted referenced files.
      */
     protected static long deleteReferenceFiles(final String changelog_filename) {
         String METHODNAME = "deleteReferenceFiles";
@@ -512,7 +512,7 @@ public class IRRChangeLogFileUtility {
      * log file has been fully processed.
      *
      * @param infile Filename.
-     * @return
+     * @return File
      */
     protected static File getProcessedFile(File infile) {
         return new File(infile.getAbsolutePath() + UNDERSCORE + PROCESSED);
@@ -523,7 +523,7 @@ public class IRRChangeLogFileUtility {
      * log file has been fully processed.
      *
      * @param infile Filename.
-     * @return
+     * @return File
      */
     protected static File getBlockedFile(File infile) {
         return new File(infile.getAbsolutePath() + UNDERSCORE + BLOCKED);
@@ -533,8 +533,8 @@ public class IRRChangeLogFileUtility {
      * get Blocked File Object for use to persist to indicate
      * log file has been fully processed.
      *
-     * @param filename.
-     * @return
+     * @param filename
+     * @return File
      */
     protected static File getBlockedFile(String filename) {
         return new File(filename + UNDERSCORE + BLOCKED);
@@ -545,7 +545,7 @@ public class IRRChangeLogFileUtility {
      * log file has been fully processed.
      *
      * @param filename
-     * @return
+     * @return File
      */
     protected static File getProcessedFile(String filename) {
         return new File(filename + UNDERSCORE + PROCESSED);
@@ -556,7 +556,7 @@ public class IRRChangeLogFileUtility {
      * log file has been fully processed.
      *
      * @param changelogstatus
-     * @return
+     * @return File
      */
     protected static File getProcessedFile(ChangeLogStatus changelogstatus) {
         return new File(changelogstatus.getLogFileName() + UNDERSCORE + PROCESSED);

@@ -138,9 +138,8 @@ public class FrameworkLogger {
     /**
      * Audit an entry
      *
-     * @param userID     A userid to be logged with the audit entry.
-     * @param messageKey The message key of the message to log
-     * @param userID     The user that is being auditted.
+     * @param userID     A userID to be logged with the audit entry.
+     * @param messageKey The message key of the message to log.
      */
     public void audit(String userID, String messageKey) {
 

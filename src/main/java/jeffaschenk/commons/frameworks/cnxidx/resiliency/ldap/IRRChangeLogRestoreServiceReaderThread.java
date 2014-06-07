@@ -751,7 +751,7 @@ class IRRChangeLogRestoreServiceReaderThread implements Runnable, LDIFConstants 
      *
      * @param cik
      * @param changelogstatus
-     * @return
+     * @return boolean -- indicates if successful or not.
      */
     private boolean performChangeLogRetry(ChangeIdentifierKey cik,
                                           ChangeLogStatus changelogstatus,
@@ -932,7 +932,7 @@ class IRRChangeLogRestoreServiceReaderThread implements Runnable, LDIFConstants 
      * processed.  Housekeeping will then come along a clean it up later.
      *
      * @param changelogstatus
-     * @return
+     * @return boolean -- Indicates if Processed sucessfully or not.
      */
     private boolean checkpointChangeLogFile(ChangeLogStatus changelogstatus) {
         // *******************************

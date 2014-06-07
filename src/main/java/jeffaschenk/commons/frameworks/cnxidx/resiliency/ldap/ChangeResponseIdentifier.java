@@ -201,7 +201,7 @@ public class ChangeResponseIdentifier implements Serializable {
     /**
      * get Change Final Notation.
      *
-     * @return
+     * @return String
      */
     public String getChangeFinalNotation() {
         return this.change_final_notation;

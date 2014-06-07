@@ -58,7 +58,7 @@ public class idxIRRschema {
     /**
      * Initial Constructor used when argument supplied.
      *
-     * @param DirContext available Directoru Context to obtain schema.
+     * @param myctx available Directoru Context to obtain schema.
      */
     public idxIRRschema(DirContext myctx) {
         boolean rc = create(myctx);
@@ -105,7 +105,7 @@ public class idxIRRschema {
     /**
      * Create Method with Argument
      *
-     * @param DirContext of current available IRR Directory Connection to obtain schema.
+     * @param myctx of current available IRR Directory Connection to obtain schema.
      * @return boolean Indicates if Directory Context was successfully opened or not.
      */
     private boolean create(DirContext myctx) {
@@ -174,8 +174,8 @@ public class idxIRRschema {
     /**
      * Method used to get Attribute List Value
      *
-     * @param String Name of Object.
-     * @param String Type of Object.
+     * @param Name of Object.
+     * @param Type of Object.
      * @return ArrayList of Object's Attributes.
      */
     private List<Attributes> getAttributeListValue(String Name, String Type) {
@@ -210,8 +210,8 @@ public class idxIRRschema {
     /**
      * Method used to get Attribute Content Value
      *
-     * @param String Name of Object.
-     * @param String Type of Object.
+     * @param Name of Object.
+     * @param Type of Object.
      * @return String of Object's Attribute Contents.
      */
     private String getAttributeValue(String Name, String Type) {
@@ -238,7 +238,7 @@ public class idxIRRschema {
     /**
      * Method used to get Attribute Syntax Name
      *
-     * @param String Name of Object.
+     * @param Name of Object.
      * @return String of Attribute Syntax Name Value.
      */
     public String getAttributeSyntaxName(String Name) {
@@ -248,7 +248,7 @@ public class idxIRRschema {
     /**
      * Method used to get Attribute Syntax
      *
-     * @param String Name of Object.
+     * @param Name of Object.
      * @return int of Attribute Syntax.
      */
     public int getAttributeSyntax(String Name) {
@@ -259,7 +259,7 @@ public class idxIRRschema {
     /**
      * Method used to get Attribute Syntax OID
      *
-     * @param String Name of Object.
+     * @param  Name of Object.
      * @return String of Syntax OID.
      */
     public String getAttributeSyntaxOID(String Name) {
@@ -270,7 +270,7 @@ public class idxIRRschema {
     /**
      * Method used to determine Attribute is Human-Readable or not.
      *
-     * @param String Name of Object.
+     * @param Name of Object.
      * @return boolean indicates if Attribute is Human-Readable or not.
      */
     public boolean IsAttributeSyntaxHumanReadable(String Name) {
@@ -281,7 +281,7 @@ public class idxIRRschema {
     /**
      * Method used to get Attribute OID
      *
-     * @param String Name of Object.
+     * @param Name of Object.
      * @return String of Attribute OID.
      */
     public String getAttributeOID(String Name) {
@@ -291,7 +291,7 @@ public class idxIRRschema {
     /**
      * Method used to get Attribute Name
      *
-     * @param String Name of Object.
+     * @param Name of Object.
      * @return ArrayList of all Attributes Names.
      */
     public List<Attributes> getAttributeName(String Name) {
@@ -301,7 +301,7 @@ public class idxIRRschema {
     /**
      * Method used to get Objects Usage
      *
-     * @param String Name of Object.
+     * @param Name of Object.
      * @return String of Attributes Usage.
      */
     public String getAttributeUsage(String Name) {
@@ -311,7 +311,7 @@ public class idxIRRschema {
     /**
      * Method used to determine Attribute is SINGLE-VALUE
      *
-     * @param String Name of Object.
+     * @param Name of Object.
      * @return boolean indicates if Attribute is SINGLE-VALUED or not.
      */
     public boolean isAttributeSingleValued(String Name) {
@@ -326,7 +326,7 @@ public class idxIRRschema {
     /**
      * Method used to determine Attribute is MULTI-VALUE
      *
-     * @param String Name of Object.
+     * @param Name of Object.
      * @return boolean indicates if Attribute is MULTI-VALUED or not.
      */
     public boolean isAttributeMultiValued(String Name) {
@@ -341,7 +341,7 @@ public class idxIRRschema {
     /**
      * Method used to determine Attribute is Not Modifiable.
      *
-     * @param String Name of Object.
+     * @param Name of Object.
      * @return boolean indicates if Attribute is Modifiable or not.
      */
     public boolean isAttributeUserModifiable(String Name) {
@@ -356,7 +356,7 @@ public class idxIRRschema {
     /**
      * Method used to determine Attribute is Binary.
      *
-     * @param String Name of Object.
+     * @param Name of Object.
      * @return boolean indicates if Attribute is Binary or not.
      */
     public boolean isAttributeBinary(String Name) {
@@ -475,8 +475,8 @@ public class idxIRRschema {
     /**
      * Method used to get Objectclasses List Value.
      *
-     * @param String Name of Object.
-     * @param String Type of Object.
+     * @param Name of Object.
+     * @param Type of Object.
      * @return ArrayList containing Named Object Values.
      */
     private List<Attributes> getObjectClassListValue(String Name, String Type) {
@@ -511,8 +511,8 @@ public class idxIRRschema {
     /**
      * Method used to get Objectclasses Content Value.
      *
-     * @param String Name of Object.
-     * @param String Type of Object.
+     * @param Name of Object.
+     * @param Type of Object.
      * @return String containing Named Object Value.
      */
     private String getObjectClassValue(String Name, String Type) {
@@ -539,7 +539,7 @@ public class idxIRRschema {
     /**
      * Method used to get Objectclasses OID.
      *
-     * @param String Name of Object.
+     * @param Name of Object.
      * @return String containing Object OID.
      */
     public String getObjectClassOID(String Name) {
@@ -549,7 +549,7 @@ public class idxIRRschema {
     /**
      * Method used to get Objectclasses Required Attributes.
      *
-     * @param String Name of Object.
+     * @param Name of Object.
      * @return ArrayList containing Objectclasses Required Attributes.
      */
     public List<Attributes> getObjectClassRequiredAttributes(String Name) {
@@ -559,7 +559,7 @@ public class idxIRRschema {
     /**
      * Method used to get Objectclasses Optional Attributes.
      *
-     * @param String Name of Object.
+     * @param Name of Object.
      * @return ArrayList containing Objectclasses Optional Attributes.
      */
     public List<Attributes> getObjectClassOptionalAttributes(String Name) {
@@ -569,7 +569,7 @@ public class idxIRRschema {
     /**
      * Method used to get Objectclasses Superior.
      *
-     * @param String Name of Object.
+     * @param Name of Object.
      * @return String containing Objectclasses Superior.
      */
     public String getObjectClassSuperior(String Name) {
@@ -579,7 +579,7 @@ public class idxIRRschema {
     /**
      * Method used to determine if Objectclass is Structural.
      *
-     * @param String Name of Object.
+     * @param Name of Object.
      * @return boolean indicates if Objectclass is Structural or not.
      */
     public boolean isObjectClassStructural(String Name) {
@@ -594,7 +594,7 @@ public class idxIRRschema {
     /**
      * Method used to determine if Objectclass is Auxiliary.
      *
-     * @param String Name of Object.
+     * @param Name of Object.
      * @return boolean indicates if Objectclass is Auxiliary or not.
      */
     public boolean isObjectClassAuxiliary(String Name) {
@@ -609,7 +609,7 @@ public class idxIRRschema {
     /**
      * Method used to determine if Objectclass is Abstract.
      *
-     * @param String Name of Object.
+     * @param Name of Object.
      * @return boolean indicates if Objectclass is Abstract or not.
      */
     public boolean isObjectClassAbstract(String Name) {
@@ -632,7 +632,7 @@ public class idxIRRschema {
      * Needs to be created, since current DCL Schema does not
      * provide SYNTAX definitions.
      *
-     * @param void <pre>
+     * <pre>
      *               Syntax to OID, per IETF Draft:
      *               LDAPv3 Attribute Syntax Definitions
      *             Syntax Name                 H-R*   OID
@@ -697,7 +697,7 @@ public class idxIRRschema {
      *             UTC Time                        Y  1.3.6.1.4.1.1466.115.121.1.53
      *
      *             H-R: Denotes Human-Readble Syntax.
-     *               </pre>
+     *  </pre>
      */
     private void createSyntax() {
 
@@ -767,10 +767,10 @@ public class idxIRRschema {
     /**
      * Method used to create Syntax Entry.
      *
-     * @param String  Name of Syntax.
-     * @param boolean Human Readable indicator.
-     * @param String  OID.
-     * @param int     Internal Syntax Id.
+     * @param Name of Syntax.
+     * @param HR Human Readable indicator.
+     * @param OID -- Object Identifier.
+     * @param IRRsynid  --  Internal Syntax Id.
      */
     private void createSyntaxEntry(String Name,
                                    boolean HR,
@@ -824,8 +824,8 @@ public class idxIRRschema {
     /**
      * Method used to get SYNTAX Content Value.
      *
-     * @param String Name of Syntax.
-     * @param String Attribute Type or Name.
+     * @param Name of Syntax.
+     * @param Type Attribute Type or Name.
      * @return String Requested Attribute.
      */
     private String getSyntaxValue(String Name, String Type) {
@@ -852,7 +852,7 @@ public class idxIRRschema {
     /**
      * Method used to get SYNTAX OID.
      *
-     * @param String Name of Syntax.
+     * @param Name of Syntax.
      * @return String OID.
      */
     public String getSyntaxOID(String Name) {
@@ -862,7 +862,7 @@ public class idxIRRschema {
     /**
      * Method used to get Internal SYNTAX ID.
      *
-     * @param String Name of Syntax.
+     * @param Name of Syntax.
      * @return int Internal Syntax ID.
      */
     public int getSyntaxIRRid(String Name) {
@@ -886,7 +886,7 @@ public class idxIRRschema {
      * Method used to Determine if Syntax is
      * Human Readable.
      *
-     * @param String Name of Syntax.
+     * @param Name of Syntax.
      * @return boolean indicates if Syntax is Human-Readable or not.
      */
     public boolean IsSyntaxHumanReadable(String Name) {
@@ -901,9 +901,9 @@ public class idxIRRschema {
     /**
      * Method used to dump All Objects contained within TreeMap in XML Document Format.
      *
-     * @param TreeMap        Can be the Attribute, Objectclass or Syntax TreeMap.
-     * @param BufferedWriter Directed output of show or display.
-     * @param String         current level Tag Name.
+     * @param myTM        Can be the Attribute, Objectclass or Syntax TreeMap.
+     * @param SO Directed output of show or display.
+     * @param sname         current level Tag Name.
      * @throws java.io.IOException
      */
     private void ShowListContents(TreeMap myTM, BufferedWriter SO, String sname)
@@ -966,8 +966,8 @@ public class idxIRRschema {
      * Method used to print All Objects in Array Lists in XML
      * formmated document, used for Schema Backup.
      *
-     * @param BufferedWriter of output file stream.
-     * @return void
+     * @param SO of output file stream.
+     *
      */
     public void printAll(BufferedWriter SO) throws IOException {
 

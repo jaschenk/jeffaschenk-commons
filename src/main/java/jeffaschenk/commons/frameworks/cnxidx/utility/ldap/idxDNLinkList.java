@@ -29,7 +29,7 @@ public class idxDNLinkList {
      * Initial Constructor used when single object argument supplied.
      * Clones Object.
      *
-     * @param idxDNLinkList Existing DN Link List Object to be cloned.
+     * @param dnllob Existing DN Link List Object to be cloned.
      */
     public idxDNLinkList(idxDNLinkList dnllob) {
         Iterator dnentries_itr = dnllob.dnList.iterator();
@@ -42,7 +42,7 @@ public class idxDNLinkList {
     /**
      * Initial Constructor used when single string argument supplied.
      *
-     * @param String to be added to new LinkedList.
+     * @param dnentry to be added to new LinkedList.
      */
     public idxDNLinkList(String dnentry) {
         add(dnentry);
@@ -51,7 +51,7 @@ public class idxDNLinkList {
     /**
      * Add new Entry to DNLinkedList
      *
-     * @param String to be added to LinkedList.
+     * @param dnentry to be added to LinkedList.
      */
     public void add(String dnentry) {
         dnList.add(dnentry);
@@ -61,8 +61,8 @@ public class idxDNLinkList {
     /**
      * Add new Entry to DNLinkedList when index and value arguments supplied.
      *
-     * @param int    Index to LinkedList Entry.
-     * @param String to be added to LinkedList.
+     * @param dnentry_index    Index to LinkedList Entry.
+     * @param dnentry to be added to LinkedList.
      */
     public void add(int dnentry_index, String dnentry) {
         dnList.add(dnentry_index, dnentry);
@@ -72,7 +72,7 @@ public class idxDNLinkList {
     /**
      * Add Entry to Beginning of DNLinkedList.
      *
-     * @param String to be added to LinkedList.
+     * @param dnentry to be added to LinkedList.
      */
     public void addFirst(String dnentry) {
         dnList.addFirst(dnentry);
@@ -82,7 +82,7 @@ public class idxDNLinkList {
     /**
      * Add Entry to End of DNLinkedList.
      *
-     * @param String to be added to LinkedList.
+     * @param dnentry to be added to LinkedList.
      */
     public void addLast(String dnentry) {
         dnList.addLast(dnentry);
@@ -92,7 +92,7 @@ public class idxDNLinkList {
     /**
      * Remove indicated Entry from DNLinkedList.
      *
-     * @param String to be removed from the LinkedList.
+     * @param dnentry to be removed from the LinkedList.
      */
     public void remove(String dnentry) {
         dnList.remove(dnentry);
@@ -102,7 +102,7 @@ public class idxDNLinkList {
     /**
      * Remove indicated Entry from DNLinkedList.
      *
-     * @param int index entry to be removed from the LinkedList.
+     * @param dnentry_index index entry to be removed from the LinkedList.
      */
     public boolean remove(int dnentry_index) {
         if (dnentry_index < dnList.size() - 1) {
@@ -170,7 +170,7 @@ public class idxDNLinkList {
     /**
      * Method to obtain entry from DNLinkedList based upon index.
      *
-     * @param int Index of entry contained within DNLinkedList.
+     * @param dnentry_index Index of entry contained within DNLinkedList.
      * @return String DNLinkedList Entry.
      */
     public String get(int dnentry_index) {
@@ -213,8 +213,8 @@ public class idxDNLinkList {
     /**
      * Method to set entry from DNLinkedList with new contents.
      *
-     * @param int    Index of entry.
-     * @param String Value of entry.
+     * @param dnentry_index    Index of entry.
+     * @param dnentry Value of entry.
      * @return boolean indicates is set was successful or not.
      */
     public boolean set(int dnentry_index, String dnentry) {
@@ -229,7 +229,7 @@ public class idxDNLinkList {
     /**
      * Method to Obtain Index Entry and Remove from DNLinkedList.
      *
-     * @param int Index of entry.
+     * @param dnentry_index Index of entry.
      * @return String Value of entry.
      */
     public String pop(int dnentry_index) {
@@ -245,7 +245,6 @@ public class idxDNLinkList {
     /**
      * Method to Obtain First Entry and Remove from DNLinkedList.
      *
-     * @param int Index of entry.
      * @return String Value of entry.
      */
     public String popfirst() {
@@ -261,7 +260,6 @@ public class idxDNLinkList {
     /**
      * Method to Obtain Last Entry and Remove from DNLinkedList.
      *
-     * @param int Index of entry.
      * @return String Value of entry.
      */
     public String poplast() {

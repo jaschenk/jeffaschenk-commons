@@ -73,7 +73,7 @@ public class idxIRRutil {
     /**
      * Set the correct Message Prefix for this instance of the Function Utility.
      *
-     * @param String Name of Message Prefix.
+     * @param _mp Name of Message Prefix.
      */
     public void setMP(String _mp) {
         if (_mp != null) {
@@ -85,10 +85,9 @@ public class idxIRRutil {
      * Deletes Entry from IRR Directory.  Performs a JNDI unbind operation
      * for the specified DN.
      *
-     * @param DirContext current established JNDI Directory Context
-     * @param String     DN to be deleted.
-     * @param boolean    Verbose Indicator.
-     * @param idxStatus  Status Class.
+     * @param _ctxSource current established JNDI Directory Context
+     * @param _DNSource     DN to be deleted.
+     * @param _Status  Status Class.
      * @throws idxIRRException if any non-recoverable errors encountered.
      */
     public void DeleteEntry(DirContext _ctxSource,
@@ -143,9 +142,9 @@ public class idxIRRutil {
     /**
      * Obtains all of an Entry's children DNs contained in the IRR.
      *
-     * @param DirContext    current established JNDI Directory Context
-     * @param String        DN for which children are to be discovered.
-     * @param idxDNLinkList used to supply returned children for entry.
+     * @param ctxSource    current established JNDI Directory Context
+     * @param DNSource        DN for which children are to be discovered.
+     * @param dnLevelList used to supply returned children for entry.
      * @throws idxIRRException if any non-recoverable errors encountered.
      */
     public void AcquireChildren(DirContext ctxSource,
@@ -197,15 +196,15 @@ public class idxIRRutil {
      * Copies an entry from one Directory Context to another as well as
      * to a different container.
      *
-     * @param DirContext current established Source JNDI Directory Context
-     * @param String     DN of source entry.
-     * @param DirContext current established Destination JNDI Directory Context
-     * @param String     DN of Destination entry.
-     * @param boolean    indicator to determine if existing destination entry
+     * @param ctxSource current established Source JNDI Directory Context
+     * @param DNSource     DN of source entry.
+     * @param ctxDest current established Destination JNDI Directory Context
+     * @param DNDest     DN of Destination entry.
+     * @param OVERWRITE_DESTINATION_ENTRY    indicator to determine if existing destination entry
      *                   should be deleted or not.
-     * @param Attributes JNDI Attributes Object for Entry to be copied.
-     * @param idxStatus  Source Common Status Object.
-     * @param idxStatus  Destination Common Status Object.
+     * @param entryattrs JNDI Attributes Object for Entry to be copied.
+     * @param _StatusSource  Source Common Status Object.
+     * @param _StatusDest  Destination Common Status Object.
      * @throws idxIRRException if any non-recoverable errors encountered.
      */
     public void CopyEntry(DirContext ctxSource,
@@ -382,15 +381,15 @@ public class idxIRRutil {
      * Copies all children entries from one Directory Context to another as well as
      * to a different container.
      *
-     * @param DirContext    current established Source JNDI Directory Context
-     * @param String        DN of source entry.
-     * @param DirContext    current established Destination JNDI Directory Context
-     * @param String        DN of Destination entry.
-     * @param boolean       indicator to determine if existing destination entry
-     *                      should be deleted or not.
-     * @param idxDNLinkList containing all children DNs to be copied.
-     * @param idxStatus     Common Status for Source Object.
-     * @param idxStatus     Common Status for Destination Object.
+     * @param ctxSource current established Source JNDI Directory Context
+     * @param DNSource     DN of source entry.
+     * @param ctxDest current established Destination JNDI Directory Context
+     * @param DNDest     DN of Destination entry.
+     * @param OVERWRITE_DESTINATION_ENTRY    indicator to determine if existing destination entry
+     *                   should be deleted or not.
+     * @param dnLevelList DN Level Linked List containing elements to be copied.
+     * @param _StatusSource  Source Common Status Object.
+     * @param _StatusDest  Destination Common Status Object.
      * @throws idxIRRException if any non-recoverable errors encountered.
      */
     public void CopyChildren(DirContext ctxSource,
@@ -479,8 +478,8 @@ public class idxIRRutil {
     /**
      * Determines if an Entry already Exists in the IRR Directory or not.
      *
-     * @param DirContext current established Source JNDI Directory Context
-     * @param String     DN of entry to be check for existence.
+     * @param ctx current established Source JNDI Directory Context
+     * @param EntryDN     DN of entry to be check for existence.
      * @return boolean indication of entry exists or not.
      * @throws idxIRRException if any non-recoverable errors encountered.
      */
@@ -513,10 +512,10 @@ public class idxIRRutil {
      * Deletes Existing entries from the IRR Directory.
      * This is a prepartory step for a Copy or Move.
      *
-     * @param DirContext current established Source JNDI Directory Context
-     * @param String     DN of entry to be Deleted.
-     * @param boolean    Indicator for Child Entries are to be deleted.
-     * @param idxStatus  Status Class.
+     * @param ctxSource current established Source JNDI Directory Context
+     * @param ENTRY_SOURCE_DN     DN of entry to be Deleted.
+     * @param DELETE_WITH_CHILDREN    Indicator for Child Entries are to be deleted.
+     * @param _Status  Status Class.
      * @throws idxIRRException if any non-recoverable errors encountered.
      */
     public void DeleteExistingEntries(DirContext ctxSource,
@@ -585,7 +584,7 @@ public class idxIRRutil {
      * control which is not exposed via LDAP.  Access Control is only
      * accessible from the X.500 or from DAP.
      *
-     * @param String DN of entry can be deleted or not.
+     * @param EntryDN DN of entry can be deleted or not.
      * @return boolean indication entry can be deleted or not.
      * @throws idxIRRException if any non-recoverable errors encountered.
      */
@@ -697,12 +696,12 @@ public class idxIRRutil {
      * Determines if the any of the Attributes are of FluidDN or DN Syntax
      * and then attempts to properly resolve those values.
      *
-     * @param DirContext current established Source JNDI Directory Context
-     * @param String     DN of source entry.
-     * @param DirContext current established Destination JNDI Directory Context
-     * @param String     DN of Destination entry.
-     * @param Attributes JNDI Attributes Object for Entry to be copied.
-     * @param idxStatus  Destination Common Status Object.
+     * @param ctxSource current established Source JNDI Directory Context
+     * @param DNSource     DN of source entry.
+     * @param ctxDest current established Destination JNDI Directory Context
+     * @param DNDest     DN of Destination entry.
+     * @param entryattrs JNDI Attributes Object for Entry to be copied.
+     * @param _StatusDest  Destination Common Status Object.
      * @throws idxIRRException if any non-recoverable errors encountered.
      */
     public void checkforFluidDNs(DirContext ctxSource,
@@ -916,12 +915,12 @@ public class idxIRRutil {
      * Obtains Entry from Directory Context and lets an Output Write Class
      * write the data out.  Usually to a file or Standard output.
      *
-     * @param DirContext     current established Source JNDI Directory Context
-     * @param String         DN of source entry.
-     * @param String         Search Filter.
-     * @param BufferedWriter Output Writer class search results sent.
-     * @param boolean        NICE DN Output Indicator.
-     * @param idxStatus      Source Common Status Object.
+     * @param ctxSource     current established Source JNDI Directory Context
+     * @param DNSource         DN of source entry.
+     * @param SearchFilter         Search Filter.
+     * @param LDIFOUT Output Writer class search results sent.
+     * @param _NICE        NICE DN Output Indicator.
+     * @param _StatusSource      Source Common Status Object.
      * @throws idxIRRException if any non-recoverable errors encountered.
      */
     public void ObtainEntryForOutput(DirContext ctxSource,
@@ -1019,13 +1018,13 @@ public class idxIRRutil {
      * objectclass on the first call, which should provide for a very quick
      * access.
      *
-     * @param DirContext     current established Source JNDI Directory Context
-     * @param String         Source DN of the base entry to be read.
-     * @param String         Filter to be used to acquire entries.
-     * @param BufferedWriter Output Writer class search results sent.
-     * @param boolean        NICE LDIF Output Indicator.
-     * @param idxDNLinkList  containing all children DNs to be copied.
-     * @param idxStatus      Status Class.
+     * @param ctxSource     current established Source JNDI Directory Context
+     * @param DNSource         Source DN of the base entry to be read.
+     * @param _SearchFilter         Filter to be used to acquire entries.
+     * @param LDIFOUT Output Writer class search results sent.
+     * @param _NICE        NICE LDIF Output Indicator.
+     * @param dnLevelList  containing all children DNs to be copied.
+     * @param _StatusSource      Status Class.
      * @throws idxIRRException if any non-recoverable errors encountered.
      */
     public void ObtainChildrenForOutput(DirContext ctxSource,
@@ -1110,11 +1109,11 @@ public class idxIRRutil {
      * objectclass on the first call, which should provide for a very quick
      * access.
      *
-     * @param DirContext    current established Source JNDI Directory Context
-     * @param String        Source DN of the base entry to be read.
-     * @param String        Filter to be used to acquire entries.
-     * @param idxDNLinkList containing all children DNs to be copied.
-     * @param idxStatus     Status Class.
+     * @param ctxSource    current established Source JNDI Directory Context
+     * @param DNSource        Source DN of the base entry to be read.
+     * @param _SearchFilter        Filter to be used to acquire entries.
+     * @param dnLevelList containing all children DNs to be copied.
+     * @param _StatusSource     Status Class.
      * @throws idxIRRException if any non-recoverable errors encountered.
      */
     public void ObtainChildrenForQueue(DirContext ctxSource,
@@ -1187,11 +1186,10 @@ public class idxIRRutil {
      * objectclass on the first call, which should provide for a very quick
      * access.
      *
-     * @param DirContext    current established Source JNDI Directory Context
-     * @param String        Source DN of the base entry to be read.
-     * @param String        Filter to be used to acquire entries.
-     * @param idxDNLinkList containing all children DNs to be copied.
-     * @param boolean       indicates whether or not to ignore a note found condition.
+     * @param ctxSource    current established Source JNDI Directory Context
+     * @param DNSource        Source DN of the base entry to be read.
+     * @param dnLevelList containing all children DNs to be copied.
+     * @param _IgnoreNotFound       indicates whether or not to ignore a note found condition.
      * @throws idxIRRException if any non-recoverable errors encountered.
      */
     public void addChildrentoList(DirContext ctxSource,
@@ -1258,10 +1256,10 @@ public class idxIRRutil {
     /**
      * Removes a Attribute from a Directory Entry.
      *
-     * @param DirContext current established Source JNDI Directory Context
-     * @param String     current DN of Entry which is to be removed.
-     * @param String     current Attribute Name to be removed.
-     * @param boolean    indicates whether or not to ignore a NoSuchAttribute Exception.
+     * @param ctxSource current established Source JNDI Directory Context
+     * @param SourceDN     current DN of Entry which is to be removed.
+     * @param AttributeName     current Attribute Name to be removed.
+     * @param _IgnoreNoSuchAttribute    indicates whether or not to ignore a NoSuchAttribute Exception.
      * @throws idxIRRException if any non-recoverable errors encountered.
      */
     public void RemoveAttribute(DirContext ctxSource,

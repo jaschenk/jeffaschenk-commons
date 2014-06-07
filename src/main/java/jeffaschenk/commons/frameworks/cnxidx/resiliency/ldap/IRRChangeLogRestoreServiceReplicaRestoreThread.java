@@ -704,9 +704,9 @@ class IRRChangeLogRestoreServiceReplicaRestoreThread implements Runnable, LDIFCo
     /**
      * addEntry, Performs add of Entry.
      *
-     * @param DirContext       of Destination Directory where modifications are to be applied.
-     * @param String           Current DN.
-     * @param Attributes       Current set of Modification Attributes.
+     * @param irrctx       of Destination Directory where modifications are to be applied.
+     * @param current_dn           Current DN.
+     * @param current_entry_attributes       Current set of Modification Attributes.
      * @param changeidentifier to be folded into response.
      */
     private ChangeResponseIdentifier addEntry(DirContext irrctx,
@@ -784,9 +784,10 @@ class IRRChangeLogRestoreServiceReplicaRestoreThread implements Runnable, LDIFCo
     /**
      * deleteEntry, Performs delete of Entry.
      *
-     * @param DirContext of Destination Directory where modifications are to be applied.
-     * @param String     Current DN.
-     * @param Attributes Current set of Modification Attributes.
+     * @param irrctx of Destination Directory where modifications are to be applied.
+     * @param current_dn     Current DN.
+     * @param current_entry_attributes Current set of Modification Attributes.
+     * @param changeidentifier
      * @throws idxIRRException for any specific IRR unrecoverable errors during function.
      * @throws Exception       for any unrecoverable errors during function.
      */
@@ -937,9 +938,10 @@ class IRRChangeLogRestoreServiceReplicaRestoreThread implements Runnable, LDIFCo
     /**
      * modDNEntry, Performs Rename/MODRDN/MODDN of Entry.
      *
-     * @param DirContext of Destination Directory where modifications are to be applied.
-     * @param String     Current DN.
-     * @param Attributes Current set of Modification Attributes.
+     * @param irrctx of Destination Directory where modifications are to be applied.
+     * @param current_dn     Current DN.
+     * @param current_entry_attributes Current set of Modification Attributes.
+     * @param changeidentifier
      * @throws idxIRRException for any specific IRR unrecoverable errors during function.
      * @throws Exception       for any unrecoverable errors during function.
      */
@@ -1135,9 +1137,10 @@ class IRRChangeLogRestoreServiceReplicaRestoreThread implements Runnable, LDIFCo
     /**
      * modifyEntry, Performs Modifications on Entry.
      *
-     * @param DirContext of Destination Directory where modifications are to be applied.
-     * @param String     Current DN.
-     * @param Attributes Current set of Modification Attributes.
+     * @param irrctx of Destination Directory where modifications are to be applied.
+     * @param current_dn     Current DN.
+     * @param EntryModSet Current set of Modification Attributes.
+     *  @param  changeidentifier
      * @throws idxIRRException for any specific IRR unrecoverable errors during function.
      * @throws Exception       for any unrecoverable errors during function.
      */

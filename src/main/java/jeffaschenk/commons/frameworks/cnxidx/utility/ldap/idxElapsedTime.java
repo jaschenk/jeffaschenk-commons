@@ -12,15 +12,13 @@ package jeffaschenk.commons.frameworks.cnxidx.utility.ldap;
 
 public class idxElapsedTime {
 
-    private long start = 0;    // Start Time in Milliseconds.
-    private long end = 0;    // End Time in Milliseconds.
+    private long start = 0;       // Start Time in Milliseconds.
+    private long end = 0;         // End Time in Milliseconds.
     private long duration = 0;    // Duration Time in Milliseconds.
 
     /**
      * Provides Common Constructor for Calculating Elapsed Time.
      * Automatically Sets the Start Time.
-     *
-     * @param String A Friendly Operation Name.
      */
     public idxElapsedTime() {
         start = System.currentTimeMillis();

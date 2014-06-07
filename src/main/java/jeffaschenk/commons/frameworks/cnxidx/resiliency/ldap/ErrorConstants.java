@@ -3,7 +3,7 @@ package jeffaschenk.commons.frameworks.cnxidx.resiliency.ldap;
 /**
  * Error Constants
  *
- * @authors Jeff.Schenk
+ * @author Jeff.Schenk@gmail.com
  */
 public interface ErrorConstants {
     // Messages should be grouped by their functional area within the application Exception.

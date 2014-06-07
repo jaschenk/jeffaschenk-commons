@@ -143,7 +143,7 @@ public class ChangeLogStatus implements Serializable {
      *
      * @param originator
      * @param logfilename
-     * @return
+     * @return String -- Formulated Key
      */
     public static String formulateKey(Object originator,
                                       String logfilename) {

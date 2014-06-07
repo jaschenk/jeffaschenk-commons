@@ -102,7 +102,7 @@ public class Shell {
     /**
      * Set Prompt for this Shell.
      *
-     * @param String Prompt String.
+     * @param _prompt Prompt String.
      */
     public void setPrompt(String _prompt) {
         Prompt = _prompt;
@@ -111,7 +111,7 @@ public class Shell {
     /**
      * Set BackEnd for this Shell.
      *
-     * @param String BackEnd Name String.
+     * @param _BackEndName BackEnd Name String.
      */
     public void setBackEnd(String _BackEndName) {
         BackEndName = _BackEndName;
@@ -396,8 +396,8 @@ public class Shell {
     /**
      * Perform an External Command Function, wait until completed while obtaining the results.
      *
-     * @param String Command To be Executed.
-     * @param String Arguments for the Command, Space Seperated.
+     * @param _ExecName Command To be Executed.
+     * @param _ExecArgs Arguments for the Command, Space Seperated.
      * @return int Return code from External Command.
      */
     public int performExternalCommand(String _ExecName, String _ExecArgs)
@@ -408,10 +408,10 @@ public class Shell {
     /**
      * Perform an External Command Function, wait until completed while obtaining the results.
      *
-     * @param String  Command To be Executed.
-     * @param String  Arguments for the Command, Space Seperated.
-     * @param boolean Indicator whether or not to obtain output from Command completion.
-     * @param boolean Indicator whether or not to wait for Command completion.
+     * @param _ExecName  Command To be Executed.
+     * @param _ExecArgs  Arguments for the Command, Space Seperated.
+     * @param _obtainoutput Indicator whether or not to obtain output from Command completion.
+     * @param _wait Indicator whether or not to wait for Command completion.
      * @return int Return code from External Command.
      */
     public int performExternalCommand(final String _ExecName, final String _ExecArgs,

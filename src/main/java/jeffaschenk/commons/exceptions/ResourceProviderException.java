@@ -21,7 +21,7 @@ public class ResourceProviderException
      * A constructor that specifies the exception string.
      *
      * @param s Error key.
-     * @param s Error arguments.
+     * @param arguments Error arguments.
      */
     public ResourceProviderException(String s, String[] arguments) {
         super(s, arguments);

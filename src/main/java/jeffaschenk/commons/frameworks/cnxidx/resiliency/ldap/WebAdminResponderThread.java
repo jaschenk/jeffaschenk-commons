@@ -589,7 +589,7 @@ class WebAdminResponderThread extends Thread {
      * Encode the Response.
      *
      * @param response
-     * @return
+     * @return ByteBuffer
      * @throws Exception
      */
     protected ByteBuffer encodeResponse(String response) throws Exception {
@@ -1269,7 +1269,7 @@ class WebAdminResponderThread extends Thread {
      * Get InputStream Byte Data.
      *
      * @param is InputStream from Channel.
-     * @return
+     * @return byte[] -- Byte Array.
      * @throws java.io.IOException
      */
     private byte[] getBytes(InputStream is)
@@ -1289,7 +1289,7 @@ class WebAdminResponderThread extends Thread {
      * access to our WebAdmin Interface.
      *
      * @param clientaddress
-     * @return
+     * @return boolean -- indicating if client is allowed or not.
      */
     private boolean isClientAllowed(final String clientaddress) {
         final String METHODNAME = "isClientAllowed";
@@ -1382,7 +1382,7 @@ class WebAdminResponderThread extends Thread {
      * @param left
      * @param center
      * @param right
-     * @return
+     * @return String -- HTML Data
      */
     protected static String build3ColumnRow(String left, String center, String right) {
         return WebAdminResponderThread.BEGIN_ROW +
@@ -1411,7 +1411,7 @@ class WebAdminResponderThread extends Thread {
      *
      * @param vector
      * @param showlocalreturn
-     * @return
+     * @return String -- HTML Data
      */
     protected static String buildMembershipList(List<Address> vector, boolean showlocalreturn) {
         StringBuffer sb = new StringBuffer();
@@ -1495,9 +1495,8 @@ class WebAdminResponderThread extends Thread {
     /**
      * Build Operation Pull Down Value.
      *
-     * @param value
-     * @param name
-     * @return
+     * @param paddrname
+     * @return String -- HTML Data
      */
     private static String buildOperationValues(final String paddrname) {
         StringBuffer sb = new StringBuffer();
@@ -1517,7 +1516,7 @@ class WebAdminResponderThread extends Thread {
      *
      * @param value
      * @param name
-     * @return
+     * @return String -- HTML Data
      */
     private static String buildOperationValue(final String value,
                                               final String name) {

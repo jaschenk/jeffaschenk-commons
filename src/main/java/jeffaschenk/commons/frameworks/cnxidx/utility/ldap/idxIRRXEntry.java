@@ -35,7 +35,7 @@ public class idxIRRXEntry {
     /**
      * Method to Set VERBOSE Indicator.
      *
-     * @param boolean Indicator to set VERBOSE.
+     * @param _verbose Indicator to set VERBOSE.
      */
     public void setVerbose(boolean _verbose) {
         VERBOSE = _verbose;
@@ -54,9 +54,9 @@ public class idxIRRXEntry {
      * Generic Private method class to
      * write/bind entry to Directory Instance.
      *
-     * @param DirContext current established Directory Context.
-     * @param String     current fully qualified DN to be written.
-     * @param Attributes Attribute Enumeration Set for Entry.
+     * @param ctx current established Directory Context.
+     * @param EntryDN     current fully qualified DN to be written.
+     * @param attrs Attribute Enumeration Set for Entry.
      * @return boolean indication of operation successful or not.
      */
     private boolean writeEntry(DirContext ctx,
@@ -113,8 +113,8 @@ public class idxIRRXEntry {
      * Generic Private method class to
      * delete/unbind entry from Directory Instance.
      *
-     * @param DirContext current established Directory Context.
-     * @param String     current fully qualified DN to be deleted.
+     * @param ctx current established Directory Context.
+     * @param EntryDN     current fully qualified DN to be deleted.
      * @return boolean indication of operation successful or not.
      */
     private boolean deleteEntry(DirContext ctx, String EntryDN)
@@ -148,8 +148,8 @@ public class idxIRRXEntry {
     /**
      * Creates a Test Entry.
      *
-     * @param DirContext current established Directory Context.
-     * @param String     current Container where Entry should be placed.
+     * @param ctx current established Directory Context.
+     * @param Container     current Container where Entry should be placed.
      * @return boolean indication of operation successful or not.
      */
     public boolean create(DirContext ctx, String Container)
@@ -193,8 +193,8 @@ public class idxIRRXEntry {
     /**
      * Removes a Test Entry.
      *
-     * @param DirContext current established Directory Context.
-     * @param String     current Container where Entry should be removed from.
+     * @param ctx current established Directory Context.
+     * @param Container     current Container where Entry should be removed from.
      * @return boolean indication of operation successful or not.
      */
     public boolean remove(DirContext ctx, String Container)
@@ -211,8 +211,8 @@ public class idxIRRXEntry {
     /**
      * Determines if an Entry already Exists in the IRR Directory or not.
      *
-     * @param DirContext current established Source JNDI Directory Context
-     * @param String     Container DN of entry to be check for existence.
+     * @param ctx current established Source JNDI Directory Context
+     * @param Container     Container DN of entry to be check for existence.
      * @return boolean indication of entry exists or not.
      */
     public boolean doesEntryExist(DirContext ctx, String Container)
@@ -242,7 +242,7 @@ public class idxIRRXEntry {
     /**
      * Obtains current Principal from existing Directory Context.
      *
-     * @param DirContext current established Directory Context.
+     * @param ctx current established Directory Context.
      * @return String of IRR Principal.
      */
     private String obtainIRRPrincipal(DirContext ctx) {

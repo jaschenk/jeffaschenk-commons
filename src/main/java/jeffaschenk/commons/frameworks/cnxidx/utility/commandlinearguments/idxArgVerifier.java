@@ -31,7 +31,7 @@ public class idxArgVerifier {
     /**
      * Method to Set VERBOSE Indicator.
      *
-     * @param boolean sets VERBOSE indicator.
+     * @param _verbose sets VERBOSE indicator.
      */
     public void setVerbose(boolean _verbose) {
         VERBOSE = _verbose;
@@ -49,9 +49,9 @@ public class idxArgVerifier {
     /**
      * Drives the Verification Process.
      *
-     * @param String       Output Logging String.
-     * @param idxArgParser Constructed Parser Object.
-     * @param LinkedList   Constructed Link List of Verification Rules.
+     * @param _MP       Output Logging String.
+     * @param _Zin Constructed Parser Object.
+     * @param _VAR   Constructed Link List of Verification Rules.
      * @return boolean Indicates whether or not Verification Process successful or not.
      */
     public boolean Verify(String _MP,

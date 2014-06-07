@@ -18,8 +18,9 @@ public class StringFormat {
     /**
      * Justify Left a String for Printing.
      *
-     * @param String
-     * @param int    Length
+     * @param _in
+     * @param _i -- Length
+     * @param _gap -- GAP String
      */
     public String JLeft(String _in, int _i, String _gap) {
         while (_in.length() < _i) {
@@ -31,8 +32,8 @@ public class StringFormat {
     /**
      * Justify Left a String for Printing.
      *
-     * @param String Incoming String.
-     * @param int    Length
+     * @param _in
+     * @param _i -- Length
      */
     public String JLeft(String _in, int _i) {
         return (JLeft(_in, _i, " "));
@@ -41,9 +42,9 @@ public class StringFormat {
     /**
      * Justify Right a String for Printing.
      *
-     * @param String Incoming String.
-     * @param int    Length
-     * @param String Gap String.
+     * @param _in
+     * @param _i -- Length
+     * @param _gap -- GAP String
      */
     public String JRight(String _in, int _i, String _gap) {
         while (_in.length() < _i) {
@@ -55,8 +56,8 @@ public class StringFormat {
     /**
      * Justify Right a String for Printing.
      *
-     * @param String Incoming String.
-     * @param int    Length
+     * @param _in
+     * @param _i -- Length
      */
     public String JRight(String _in, int _i) {
         return (JRight(_in, _i, " "));

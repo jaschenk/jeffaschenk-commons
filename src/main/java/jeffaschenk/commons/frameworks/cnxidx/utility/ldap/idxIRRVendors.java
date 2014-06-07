@@ -152,7 +152,7 @@ public class idxIRRVendors {
     /**
      * Method to Set VERBOSE Indicator.
      *
-     * @param boolean Verbose Indicator setting.
+     * @param _verbose Verbose Indicator setting.
      */
     public void setVerbose(boolean _verbose) {
         VERBOSE = _verbose;
@@ -180,8 +180,8 @@ public class idxIRRVendors {
     /**
      * Create an new set Containers for Vendor.
      *
-     * @param DirContext current established Directory Context.
-     * @param String     current Customer DN.
+     * @param ctx current established Directory Context.
+     * @param CustomerDN     current Customer DN.
      * @return boolean indication of operation successful or not.
      */
     public boolean CreateContainersForVendors(DirContext ctx,
@@ -314,7 +314,7 @@ class VendorResource {
     /**
      * Method to obtain vendor Name.
      *
-     * @param String Vendor Name.
+     * @return String Vendor Name.
      */
     public String getVendorName() {
         return (VendorName);
@@ -323,7 +323,7 @@ class VendorResource {
     /**
      * Method to obtain vendor Resource Type.
      *
-     * @param String Vendor Resource Type.
+     * @return String Vendor Resource Type.
      */
     public String getVendorResourceType() {
         return (VendorResourceType);
@@ -332,7 +332,7 @@ class VendorResource {
     /**
      * Method to obtain vendor Resource Model.
      *
-     * @param String Vendor Resource Model.
+     * @return String Vendor Resource Model.
      */
     public String getVendorResourceModel() {
         return (VendorResourceModel);
@@ -341,7 +341,7 @@ class VendorResource {
     /**
      * Method to obtain vendor Resource OS.
      *
-     * @param String Vendor Resource OS.
+     * @return String Vendor Resource OS.
      */
     public String getVendorResourceOS() {
         return (VendorResourceOS);
@@ -350,7 +350,7 @@ class VendorResource {
     /**
      * Method to convert Object to String Information.
      *
-     * @param String Vendor Object.
+     * @return String Vendor Object.
      */
     public String toString() {
 

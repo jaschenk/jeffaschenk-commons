@@ -103,7 +103,7 @@ public class idxLapTime {
     /**
      * Get Elapsed Timing in String Form.
      *
-     * @param long A Duration.
+     * @param _duration A Duration, in milliseconds.
      * @return String of Duration.
      */
     public String getElapsedtoString(long _duration) {
